@@ -56,7 +56,9 @@
     <!-- Date picker dropdown -->
     <div
       v-if="isOpen"
-      class="absolute z-50 mt-1 w-full bg-surface dark:bg-dark-surface high-contrast:bg-high-contrast-surface border rounded-lg shadow-lg"
+      ref="dropdownRef"
+      class="fixed z-[9999] mt-1 w-[320px] bg-surface dark:bg-dark-surface high-contrast:bg-high-contrast-surface border rounded-lg shadow-lg"
+      :style="dropdownStyle"
       :class="[
         error
           ? 'border-danger dark:border-danger high-contrast:border-danger'
@@ -79,10 +81,15 @@
           <!-- Year selection -->
           <select
             v-model="currentYear"
-            class="bg-surface dark:bg-dark-surface high-contrast:bg-high-contrast-surface text-text-primary dark:text-dark-text-primary high-contrast:text-high-contrast-text-primary border border-border dark:border-dark-border high-contrast:border-high-contrast-border rounded px-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/50 dark:focus:ring-dark-primary/50 high-contrast:focus:ring-high-contrast-primary"
+            class="bg-surface dark:bg-dark-surface high-contrast:bg-high-contrast-surface text-text-primary dark:text-dark-text-primary high-contrast:text-high-contrast-text-primary border border-border dark:border-dark-border high-contrast:border-high-contrast-border rounded px-2 py-1 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/50 dark:focus:ring-dark-primary/50 high-contrast:focus:ring-high-contrast-primary hover:border-primary dark:hover:border-dark-primary high-contrast:hover:border-high-contrast-primary transition-colors"
             @change="updateCurrentDate"
           >
-            <option v-for="year in yearRange" :key="year" :value="year">
+            <option
+              v-for="year in yearRange"
+              :key="year"
+              :value="year"
+              class="bg-surface dark:bg-dark-surface high-contrast:bg-high-contrast-surface text-text-primary dark:text-dark-text-primary high-contrast:text-high-contrast-text-primary"
+            >
               {{ year }}
             </option>
           </select>
@@ -91,13 +98,14 @@
           <select
             v-if="showMonths"
             v-model="currentMonth"
-            class="bg-surface dark:bg-dark-surface high-contrast:bg-high-contrast-surface text-text-primary dark:text-dark-text-primary high-contrast:text-high-contrast-text-primary border border-border dark:border-dark-border high-contrast:border-high-contrast-border rounded px-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/50 dark:focus:ring-dark-primary/50 high-contrast:focus:ring-high-contrast-primary"
+            class="bg-surface dark:bg-dark-surface high-contrast:bg-high-contrast-surface text-text-primary dark:text-dark-text-primary high-contrast:text-high-contrast-text-primary border border-border dark:border-dark-border high-contrast:border-high-contrast-border rounded px-2 py-1 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/50 dark:focus:ring-dark-primary/50 high-contrast:focus:ring-high-contrast-primary hover:border-primary dark:hover:border-dark-primary high-contrast:hover:border-high-contrast-primary transition-colors"
             @change="updateCurrentDate"
           >
             <option
               v-for="(month, index) in months"
               :key="index"
               :value="index"
+              class="bg-surface dark:bg-dark-surface high-contrast:bg-high-contrast-surface text-text-primary dark:text-dark-text-primary high-contrast:text-high-contrast-text-primary"
             >
               {{ month }}
             </option>
@@ -204,9 +212,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, nextTick } from 'vue'
 import { format, parse, isValid } from 'date-fns'
-import { onClickOutside } from '@vueuse/core'
+import { onClickOutside, useWindowSize } from '@vueuse/core'
 
 type DateFormat =
   | 'dd.MM.yyyy'
@@ -429,9 +437,15 @@ const togglePicker = () => {
   if (props.disabled || props.readonly) return
   isOpen.value = !isOpen.value
 
-  // Если открываем пикер, фокусируемся на инпуте
+  // Reset position when opening
   if (isOpen.value) {
     inputRef.value?.focus()
+    nextTick(() => {
+      if (dropdownRef.value) {
+        const style = dropdownStyle.value
+        Object.assign(dropdownRef.value.style, style)
+      }
+    })
   }
 }
 
@@ -647,8 +661,54 @@ watch(
 )
 
 const containerRef = ref<HTMLElement | null>(null)
+const dropdownRef = ref<HTMLElement | null>(null)
+const { width: windowWidth, height: windowHeight } = useWindowSize()
+
+// Add new computed property for dropdown positioning
+const dropdownStyle = computed(() => {
+  if (!containerRef.value || !isOpen.value) return {}
+
+  const inputRect = containerRef.value.getBoundingClientRect()
+  const dropdownWidth = 320 // Fixed width of dropdown
+  const dropdownHeight = 350 // Approximate max height of dropdown
+
+  // Calculate initial position
+  let left = inputRect.left
+  let top = inputRect.bottom + 8 // Add small gap
+
+  // Adjust horizontal position if dropdown would overflow right edge
+  if (left + dropdownWidth > windowWidth.value) {
+    left = Math.max(0, windowWidth.value - dropdownWidth - 16) // 16px padding from window edge
+  }
+
+  // Adjust vertical position if dropdown would overflow bottom edge
+  if (top + dropdownHeight > windowHeight.value) {
+    // Position above input if there's more space
+    if (inputRect.top > windowHeight.value - inputRect.bottom) {
+      top = inputRect.top - dropdownHeight - 8
+    }
+  }
+
+  return {
+    left: `${left}px`,
+    top: `${top}px`,
+    maxHeight: `${windowHeight.value - top - 16}px` // Ensure it doesn't overflow bottom
+  }
+})
+
+// Add window resize handler
+watch([windowWidth, windowHeight], () => {
+  if (isOpen.value && dropdownRef.value) {
+    const style = dropdownStyle.value
+    Object.assign(dropdownRef.value.style, style)
+  }
+})
 
 onClickOutside(containerRef, () => {
   isOpen.value = false
 })
 </script>
+
+<style scoped>
+/* Add your styles here */
+</style>
