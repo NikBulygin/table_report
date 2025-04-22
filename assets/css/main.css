@@ -1,0 +1,33 @@
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../fonts/Montserrat-Italic-VariableFont_wght.ttf')
+    format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .scalable {
+    @apply relative transform transition-transform duration-300 ease-out;
+  }
+
+  .scalable:hover {
+    @apply scale-110 z-10;
+  }
+
+  .round {
+    @apply rounded-3xl;
+    @apply p-2;
+  }
+}
