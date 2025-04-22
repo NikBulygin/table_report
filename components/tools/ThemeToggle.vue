@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { useColorMode } from '#imports'
+import { useColorMode, onMounted, ref } from '#imports'
 import SunIcon from './icons/flags/sun.vue'
 import MoonIcon from './icons/flags/moon.vue'
 import EyeIcon from './icons/flags/eye.vue'
 
 const colorMode = useColorMode()
+const isLoaded = ref(false)
 
 const themes = [
   { name: 'light', icon: SunIcon, label: 'Светлая' },
@@ -13,17 +14,29 @@ const themes = [
 ]
 
 const currentThemeIndex = computed(() => {
-  return themes.findIndex(theme => theme.name === colorMode.value)
+  return themes.findIndex(theme => theme.name === colorMode.preference)
 })
 
 const sliderPosition = computed(() => {
-  return `calc(${currentThemeIndex.value} * (100% / 3))`
+  if (!isLoaded.value) return '0'
+  return `calc(${currentThemeIndex.value} * (100% / 3) + 0.25rem)`
 })
 
 function setTheme(themeName: string) {
   colorMode.preference = themeName
   document.documentElement.setAttribute('data-theme', themeName)
 }
+
+onMounted(() => {
+  // Ensure the theme is properly initialized
+  if (colorMode.preference) {
+    setTheme(colorMode.preference)
+  }
+  // Small delay to ensure smooth transition
+  setTimeout(() => {
+    isLoaded.value = true
+  }, 50)
+})
 </script>
 
 <template>
@@ -44,17 +57,21 @@ function setTheme(themeName: string) {
           @click="setTheme(theme.name)"
           class="relative z-10 flex-1 h-7 flex items-center justify-center rounded transition-colors duration-200"
           :class="[
-            currentThemeIndex === index
+            isLoaded && currentThemeIndex === index
               ? 'text-white'
               : 'text-text-primary dark:text-dark-text-primary high-contrast:text-high-contrast-text-primary',
-            currentThemeIndex !== index ? 'hover:scale-110' : ''
+            isLoaded && currentThemeIndex !== index
+              ? 'hover:scale-110'
+              : ''
           ]"
           :title="theme.label"
         >
           <component
             :is="theme.icon"
             class="w-5 h-5 transition-transform duration-200"
-            :class="{ 'scale-110': currentThemeIndex === index }"
+            :class="{
+              'scale-110': isLoaded && currentThemeIndex === index
+            }"
           />
         </button>
       </template>

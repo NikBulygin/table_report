@@ -7,12 +7,41 @@
     >
       {{ hasNavigation ? 'Скрыть' : 'Показать' }} дополнительное меню
     </button>
+    <textfield
+      v-model="value"
+      regex="^[a-zA-Z0-9]+$"
+      error-message="Поле должно содержать только буквы и цифры"
+      label="Имя"
+      placeholder="Введите имя"
+    />
+    <number-input v-model="value" label="Basic Number" />
+    <number-input
+      v-model="price"
+      label="Price"
+      :float="{ precision: 2, separator: ',', step: 0.5 }"
+      :min="0"
+      :max="1000"
+    />
+    <number-input
+      v-model="quantity"
+      label="Quantity"
+      :float="{ precision: 0, step: 1 }"
+      :min="1"
+    />
+    <number-input
+      v-model="value"
+      label="Custom Number"
+      :showSpinner="false"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import type { NavigationItem } from '~/types'
+import textfield from '~/components/input/text.vue'
+import numberInput from '~/components/input/number.vue'
 
+const value = ref('')
 const navigationItems = useState<NavigationItem[]>('navigationItems')
 const hasNavigation = computed(() => navigationItems.value.length > 0)
 

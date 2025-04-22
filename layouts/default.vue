@@ -23,7 +23,7 @@
     />
     <button
       @click="toggleMenu"
-      class="fixed bottom-4 right-4 p-3 rounded-full bg-primary dark:bg-dark-primary high-contrast:bg-high-contrast-primary text-white shadow-lg hover:opacity-90 transition-opacity"
+      class="fixed bottom-8 right-8 p-3 rounded-full bg-primary dark:bg-dark-primary high-contrast:bg-high-contrast-primary text-white shadow-lg hover:opacity-90 transition-opacity"
       aria-label="Toggle menu"
     >
       <svg
@@ -62,11 +62,6 @@ const toggleMenu = () => {
 }
 
 const navigationItems = ref<NavigationItem[]>([
-  { title: 'Главная', url: '/' },
-  { title: 'Главная', url: '/' },
-  { title: 'Главная', url: '/' },
-  { title: 'Главная', url: '/' },
-  { title: 'Главная', url: '/' },
   { title: 'Главная', url: '/' },
   {
     title: 'TestWithChild',

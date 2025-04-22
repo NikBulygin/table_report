@@ -67,7 +67,7 @@ const toggleSubmenu = (title: string) => {
                   ? 'bg-surface dark:bg-dark-surface high-contrast:bg-high-contrast-surface text-primary dark:text-dark-primary high-contrast:text-high-contrast-primary font-medium'
                   : '',
                 hasActiveChild(item)
-                  ? 'bg-success/10 text-success dark:bg-dark-success/10 dark:text-dark-success high-contrast:bg-high-contrast-success/10 high-contrast:text-high-contrast-success'
+                  ? 'bg-info/10 text-info dark:bg-dark-info/10 dark:text-dark-info high-contrast:bg-high-contrast-info/10 high-contrast:text-high-contrast-info'
                   : ''
               ]"
             >
@@ -107,7 +107,7 @@ const toggleSubmenu = (title: string) => {
                 :to="item.url"
                 class="flex items-center w-full"
                 :class="{
-                  'text-success dark:text-dark-success high-contrast:text-high-contrast-success':
+                  'text-info dark:text-dark-info high-contrast:text-high-contrast-info':
                     isActiveRoute(item.url)
                 }"
               >
@@ -131,7 +131,7 @@ const toggleSubmenu = (title: string) => {
                         ? 'bg-surface dark:bg-dark-surface high-contrast:bg-high-contrast-surface text-primary dark:text-dark-primary high-contrast:text-high-contrast-primary font-medium'
                         : '',
                       hasActiveChild(child)
-                        ? 'bg-success/10 text-success dark:bg-dark-success/10 dark:text-dark-success high-contrast:bg-high-contrast-success/10 high-contrast:text-high-contrast-success'
+                        ? 'bg-info/10 text-info dark:bg-dark-info/10 dark:text-dark-info high-contrast:bg-high-contrast-info/10 high-contrast:text-high-contrast-info'
                         : ''
                     ]"
                   >
@@ -173,7 +173,7 @@ const toggleSubmenu = (title: string) => {
                       :to="child.url"
                       class="flex items-center w-full"
                       :class="{
-                        'text-success dark:text-dark-success high-contrast:text-high-contrast-success':
+                        'text-info dark:text-dark-info high-contrast:text-high-contrast-info':
                           isActiveRoute(child.url)
                       }"
                     >
@@ -198,7 +198,7 @@ const toggleSubmenu = (title: string) => {
                           :to="grandChild.url"
                           class="flex items-center w-full transition-all duration-200 hover:bg-surface hover:text-primary dark:hover:bg-dark-surface dark:hover:text-dark-primary high-contrast:hover:bg-high-contrast-surface high-contrast:hover:text-high-contrast-primary rounded-md"
                           :class="{
-                            'text-success dark:text-dark-success high-contrast:text-high-contrast-success':
+                            'text-info dark:text-dark-info high-contrast:text-high-contrast-info':
                               isActiveRoute(grandChild.url)
                           }"
                         >
