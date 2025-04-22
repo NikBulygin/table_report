@@ -17,6 +17,56 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    color-scheme: light dark;
+  }
+
+  html[data-theme='high-contrast'] {
+    color-scheme: light dark;
+  }
+
+  body {
+    @apply antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Theme transitions */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  * {
+    @apply transition-colors duration-200;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-surface;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary-200 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-300;
+  }
+
+  /* Selection styling */
+  ::selection {
+    @apply bg-primary-500 text-white;
+  }
+}
+
 @layer components {
   .scalable {
     @apply relative transform transition-transform duration-300 ease-out;
@@ -27,7 +77,175 @@
   }
 
   .round {
-    @apply rounded-3xl;
-    @apply p-2;
+    @apply rounded-3xl p-2;
+  }
+
+  /* Theme container styles */
+  .theme-container {
+    @apply min-h-screen bg-background text-text-primary font-montserrat transition-colors duration-200;
+  }
+
+  /* Dark mode */
+  :root[data-theme='dark'] .theme-container,
+  .dark .theme-container {
+    @apply bg-dark-background text-dark-text-primary;
+  }
+
+  :root[data-theme='dark'] ::-webkit-scrollbar-track,
+  .dark ::-webkit-scrollbar-track {
+    @apply bg-dark-surface;
+  }
+
+  :root[data-theme='dark'] ::-webkit-scrollbar-thumb,
+  .dark ::-webkit-scrollbar-thumb {
+    @apply bg-dark-primary-200;
+  }
+
+  :root[data-theme='dark'] ::-webkit-scrollbar-thumb:hover,
+  .dark ::-webkit-scrollbar-thumb:hover {
+    @apply bg-dark-primary-300;
+  }
+
+  /* High contrast mode - Light */
+  :root[data-theme='high-contrast'] .theme-container,
+  .high-contrast .theme-container {
+    @apply bg-high-contrast-background text-high-contrast-text-primary;
+  }
+
+  /* Enhance borders in high contrast mode */
+  .high-contrast {
+    /* Buttons */
+    button,
+    [type='button'],
+    [type='submit'],
+    [type='reset'] {
+      @apply border-2 border-high-contrast-border;
+    }
+
+    /* Form elements */
+    input,
+    select,
+    textarea {
+      @apply border-2 border-high-contrast-border outline-2 outline-high-contrast-border;
+    }
+
+    /* Links */
+    a {
+      @apply underline decoration-2;
+    }
+
+    /* Tables */
+    table,
+    th,
+    td {
+      @apply border-2 border-high-contrast-border;
+    }
+
+    /* Lists */
+    ul,
+    ol {
+      @apply border-l-4 border-high-contrast-border pl-4;
+    }
+
+    /* Cards and containers */
+    .card,
+    .container,
+    .box,
+    [class*='border'] {
+      @apply border-2 !important;
+    }
+
+    /* Focus states */
+    *:focus {
+      @apply outline-2 outline-offset-2 outline-high-contrast-border;
+    }
+
+    /* Focus visible (keyboard navigation) */
+    *:focus-visible {
+      @apply outline-4 outline-offset-4 outline-high-contrast-border;
+    }
+  }
+
+  /* High contrast mode - Dark */
+  :root[data-theme='high-contrast'].dark .theme-container,
+  .high-contrast.dark .theme-container {
+    @apply bg-high-contrast-dark-background text-high-contrast-dark-text-primary;
+  }
+
+  /* Enhance borders in dark high contrast mode */
+  .high-contrast.dark {
+    /* Buttons */
+    button,
+    [type='button'],
+    [type='submit'],
+    [type='reset'] {
+      @apply border-2 border-high-contrast-dark-border;
+    }
+
+    /* Form elements */
+    input,
+    select,
+    textarea {
+      @apply border-2 border-high-contrast-dark-border outline-2 outline-high-contrast-dark-border;
+    }
+
+    /* Links */
+    a {
+      @apply underline decoration-2 decoration-high-contrast-dark-border;
+    }
+
+    /* Tables */
+    table,
+    th,
+    td {
+      @apply border-2 border-high-contrast-dark-border;
+    }
+
+    /* Lists */
+    ul,
+    ol {
+      @apply border-l-4 border-high-contrast-dark-border pl-4;
+    }
+
+    /* Cards and containers */
+    .card,
+    .container,
+    .box,
+    [class*='border'] {
+      @apply border-2 !important;
+    }
+
+    /* Focus states */
+    *:focus {
+      @apply outline-2 outline-offset-2 outline-high-contrast-dark-border;
+    }
+
+    /* Focus visible (keyboard navigation) */
+    *:focus-visible {
+      @apply outline-4 outline-offset-4 outline-high-contrast-dark-border;
+    }
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-surface;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary-200 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-300;
+  }
+
+  /* Selection styling */
+  ::selection {
+    @apply bg-primary-500 text-white;
   }
 }

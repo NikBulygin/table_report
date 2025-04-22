@@ -1,7 +1,7 @@
 <template>
-  {{ t('Test.HelloWorld') }}
-  <div>
-    <NuxtRouteAnnouncer />
-    <NuxtWelcome />
+  <div class="theme-container">
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </div>
 </template>

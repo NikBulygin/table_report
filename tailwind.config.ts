@@ -8,7 +8,7 @@ module.exports = {
     './app.vue',
     './error.vue'
   ],
-  darkMode: 'class', // Включаем поддержку темной темы через класс
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -23,14 +23,15 @@ module.exports = {
         h6: ['1rem', { lineHeight: '1.5rem', fontWeight: '500' }]
       },
       colors: {
+        // Light theme (default)
         primary: {
-          DEFAULT: 'rgb(0,0,124)', // Основной цвет
+          DEFAULT: '#000080',
           50: '#e6e6ff',
           100: '#ccccff',
           200: '#9999ff',
           300: '#6666ff',
           400: '#3333ff',
-          500: 'rgb(0,0,124)', // Наш новый основной цвет
+          500: '#000080',
           600: '#00007a',
           700: '#000066',
           800: '#000052',
@@ -46,41 +47,16 @@ module.exports = {
         },
         border: '#e5e5e5',
 
-        // Светлая тема
-        light: {
-          primary: {
-            DEFAULT: 'rgb(0,0,124)',
-            50: '#e6e6ff',
-            100: '#ccccff',
-            200: '#9999ff',
-            300: '#6666ff',
-            400: '#3333ff',
-            500: 'rgb(0,0,124)',
-            600: '#00007a',
-            700: '#000066',
-            800: '#000052',
-            900: '#00003d',
-            950: '#000029'
-          },
-          background: '#ffffff',
-          surface: '#f8fafc',
-          text: {
-            primary: '#171717',
-            secondary: '#404040',
-            tertiary: '#737373'
-          },
-          border: '#e5e5e5'
-        },
-        // Темная тема (инверсия)
+        // Dark theme
         dark: {
           primary: {
-            DEFAULT: 'rgb(0,0,124)',
+            DEFAULT: '#3333ff',
             50: '#000029',
             100: '#00003d',
             200: '#000052',
             300: '#000066',
             400: '#00007a',
-            500: 'rgb(0,0,124)',
+            500: '#000080',
             600: '#3333ff',
             700: '#6666ff',
             800: '#9999ff',
@@ -96,7 +72,59 @@ module.exports = {
           },
           border: '#404040'
         },
-        // Цвета для уведомлений (одинаковые для обеих тем)
+
+        // High contrast theme
+        'high-contrast': {
+          primary: {
+            DEFAULT: '#000000',
+            50: '#ffffff',
+            100: '#ffffff',
+            200: '#000000',
+            300: '#000000',
+            400: '#000000',
+            500: '#000000',
+            600: '#ffffff',
+            700: '#ffffff',
+            800: '#000000',
+            900: '#000000',
+            950: '#000000'
+          },
+          background: '#ffffff',
+          surface: '#ffffff',
+          text: {
+            primary: '#000000',
+            secondary: '#000000',
+            tertiary: '#000000'
+          },
+          border: '#000000',
+          // Dark high contrast variant
+          dark: {
+            primary: {
+              DEFAULT: '#ffffff',
+              50: '#000000',
+              100: '#000000',
+              200: '#ffffff',
+              300: '#ffffff',
+              400: '#ffffff',
+              500: '#ffffff',
+              600: '#000000',
+              700: '#000000',
+              800: '#ffffff',
+              900: '#ffffff',
+              950: '#ffffff'
+            },
+            background: '#000000',
+            surface: '#000000',
+            text: {
+              primary: '#ffffff',
+              secondary: '#ffffff',
+              tertiary: '#ffffff'
+            },
+            border: '#ffffff'
+          }
+        },
+
+        // Status colors (same for all themes)
         success: {
           light: '#ecfdf5',
           DEFAULT: '#10b981',
@@ -120,5 +148,15 @@ module.exports = {
       }
     }
   },
-  plugins: []
+  plugins: [
+    function ({
+      addVariant
+    }: {
+      addVariant: (name: string, definition: string) => void
+    }) {
+      // Add high-contrast variants
+      addVariant('high-contrast', '.high-contrast &')
+      addVariant('high-contrast-dark', '.high-contrast.dark &')
+    }
+  ]
 }
