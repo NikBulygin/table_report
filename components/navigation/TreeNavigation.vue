@@ -54,7 +54,9 @@ const toggleSubmenu = (title: string) => {
   >
     <div class="p-4">
       <!-- Дерево навигации -->
-      <div class="flex flex-row flex-wrap justify-between gap-4">
+      <div
+        class="flex flex-row flex-wrap items-center justify-around gap-4"
+      >
         <template v-for="item in items" :key="item.title">
           <!-- Корневой элемент -->
           <div class="group w-full sm:w-auto min-w-[200px]">
@@ -116,7 +118,7 @@ const toggleSubmenu = (title: string) => {
             <!-- Дочерние элементы -->
             <div
               v-if="item.children?.length && openSubmenus.has(item.title)"
-              class="ml-4 mt-1 border-l-2 border-border dark:border-dark-border high-contrast:border-high-contrast-border"
+              class="absolute ml-4 mt-1 border-l-2 border-border dark:border-dark-border high-contrast:border-high-contrast-border"
             >
               <template v-for="child in item.children" :key="child.title">
                 <!-- Дочерний элемент -->

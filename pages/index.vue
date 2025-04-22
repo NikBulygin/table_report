@@ -1,87 +1,40 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-import type { NavigationMenu } from '~/types'
-import SideNavigation from '~/components/navigation/SideNavigation.vue'
-import TreeNavigation from '~/components/navigation/TreeNavigation.vue'
-const isNavigationOpen = ref(false)
+<template>
+  <div>
+    <h1>Hello World</h1>
+    <button
+      class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+      @click="toggleNavigation"
+    >
+      {{ hasNavigation ? 'Скрыть' : 'Показать' }} дополнительное меню
+    </button>
+  </div>
+</template>
 
-const navigationItems: NavigationMenu = [
+<script setup lang="ts">
+import type { NavigationItem } from '~/types'
+
+const navigationItems = useState<NavigationItem[]>('navigationItems')
+const hasNavigation = computed(() => navigationItems.value.length > 0)
+
+const sampleNavigation: NavigationItem[] = [
   {
-    title: 'Главная',
-    url: '/'
-  },
-  {
-    title: 'О нас',
-    url: '/about',
+    title: 'Дополнительное меню',
+    url: '/additional',
     children: [
+      { title: 'Пункт 1', url: '/additional/1' },
       {
-        title: 'История',
-        url: '/about/history'
-      },
-      {
-        title: 'Команда',
-        url: '/about/team'
-      }
-    ]
-  },
-  {
-    title: 'Услуги',
-    url: '/services',
-    children: [
-      {
-        title: 'Консультации',
-        url: '/services/consulting'
-      },
-      {
-        title: 'Разработка',
-        url: '/services/development',
+        title: 'Пункт 2',
+        url: '/additional/2',
         children: [
-          {
-            title: 'Веб-разработка',
-            url: '/services/development/web'
-          },
-          {
-            title: 'Мобильная разработка',
-            url: '/services/development/mobile'
-          }
+          { title: 'Подпункт 2.1', url: '/additional/2/1' },
+          { title: 'Подпункт 2.2', url: '/additional/2/2' }
         ]
       }
     ]
-  },
-  {
-    title: 'Контакты',
-    url: '/contacts'
   }
 ]
+
+const toggleNavigation = () => {
+  navigationItems.value = hasNavigation.value ? [] : sampleNavigation
+}
 </script>
-
-<template>
-  <TreeNavigation :items="navigationItems" />
-  <div>
-    <button
-      @click="isNavigationOpen = true"
-      class="fixed right-4 bottom-4 p-2 bg-primary text-white rounded-full shadow-lg hover:bg-primary-600 transition-colors duration-200"
-    >
-      <svg
-        class="w-6 h-6"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 6h16M4 12h16m-7 6h7"
-        />
-      </svg>
-    </button>
-
-    <SideNavigation
-      v-model:isOpen="isNavigationOpen"
-      :items="navigationItems"
-    />
-
-    test
-  </div>
-</template>
