@@ -71,7 +71,7 @@ onMounted(() => {
     <!-- Dropdown menu -->
     <div
       v-show="isOpen"
-      class="absolute top-full mt-1 bg-background dark:bg-dark-background border border-border dark:border-dark-border rounded-lg shadow-lg overflow-hidden z-50 w-full"
+      class="absolute top-full mt-0 bg-background dark:bg-dark-background border border-border dark:border-dark-border rounded-lg shadow-lg overflow-hidden z-50 w-full"
     >
       <button
         v-for="lang in locales"

@@ -43,12 +43,12 @@ function setTheme(themeName: string) {
         <button
           @click="setTheme(theme.name)"
           class="relative z-10 flex-1 h-7 flex items-center justify-center rounded transition-colors duration-200"
-          :class="{
-            'text-white': currentThemeIndex === index,
-            'hover:scale-110': currentThemeIndex !== index,
-            'text-text-primary dark:text-dark-text-primary high-contrast:text-high-contrast-text-primary':
-              currentThemeIndex !== index
-          }"
+          :class="[
+            currentThemeIndex === index
+              ? 'text-white'
+              : 'text-text-primary dark:text-dark-text-primary high-contrast:text-high-contrast-text-primary',
+            currentThemeIndex !== index ? 'hover:scale-110' : ''
+          ]"
           :title="theme.label"
         >
           <component
