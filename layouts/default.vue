@@ -1,83 +1,39 @@
 <template>
-  <header>
-    <div class="flex items-center justify-between p-4">
-      <div class="logo w-64 h-16">
-        <NuxtLink to="/">
-          <!-- <img src="/logo.svg" alt="Logo" /> -->
-          logo
-        </NuxtLink>
-      </div>
-
-      <TreeNavigation :items="navigationItems" />
-      <div class="flex flex-col gap-2">
-        <themeSelector />
-        <langselector />
-      </div>
-    </div>
-  </header>
-  <div v-if="secondaryNavigationItems.length > 0">
-    <SideNavigation
-      :items="secondaryNavigationItems"
-      :is-open="isMenuOpen"
-      @update:isOpen="toggleMenu"
-    />
-    <button
-      @click="toggleMenu"
-      class="fixed bottom-8 right-8 p-3 rounded-full bg-primary dark:bg-dark-primary high-contrast:bg-high-contrast-primary text-white shadow-lg hover:opacity-90 transition-opacity"
-      aria-label="Toggle menu"
+  <div
+    class="min-h-screen bg-background dark:bg-dark-background high-contrast:bg-high-contrast-background"
+  >
+    <nav
+      class="bg-surface dark:bg-dark-surface high-contrast:bg-high-contrast-surface border-b border-border dark:border-dark-border high-contrast:border-high-contrast-border"
     >
-      <svg
-        class="w-6 h-6"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 6h16M4 12h16M4 18h16"
-        />
-      </svg>
-    </button>
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between h-16">
+          <div class="flex">
+            <NuxtLink
+              v-for="shop in shops"
+              :key="shop.id"
+              :to="{ path: '/', query: { shop: shop.id } }"
+              class="inline-flex items-center px-4 border-b-2 transition-colors"
+              :class="[
+                $route.query.shop === shop.id
+                  ? 'border-primary dark:border-dark-primary high-contrast:border-high-contrast-primary text-text-primary dark:text-dark-text-primary high-contrast:text-high-contrast-text-primary'
+                  : 'border-transparent text-text-secondary dark:text-dark-text-secondary high-contrast:text-high-contrast-text-secondary hover:text-text-primary dark:hover:text-dark-text-primary high-contrast:hover:text-high-contrast-text-primary'
+              ]"
+            >
+              {{ shop.name }}
+            </NuxtLink>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <main class="max-w-7xl mx-auto px-4 py-6">
+      <slot />
+    </main>
   </div>
-  <slot />
 </template>
 
 <script setup lang="ts">
-import TreeNavigation from '@/components/navigation/TreeNavigation.vue'
-import SideNavigation from '@/components/navigation/SideNavigation.vue'
-import themeSelector from '@/components/tools/ThemeToggle.vue'
-import langselector from '@/components/tools/i18n.vue'
-
-// Define props
-const props = defineProps<{
-  secondaryNavigationItems?: NavigationItem[]
-}>()
-
-const isMenuOpen = ref(false)
-
-const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value
-}
-
-const navigationItems = ref<NavigationItem[]>([
-  { title: 'Главная', url: '/' },
-  {
-    title: 'TestWithChild',
-    url: '/test',
-    children: [
-      { title: 'Child1', url: '/child1' },
-      {
-        title: 'Child2',
-        url: '/child2',
-        children: [
-          { title: 'Child2.1', url: '/child2.1' },
-          { title: 'Child2.2', url: '/child2.2' },
-          { title: 'Child2.3', url: '/child2.3' }
-        ]
-      }
-    ]
-  }
-])
+const shops = [
+  { id: '2', name: 'Цех 2' },
+  { id: '12', name: 'Цех 12' }
+]
 </script>

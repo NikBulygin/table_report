@@ -306,7 +306,7 @@
                   :disabled="false"
                   :readonly="false"
                   :required="column.validation?.required || false"
-                  :format="column.validation?.format || 'dd.MM.yyyy'"
+                  :format="'dd-MM-yyyy'"
                   :error-message="
                     editedDataErrors[rowIndex]?.[column.key] || ''
                   "
@@ -349,6 +349,11 @@
                   {{
                     column.type === 'formula'
                       ? column.formula(getRowData(rowIndex))
+                      : column.type === 'date'
+                      ? format(
+                          new Date(getRowData(rowIndex)[column.key]),
+                          'dd-MM-yyyy'
+                        )
                       : column.type === 'number' &&
                         column.validation?.precision
                       ? Number(getRowData(rowIndex)[column.key]).toFixed(
@@ -393,6 +398,7 @@ import ContainerPagination from '~/components/container/pagination/index.vue'
 import InputText from '~/components/input/text.vue'
 import InputNumber from '~/components/input/number.vue'
 import InputDate from '~/components/input/datepicker.vue'
+import { format } from 'date-fns'
 
 interface ValidationMeta {
   required?: boolean
@@ -429,6 +435,7 @@ interface Props {
     columns: ColumnMeta[]
   }
   data: {
+    id: number
     [key: string]: any
   }[]
   pagination?: {
@@ -626,6 +633,9 @@ const addNewRow = () => {
     }
     return acc
   }, {} as { [key: string]: any })
+
+  // Добавляем временный id для новой строки (будет заменен на серверный после сохранения)
+  newRow.id = -1 * (newRows.value.length + 1) // Используем отрицательные id для новых строк
 
   // Добавляем новую строку в editedData
   editedData.value[newIndex] = newRow
