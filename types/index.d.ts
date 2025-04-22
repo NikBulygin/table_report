@@ -13,3 +13,12 @@ export interface NavigationItem {
 }
 
 export type NavigationMenu = NavigationItem[]
+
+type DateFormat =
+  | 'dd.MM.yyyy' // полная дата с точкой
+  | 'MM.yyyy' // месяц и год с точкой
+  | 'yyyy' // только год
+  | 'dd-MM-yyyy' // полная дата с дефисом
+  | 'MM-yyyy' // месяц и год с дефисом
+  | 'dd/MM/yyyy' // полная дата со слешем
+  | 'MM/yyyy' // месяц и год со слешем
