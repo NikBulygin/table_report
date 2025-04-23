@@ -30,10 +30,10 @@ import { ref } from 'vue'
 
 interface Props {
   modelValue: string
-  regex: string
-  errorMessage: string
   label: string
   placeholder: string
+  regex: string
+  errorMessage: string
   type?: string
   disabled?: boolean
   readonly?: boolean

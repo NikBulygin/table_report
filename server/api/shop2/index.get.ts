@@ -1,3 +1,4 @@
+import metadata from './meta.JSON'
 export default defineEventHandler(event => {
   const query = getQuery(event)
   const {
@@ -13,63 +14,7 @@ export default defineEventHandler(event => {
 
   // Return metadata if requested
   if (meta) {
-    return {
-      columns: [
-        {
-          key: 'code',
-          title: 'Код',
-          type: 'text',
-          validation: {
-            required: true,
-            minLength: 3,
-            maxLength: 10
-          }
-        },
-        {
-          key: 'quantity',
-          title: 'Количество',
-          type: 'number',
-          validation: {
-            required: true,
-            min: 0,
-            max: 1000
-          }
-        },
-        {
-          key: 'defects',
-          title: 'Брак',
-          type: 'number',
-          validation: {
-            required: true,
-            min: 0,
-            max: 1000
-          }
-        },
-        {
-          key: 'defectRate',
-          title: 'Процент брака',
-          type: 'text',
-          editable: false
-        },
-        {
-          key: 'date',
-          title: 'Дата',
-          type: 'date',
-          validation: {
-            required: true
-          }
-        },
-        {
-          key: 'shift',
-          title: 'Смена',
-          type: 'text',
-          validation: {
-            required: true,
-            pattern: '^[1-3]$'
-          }
-        }
-      ]
-    }
+    return metadata
   }
 
   // Generate realistic mock data

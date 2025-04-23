@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "columns": [
+      {
+        "key": "numberVagonOrTank",
+        "key_type": "text",
+        "label": "Номер цистерны вагона",
+        "placeholder": "Введите номер цистерны вагона",
+        "regex": "^[0-9]{6,10}$",
+        "errorMessage": "Номер цистерны вагона должен содержать от 6 до 10 цифр",
+        "required": true
+      },
+      {
+        "key": "weight",
+        "key_type": "number",
+        "label": "Отгруженная натура",
+        "placeholder": "Введите отгруженную натуру",
+        "float": {
+          "precision": 2,
+          "separator": ",",
+          "step": 0.01
+        },
+        "required": true,
+        "min": 0
+      },
+      {
+        "key": "perMetVklCert",
+        "key_type": "number",
+        "label": "% мет. вклад. сертиф",
+        "placeholder": "Введите % мет. вклад. сертиф",
+        "float": {
+          "precision": 2,
+          "separator": ",",
+          "step": 0.01
+        },
+        "required": true,
+        "min": 0
+      },
+      {
+        "key": "perTioCert",
+        "key_type": "number",
+        "label": "% ТИО2 сертиф",
+        "placeholder": "Введите % ТИО2 сертиф",
+        "float": {
+          "precision": 2,
+          "separator": ",",
+          "step": 0.01
+        },
+        "required": true,
+        "min": 0
+      },
+      {
+        "key": "perH2oCert",
+        "key_type": "number",
+        "label": "% Н2О сертиф",
+        "placeholder": "Введите % Н2О сертиф",
+        "float": {
+          "precision": 2,
+          "separator": ",",
+          "step": 0.01
+        },
+        "required": true,
+        "min": 0
+      },
+      {
+        "key": "DryWeight",
+        "key_type": "number",
+        "label": "Сухой вес",
+        "readonly": true
+      },
+      {
+        "key": "MetalTon",
+        "key_type": "number",
+        "label": "Металл тонна",
+        "readonly": true
+      },
+      {
+        "key": "standart80Tio2",
+        "key_type": "number",
+        "label": "Стандарт 80% ТИО2",
+        "readonly": true
+      },
+      {
+        "key": "standart80Tio2Total",
+        "key_type": "number",
+        "label": "Стандарт 80% ТИО2 общий",
+        "readonly": true
+      },
+      {
+        "key": "dockumentNumberMiro",
+        "key_type": "text",
+        "label": "Номер документа в miro",
+        "placeholder": "Введите номер документа в miro",
+        "required": true
+      },
+      {
+        "key": "invoiceDate",
+        "key_type": "date",
+        "label": "Дата счета",
+        "placeholder": "Выберите дату счета",
+        "format": "dd.MM.yyyy",
+        "errorMessage": "Дата счета должна быть в формате dd.MM.yyyy",
+        "allowInput": true
+      },
+      {
+        "key": "invoiceNumber",
+        "key_type": "text",
+        "label": "Номер счета",
+        "placeholder": "Введите номер счета",
+        "regex": "^[0-9]{6,10}$",
+        "errorMessage": "Номер счета должен содержать от 6 до 10 цифр",
+        "required": true
+      },
+      {
+        "key": "gtdDate",
+        "key_type": "date",
+        "label": "Дата ГТД",
+        "placeholder": "Выберите дату ГТД",
+        "format": "dd.MM.yyyy",
+        "errorMessage": "Дата ГТД должна быть в формате dd.MM.yyyy",
+        "allowInput": true
+      },
+      {
+        "key": "gtdNumber",
+        "key_type": "text",
+        "label": "Номер ГТД",
+        "placeholder": "Введите номер ГТД",
+        "regex": "^[0-9]{6,10}$",
+        "errorMessage": "Номер ГТД должен содержать от 6 до 10 цифр",
+        "required": true
+      }
+    ]
+  }
+}
