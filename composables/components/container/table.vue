@@ -108,51 +108,32 @@
           />
         </div>
 
-        <!-- Loading state -->
-        <div
-          v-if="loading"
-          class="w-full text-center py-4 text-text-secondary dark:text-dark-text-secondary high-contrast:text-high-contrast-text-secondary"
-        >
-          Загрузка...
-        </div>
-
-        <!-- Error state -->
-        <div v-else-if="error" class="w-full text-center py-4 text-danger">
-          Ошибка загрузки данных
-        </div>
-
-        <!-- No data state -->
-        <div
-          v-else-if="!displayData.length"
-          class="w-full text-center py-4 text-text-secondary dark:text-dark-text-secondary high-contrast:text-high-contrast-text-secondary"
-        >
-          Нет данных
-        </div>
-
         <!-- Column headers -->
         <template v-for="column in props.meta.columns" :key="column.key">
           <div
             class="table-header-cell p-2 bg-primary-600 dark:bg-dark-primary-600 high-contrast:bg-high-contrast-primary text-white dark:text-white high-contrast:text-black flex items-center gap-1 cursor-pointer select-none border-r border-r-white/20 dark:border-r-black/20 high-contrast:border-r-black last:border-r-0 font-bold text-sm uppercase tracking-wider shadow-md"
             @click="
-              column.type !== 'formula' &&
+              column.key_type !== 'formula' &&
                 !isEditMode &&
                 handleSort(column.key)
             "
             :class="{
               'cursor-not-allowed opacity-75':
-                column.type === 'formula' || isEditMode,
+                column.key_type === 'formula' || isEditMode,
               'hover:bg-primary-700 dark:hover:bg-dark-primary-700 high-contrast:hover:bg-high-contrast-primary/90':
-                column.type !== 'formula' && !isEditMode
+                column.key_type !== 'formula' && !isEditMode
             }"
             :title="
-              column.type !== 'formula' && !isEditMode
+              column.key_type !== 'formula' && !isEditMode
                 ? getSortTitle(column.key)
                 : ''
             "
           >
-            <span class="flex-1">{{ column.title }}</span>
+            <div class="flex-1 break-all whitespace-pre-wrap">
+              {{ column.label }}
+            </div>
             <div
-              v-if="column.type !== 'formula' && !isEditMode"
+              v-if="column.key_type !== 'formula' && !isEditMode"
               class="flex items-center"
             >
               <svg
@@ -173,6 +154,27 @@
             </div>
           </div>
         </template>
+
+        <!-- Loading state -->
+        <div
+          v-if="loading"
+          class="w-full text-center py-4 text-text-secondary dark:text-dark-text-secondary high-contrast:text-high-contrast-text-secondary"
+        >
+          Загрузка...
+        </div>
+
+        <!-- Error state -->
+        <div v-else-if="error" class="w-full text-center py-4 text-danger">
+          Ошибка загрузки данных
+        </div>
+
+        <!-- No data state -->
+        <div
+          v-else-if="!displayData.length"
+          class="w-full text-center py-4 text-text-secondary dark:text-dark-text-secondary high-contrast:text-high-contrast-text-secondary"
+        >
+          Нет данных
+        </div>
 
         <!-- Table rows -->
         <template v-for="(row, rowIndex) in displayData" :key="rowIndex">
@@ -212,9 +214,9 @@
                   'border border-danger dark:border-danger high-contrast:border-danger'
               ]"
             >
-              <template v-if="isEditMode && column.type !== 'formula'">
+              <template v-if="isEditMode && column.key_type !== 'formula'">
                 <InputText
-                  v-if="column.type === 'text'"
+                  v-if="column.key_type === 'text'"
                   v-model="editedData[rowIndex][column.key]"
                   :regex="
                     getValidationPattern(column.validation)?.toString() ||
@@ -224,7 +226,7 @@
                     editedDataErrors[rowIndex]?.[column.key] || ''
                   "
                   :label="''"
-                  :placeholder="column.title"
+                  :placeholder="column.placeholder || ''"
                   :disabled="false"
                   :readonly="false"
                   :required="column.validation?.required || false"
@@ -244,12 +246,13 @@
                   "
                 />
                 <InputNumber
-                  v-else-if="column.type === 'number'"
+                  v-else-if="column.key_type === 'number'"
                   v-model="editedData[rowIndex][column.key]"
                   :label="''"
-                  :placeholder="column.title"
+                  :placeholder="column.placeholder"
                   :disabled="false"
                   :readonly="false"
+                  :show-spinner="false"
                   :required="column.validation?.required || false"
                   :min="column.validation?.min"
                   :max="column.validation?.max"
@@ -299,10 +302,10 @@
                   "
                 />
                 <InputDate
-                  v-else-if="column.type === 'date'"
+                  v-else-if="column.key_type === 'date'"
                   v-model="editedData[rowIndex][column.key]"
                   :label="''"
-                  :placeholder="column.title"
+                  :placeholder="column.placeholder"
                   :disabled="false"
                   :readonly="false"
                   :required="column.validation?.required || false"
@@ -341,20 +344,20 @@
                 <span
                   :class="{
                     'text-text-primary dark:text-dark-text-primary high-contrast:text-high-contrast-text-primary':
-                      column.type !== 'formula',
+                      column.key_type !== 'formula',
                     'text-text-secondary dark:text-dark-text-secondary high-contrast:text-high-contrast-text-secondary':
-                      column.type === 'formula'
+                      column.key_type === 'formula'
                   }"
                 >
                   {{
-                    column.type === 'formula'
+                    column.key_type === 'formula'
                       ? column.formula(getRowData(rowIndex))
-                      : column.type === 'date'
+                      : column.key_type === 'date'
                       ? format(
                           new Date(getRowData(rowIndex)[column.key]),
                           'dd-MM-yyyy'
                         )
-                      : column.type === 'number' &&
+                      : column.key_type === 'number' &&
                         column.validation?.precision
                       ? Number(getRowData(rowIndex)[column.key]).toFixed(
                           column.validation.precision
@@ -423,8 +426,14 @@ interface ValidationMeta {
 
 interface ColumnMeta {
   key: string
-  title: string
-  type: 'text' | 'date' | 'number' | 'formula'
+  key_type: 'text' | 'date' | 'number' | 'formula'
+  label: string
+  placeholder?: string
+  regex?: string
+  errorMessage?: string
+  required?: boolean
+  min?: number
+  max?: number
   width?: string
   formula?: (row: any) => any
   validation?: ValidationMeta
@@ -483,7 +492,7 @@ const getRowData = (index: number) => {
 
   const processedData = { ...rowData }
   props.meta.columns.forEach(column => {
-    if (column.type === 'date') {
+    if (column.key_type === 'date') {
       processedData[column.key] = processedData[column.key]
         ? new Date(processedData[column.key])
         : null
@@ -506,7 +515,7 @@ const displayData = computed(() => {
   return allData.map(row => {
     const displayRow = { ...row }
     props.meta.columns.forEach(column => {
-      if (column.type === 'date' && displayRow[column.key]) {
+      if (column.key_type === 'date' && displayRow[column.key]) {
         displayRow[column.key] = new Date(displayRow[column.key])
       }
     })
@@ -531,7 +540,7 @@ const initEditedData = () => {
   editedData.value = props.data.reduce((acc, row, index) => {
     acc[index] = { ...row }
     props.meta.columns.forEach(column => {
-      if (column.type === 'date') {
+      if (column.key_type === 'date') {
         acc[index][column.key] = acc[index][column.key]
           ? new Date(acc[index][column.key])
           : null
@@ -616,8 +625,8 @@ const addNewRow = () => {
 
   // Создаем новую строку с значениями по умолчанию
   const newRow = props.meta.columns.reduce((acc, column) => {
-    if (column.type !== 'formula') {
-      switch (column.type) {
+    if (column.key_type !== 'formula') {
+      switch (column.key_type) {
         case 'date':
           acc[column.key] = null
           break
@@ -660,7 +669,7 @@ const copySelected = () => {
 
     // Обрабатываем специальные типы данных
     props.meta.columns.forEach(column => {
-      if (column.type === 'date' && rowData[column.key]) {
+      if (column.key_type === 'date' && rowData[column.key]) {
         // Если значение уже является объектом Date, создаем новый объект Date
         // Если значение - строка, парсим ее в Date
         rowData[column.key] =

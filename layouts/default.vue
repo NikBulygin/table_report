@@ -22,6 +22,7 @@
               {{ shop.name }}
             </NuxtLink>
           </div>
+          <ThemeToggle />
         </div>
       </div>
     </nav>
@@ -32,6 +33,8 @@
 </template>
 
 <script setup lang="ts">
+import ThemeToggle from '~/components/tools/ThemeToggle.vue'
+
 const shops = [
   { id: '2', name: 'Цех 2' },
   { id: '12', name: 'Цех 12' }

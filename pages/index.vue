@@ -1,4 +1,11 @@
 <template>
+  <div class="w-1/2 bg-red-500 break-all whitespace-pre-wrap">
+    test testtest testtest testtest testtest testtest testtest testtest
+    testtest testtest testtest testtest testtest testtest testtest testtest
+    testtest testtest testtest testtest testtest testtest testtest testtest
+    testtest testtest testtest test
+  </div>
+  >
   <div v-if="currentShop" class="space-y-4">
     <!-- Filters -->
     <div
@@ -30,7 +37,7 @@
         <div class="flex items-end">
           <button
             @click="loadData"
-            class="px-4 py-2 bg-primary dark:bg-dark-primary high-contrast:bg-high-contrast-primary text-white dark:text-white high-contrast:text-black rounded hover:bg-primary-dark dark:hover:bg-dark-primary-dark high-contrast:hover:bg-high-contrast-primary-dark transition-colors"
+            class="px-4 py-2 rounded hover:bg-primary-dark dark:hover:bg-dark-primary-dark high-contrast:hover:bg-high-contrast-primary-dark transition-colors"
           >
             Применить
           </button>
@@ -108,7 +115,7 @@ const loadMetadata = async () => {
         meta: true
       }
     })
-    tableMeta.value = response.columns
+    tableMeta.value = response.meta.columns
   } catch (error) {
     console.error('Error loading metadata:', error)
   }
