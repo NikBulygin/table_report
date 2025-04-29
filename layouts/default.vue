@@ -13,6 +13,7 @@
                     ? 'border-indigo-500 text-gray-900'
                     : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
                 ]"
+                @click="resetStore"
               >
                 Shop 2
               </NuxtLink>
@@ -24,6 +25,7 @@
                     ? 'border-indigo-500 text-gray-900'
                     : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
                 ]"
+                @click="resetStore"
               >
                 Shop 12
               </NuxtLink>
@@ -38,3 +40,13 @@
     </main>
   </div>
 </template>
+
+<script setup lang="ts">
+import { useShopDataStore } from '~/stores/shopData'
+
+const store = useShopDataStore()
+
+function resetStore() {
+  store.reset()
+}
+</script>

@@ -76,13 +76,26 @@
                 type="button"
                 class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700"
                 @click="store.toggleEditMode()"
+                v-if="!store.isEditMode"
               >
-                {{
-                  store.isEditMode
-                    ? 'Выйти из режима редактирования'
-                    : 'Редактировать'
-                }}
+                Редактировать
               </button>
+              <template v-else>
+                <button
+                  type="button"
+                  class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700"
+                  @click="store.cancelEdit()"
+                >
+                  Отменить
+                </button>
+                <button
+                  type="button"
+                  class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
+                  @click="store.applyEdit()"
+                >
+                  Применить
+                </button>
+              </template>
               <button
                 type="button"
                 class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700"

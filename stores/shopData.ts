@@ -24,7 +24,8 @@ export const useShopDataStore = defineStore('shopData', {
     },
     shopType: 'shop2' as 'shop2' | 'shop12',
     isEditMode: false,
-    selectedIds: [] as (number | string)[]
+    selectedIds: [] as (number | string)[],
+    editBuffer: {} as Record<string, any>
   }),
   actions: {
     setShopType(type: 'shop2' | 'shop12') {
@@ -39,7 +40,7 @@ export const useShopDataStore = defineStore('shopData', {
     setPageSize(size: number) {
       this.filter.pagination.pageSize = size
     },
-    deleteItem(itemId: number) {
+    deleteItem(itemId: number | string) {
       const idx = this.items.findIndex(item => item.id === itemId)
       if (idx !== -1) {
         const [removed] = this.items.splice(idx, 1)
@@ -96,14 +97,31 @@ export const useShopDataStore = defineStore('shopData', {
         this.loading = false
       }
     },
-    setEditMode(val: boolean) {
-      this.isEditMode = val
-    },
     toggleEditMode() {
       this.isEditMode = !this.isEditMode
+      if (!this.isEditMode) {
+        this.editBuffer = {}
+      } else {
+        this.editBuffer = { ...this.items }
+      }
+    },
+    cancelEdit() {
+      this.isEditMode = false
+      this.editBuffer = {}
+      this.fetchData()
+    },
+    applyEdit() {
+      const editedItems = Object.values(this.editBuffer)
+      if (editedItems.length > 0) {
+        this.items = editedItems
+      }
+      this.isEditMode = false
+      this.editBuffer = {}
     },
     selectRow(id: number | string) {
-      if (!this.selectedIds.includes(id)) this.selectedIds.push(id)
+      if (!this.selectedIds.includes(id)) {
+        this.selectedIds.push(id)
+      }
     },
     deselectRow(id: number | string) {
       this.selectedIds = this.selectedIds.filter(x => x !== id)
@@ -114,6 +132,29 @@ export const useShopDataStore = defineStore('shopData', {
     deleteSelected() {
       this.selectedIds.forEach(id => this.deleteItem(id))
       this.clearSelection()
+    },
+    reset() {
+      this.items = []
+      this.itemsDelete = []
+      this.itemsEdit = []
+      this.pagination = {
+        total: 0,
+        currentPage: 1,
+        pageSize: 10,
+        totalPages: 0
+      }
+      this.loading = false
+      this.error = null
+      this.filter = {
+        month: '',
+        pagination: {
+          pageSize: 10,
+          currentPage: 1
+        }
+      }
+      this.isEditMode = false
+      this.selectedIds = []
+      this.editBuffer = {}
     }
   }
 })
