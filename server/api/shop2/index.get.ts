@@ -46,23 +46,20 @@ export default defineEventHandler(async event => {
     const total = await prisma.shop2.count({ where })
 
     // Build orderBy clause
-    const orderBy: any = {}
-    if (sortField === 'createdAt') {
-      orderBy[sortField] = sortOrder
-    } else if (sortField === 'InvoiceDate') {
-      orderBy.Invoice = {
-        InvoiceDate: sortOrder
-      }
-    } else if (sortField === 'GtdDate') {
-      orderBy.Invoice = {
-        GTD: {
-          GtdDate: sortOrder
-        }
-      }
-    } else {
-      orderBy[sortField] = {
-        _count: sortOrder
-      }
+    let orderBy: any = {}
+
+    switch (sortField) {
+      case 'createdAt':
+        orderBy = { createdAt: sortOrder }
+        break
+      case 'InvoiceDate':
+        orderBy = { Invoice: { InvoiceDate: sortOrder } }
+        break
+      case 'GtdDate':
+        orderBy = { Invoice: { GTD: { GtdDate: sortOrder } } }
+        break
+      default:
+        orderBy = { [sortField]: sortOrder }
     }
 
     // Fetch data with pagination
