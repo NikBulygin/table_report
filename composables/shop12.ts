@@ -34,6 +34,21 @@ export class Shop12Invoice {
   }
 }
 
+export class Shop12Filter {
+  constructor(
+    public startDate?: Date,
+    public endDate?: Date,
+    public pagination: {
+      pageSize: number
+      currentPage: number
+    } = { pageSize: 10, currentPage: 1 },
+    public orderBy?: {
+      field: 'GtdDate' | 'InvoiceDate' | 'weight' | 'recalculatedWeight'
+      direction: 'asc' | 'desc'
+    }
+  ) {}
+}
+
 export class Shop12GTD {
   constructor(
     public GtdNumber: string,
@@ -43,6 +58,28 @@ export class Shop12GTD {
 
   addInvoice(invoice: Shop12Invoice): void {
     this.invoices.push(invoice)
+  }
+
+  static async findWithFilter(filter: Shop12Filter) {
+    const query = new URLSearchParams()
+
+    if (filter.startDate)
+      query.append('startDate', filter.startDate.toISOString())
+    if (filter.endDate)
+      query.append('endDate', filter.endDate.toISOString())
+    query.append('pageSize', filter.pagination.pageSize.toString())
+    query.append('currentPage', filter.pagination.currentPage.toString())
+    if (filter.orderBy) {
+      query.append('orderBy', filter.orderBy.field)
+      query.append('direction', filter.orderBy.direction)
+    }
+
+    const response = await fetch(`/api/shop12?${query.toString()}`)
+    if (!response.ok) {
+      throw new Error('Failed to fetch Shop12 data')
+    }
+
+    return response.json()
   }
 }
 
