@@ -24,13 +24,18 @@ export default defineEventHandler(async event => {
     const where: any = {}
 
     if (dateFrom || dateTo) {
-      where.createdAt = {}
-      if (dateFrom) where.createdAt.gte = new Date(dateFrom as string)
-      if (dateTo) where.createdAt.lte = new Date(dateTo as string)
+      where.Invoice = {
+        InvoiceDate: {}
+      }
+      if (dateFrom)
+        where.Invoice.InvoiceDate.gte = new Date(dateFrom as string)
+      if (dateTo)
+        where.Invoice.InvoiceDate.lte = new Date(dateTo as string)
     }
 
     if (codeNumber) {
       where.Invoice = {
+        ...where.Invoice,
         InvoiceNumber: {
           contains: codeNumber as string
         }
@@ -44,6 +49,16 @@ export default defineEventHandler(async event => {
     const orderBy: any = {}
     if (sortField === 'createdAt') {
       orderBy[sortField] = sortOrder
+    } else if (sortField === 'InvoiceDate') {
+      orderBy.Invoice = {
+        InvoiceDate: sortOrder
+      }
+    } else if (sortField === 'GtdDate') {
+      orderBy.Invoice = {
+        GTD: {
+          GtdDate: sortOrder
+        }
+      }
     } else {
       orderBy[sortField] = {
         _count: sortOrder
