@@ -23,10 +23,22 @@ export default defineEventHandler(async event => {
         : undefined
     }
 
+    const invoiceNumbers = Array.isArray(query.invoiceNumbers)
+      ? query.invoiceNumbers
+      : query.invoiceNumbers
+      ? [query.invoiceNumbers]
+      : []
+    const gtdNumbers = Array.isArray(query.gtdNumbers)
+      ? query.gtdNumbers
+      : query.gtdNumbers
+      ? [query.gtdNumbers]
+      : []
+
     const where = {
       AND: [
         filter.startDate ? { GtdDate: { gte: filter.startDate } } : {},
         filter.endDate ? { GtdDate: { lte: filter.endDate } } : {},
+        gtdNumbers.length > 0 ? { GtdNumber: { in: gtdNumbers } } : {},
         {
           Invoices: {
             some: {
@@ -36,6 +48,9 @@ export default defineEventHandler(async event => {
                   : {},
                 filter.endDate
                   ? { InvoiceDate: { lte: filter.endDate } }
+                  : {},
+                invoiceNumbers.length > 0
+                  ? { InvoiceNumber: { in: invoiceNumbers } }
                   : {}
               ]
             }
@@ -55,31 +70,54 @@ export default defineEventHandler(async event => {
       (filter.pagination.currentPage - 1) * filter.pagination.pageSize
     const take = filter.pagination.pageSize
 
-    const [total, items] = await Promise.all([
-      prisma.shop2GTD.count({ where }),
-      prisma.shop2GTD.findMany({
-        where,
-        orderBy,
-        skip,
-        take,
-        include: {
-          Invoices: {
-            include: {
-              Items: true
-            }
+    const result = await prisma.shop2GTD.findMany({
+      where,
+      include: {
+        Invoices: {
+          include: {
+            Items: true
           }
         }
+      },
+      skip:
+        (filter.pagination.currentPage - 1) * filter.pagination.pageSize,
+      take: filter.pagination.pageSize,
+      orderBy: orderBy
+    })
+
+    const total = await prisma.shop2GTD.count({ where })
+    const totalPages = Math.ceil(total / filter.pagination.pageSize)
+
+    // Получаем все записи для расчета суммы standart80Tio2
+    const allRecords = await prisma.shop2GTD.findMany({
+      where,
+      include: {
+        Invoices: {
+          include: {
+            Items: true
+          }
+        }
+      }
+    })
+
+    // Calculate total standart80Tio2 по всем записям
+    let totalStandart80Tio2 = 0
+    allRecords.forEach(gtd => {
+      gtd.Invoices.forEach(invoice => {
+        invoice.Items.forEach(item => {
+          totalStandart80Tio2 += item.standart80Tio2
+        })
       })
-    ])
+    })
 
     return {
-      items,
+      items: result,
       pagination: {
         total,
         currentPage: filter.pagination.currentPage,
-        pageSize: filter.pagination.pageSize,
-        totalPages: Math.ceil(total / filter.pagination.pageSize)
-      }
+        totalPages
+      },
+      totalStandart80Tio2
     }
   } catch (error) {
     console.error('Error fetching Shop2 data:', error)

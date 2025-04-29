@@ -1,5 +1,15 @@
 <template>
   <div class="w-[90%] mx-auto overflow-x-auto">
+    <!-- Кнопка добавления -->
+    <div v-if="store.isEditMode" class="mb-4 flex justify-end">
+      <button
+        class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+        @click="addNewRow"
+      >
+        + Добавить строку
+      </button>
+    </div>
+
     <!-- Заголовки таблицы -->
     <div
       class="font-bold border-b pb-2 mb-2"
@@ -19,18 +29,49 @@
     </div>
 
     <!-- Сообщение при отсутствии данных -->
-    <div v-if="items.length === 0" class="p-4 text-gray-400">
+    <div
+      v-if="items.length === 0 && !newRows.length"
+      class="p-4 text-gray-400"
+    >
       Нет данных
     </div>
 
     <!-- Строки таблицы -->
     <div v-else :style="{ display: 'grid', gridTemplateColumns }">
+      <!-- Новые строки сверху -->
+      <div
+        v-for="row in newRows"
+        :key="row.id"
+        class="contents group bg-yellow-50"
+      >
+        <!-- Чекбокс для удаления -->
+        <div class="p-2 border-b flex items-center">
+          <input
+            type="checkbox"
+            :checked="store.selectedIds.includes(row.id)"
+            @change="toggleSelect(row.id, $event)"
+          />
+        </div>
+        <div
+          v-for="col in editColumns"
+          :key="col.key"
+          class="p-2 border-b"
+        >
+          <input
+            :value="getEditInputValue(row.id, col)"
+            @input="setEditValue(row.id, col.key, $event.target.value)"
+            :type="col.type"
+            class="border rounded px-1 py-0.5 w-full"
+          />
+        </div>
+      </div>
+
+      <!-- Существующие строки -->
       <div
         v-for="row in items"
         :key="row.uniqueId || row.id"
         class="contents group"
       >
-        <!-- Чекбокс -->
         <div class="p-2 border-b group-hover:bg-gray-50 flex items-center">
           <input
             type="checkbox"
@@ -39,7 +80,6 @@
           />
         </div>
 
-        <!-- Ячейки данных -->
         <template v-if="store.isEditMode">
           <div
             v-for="col in editColumns"
@@ -82,6 +122,7 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue'
 import { useShopDataStore } from '~/stores/shopData'
+import { nanoid } from 'nanoid'
 
 const props = defineProps<{ items: any[] }>()
 const store = useShopDataStore()
@@ -224,20 +265,134 @@ function getEditInputValue(
 }
 
 function setEditValue(id: string | number, key: string, value: any) {
-  if (!editBuffer.value[id]) editBuffer.value[id] = {}
-  const keys = key.split('.')
-  let current = editBuffer.value[id]
-
-  for (let i = 0; i < keys.length - 1; i++) {
-    if (!current[keys[i]]) current[keys[i]] = {}
-    current = current[keys[i]]
+  if (!store.editBuffer[id]) {
+    // Создаем начальную структуру если её нет
+    store.editBuffer[id] = {
+      id,
+      Invoices: [
+        {
+          Items: [{}],
+          MiroDocument: '',
+          InvoiceNumber: '',
+          InvoiceDate: new Date().toISOString().slice(0, 10)
+        }
+      ],
+      GtdNumber: '',
+      GtdDate: new Date().toISOString().slice(0, 10)
+    }
   }
 
-  current[keys[keys.length - 1]] = value
+  const keys = key.split('.')
+  let current = store.editBuffer[id]
+
+  // Для каждого уровня вложенности, кроме последнего
+  for (let i = 0; i < keys.length - 1; i++) {
+    const k = keys[i]
+    // Если это индекс массива
+    if (k === '0') continue
+
+    // Если следующий ключ - индекс массива, убедимся что текущий - массив
+    if (keys[i + 1] === '0') {
+      if (!Array.isArray(current[k])) {
+        current[k] = []
+      }
+      if (!current[k][0]) {
+        current[k][0] = keys[i + 2] === 'Items' ? { Items: [{}] } : {}
+      }
+      current = current[k][0]
+      i++ // Пропускаем следующий индекс
+    } else {
+      if (!current[k]) {
+        current[k] = {}
+      }
+      current = current[k]
+    }
+  }
+
+  // Устанавливаем значение
+  const lastKey = keys[keys.length - 1]
+  if (lastKey === '0') return
+
+  // Преобразуем значение в нужный тип
+  const col = columns.find(c => c.key === key)
+  if (col?.type === 'number') {
+    current[lastKey] = value === '' ? 0 : Number(value)
+  } else {
+    current[lastKey] = value
+  }
 }
 
 function toggleSelect(id, e) {
   if (e.target.checked) store.selectRow(id)
   else store.deselectRow(id)
+}
+
+const newRows = computed(() => {
+  // Новые строки — те, которых нет в items, но есть в editBuffer
+  const existingIds = new Set(props.items.map(r => r.id))
+  return Object.values(store.editBuffer).filter(
+    r => r && !existingIds.has(r.id)
+  )
+})
+
+function validateNewRow(row: any): string | null {
+  // Проверяем обязательные поля
+  const requiredFields = [
+    'Invoices.0.Items.0.numberVagonOrTank',
+    'Invoices.0.Items.0.weight',
+    'Invoices.0.Items.0.perMetVklCert',
+    'Invoices.0.Items.0.perTioCert',
+    'Invoices.0.Items.0.perH2oCert'
+  ]
+
+  for (const field of requiredFields) {
+    const value = getNestedValue(row, field)
+    if (!value && value !== 0) {
+      const col = columns.find(c => c.key === field)
+      return `Поле "${col?.label || field}" обязательно для заполнения`
+    }
+  }
+
+  // Проверяем числовые поля на корректность
+  const numberFields = editColumns.value.filter(
+    col => col.type === 'number'
+  )
+  for (const col of numberFields) {
+    const value = getNestedValue(row, col.key)
+    if (value && isNaN(Number(value))) {
+      return `Поле "${col.label}" должно быть числом`
+    }
+  }
+
+  return null
+}
+
+function addNewRow() {
+  const id = 'new_' + nanoid(8)
+
+  // Создаём правильную структуру данных
+  const template = {
+    id,
+    Invoices: [
+      {
+        Items: [
+          {
+            numberVagonOrTank: '',
+            weight: 0,
+            perMetVklCert: 0,
+            perTioCert: 0,
+            perH2oCert: 0
+          }
+        ],
+        MiroDocument: '',
+        InvoiceNumber: '',
+        InvoiceDate: new Date().toISOString().slice(0, 10)
+      }
+    ],
+    GtdNumber: '',
+    GtdDate: new Date().toISOString().slice(0, 10)
+  }
+
+  store.editBuffer[id] = template
 }
 </script>

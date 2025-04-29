@@ -66,7 +66,9 @@ export class Shop2Filter {
     public orderBy?: {
       field: 'GtdDate' | 'InvoiceDate' | 'weight' | 'standart80Tio2'
       direction: 'asc' | 'desc'
-    }
+    },
+    public invoiceNumbers?: string[],
+    public gtdNumbers?: string[]
   ) {}
 }
 
@@ -81,7 +83,15 @@ export class Shop2GTD {
     this.invoices.push(invoice)
   }
 
-  static async findWithFilter(filter: Shop2Filter) {
+  static async findWithFilter(filter: Shop2Filter): Promise<{
+    items: Shop2GTD[]
+    pagination: {
+      total: number
+      currentPage: number
+      totalPages: number
+    }
+    totalStandart80Tio2: number
+  }> {
     const query = new URLSearchParams()
 
     if (filter.startDate)
@@ -93,6 +103,14 @@ export class Shop2GTD {
     if (filter.orderBy) {
       query.append('orderBy', filter.orderBy.field)
       query.append('direction', filter.orderBy.direction)
+    }
+    if (filter.invoiceNumbers && filter.invoiceNumbers.length) {
+      filter.invoiceNumbers.forEach(num =>
+        query.append('invoiceNumbers', num)
+      )
+    }
+    if (filter.gtdNumbers && filter.gtdNumbers.length) {
+      filter.gtdNumbers.forEach(num => query.append('gtdNumbers', num))
     }
 
     const response = await fetch(`/api/shop2?${query.toString()}`)

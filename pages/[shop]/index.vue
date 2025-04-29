@@ -64,6 +64,68 @@
                   </select>
                 </div>
               </div>
+              <div class="sm:col-span-3">
+                <label class="block text-sm font-medium text-gray-700"
+                  >Номера инвойсов</label
+                >
+                <div class="mt-1">
+                  <Multiselect
+                    v-model="store.filter.invoiceNumbers"
+                    :options="invoiceNumberOptions"
+                    :searchable="true"
+                    :create-option="false"
+                    mode="multiple"
+                    valueProp="value"
+                    track-by="value"
+                    label="label"
+                    placeholder="Выберите номера инвойсов"
+                    :can-clear="true"
+                    :can-deselect="true"
+                    :close-on-select="false"
+                    :search-results-text="'Найдено {count} вариантов'"
+                    :no-results-text="'Ничего не найдено'"
+                    :no-options-text="'Нет доступных вариантов'"
+                    :select-text="'Выбрать'"
+                    :deselect-text="'Удалить'"
+                    :clear-text="'Очистить'"
+                    class="multiselect-wrapper"
+                  />
+                  <p class="mt-1 text-sm text-gray-500">
+                    Начните вводить для поиска или выберите из списка
+                  </p>
+                </div>
+              </div>
+              <div class="sm:col-span-3">
+                <label class="block text-sm font-medium text-gray-700"
+                  >Номера ГТД</label
+                >
+                <div class="mt-1">
+                  <Multiselect
+                    v-model="store.filter.gtdNumbers"
+                    :options="gtdNumberOptions"
+                    :searchable="true"
+                    :create-option="false"
+                    mode="multiple"
+                    valueProp="value"
+                    track-by="value"
+                    label="label"
+                    placeholder="Выберите номера ГТД"
+                    :can-clear="true"
+                    :can-deselect="true"
+                    :close-on-select="false"
+                    :search-results-text="'Найдено {count} вариантов'"
+                    :no-results-text="'Ничего не найдено'"
+                    :no-options-text="'Нет доступных вариантов'"
+                    :select-text="'Выбрать'"
+                    :deselect-text="'Удалить'"
+                    :clear-text="'Очистить'"
+                    class="multiselect-wrapper"
+                  />
+                  <p class="mt-1 text-sm text-gray-500">
+                    Начните вводить для поиска или выберите из списка
+                  </p>
+                </div>
+              </div>
             </div>
             <div class="flex justify-end">
               <button
@@ -131,6 +193,13 @@
             Текущая страница: {{ store.pagination.currentPage || 0 }} из
             {{ store.pagination.totalPages || 0 }}
           </div>
+          <div
+            v-if="store.totalStandart80Tio2"
+            class="text-sm text-gray-500"
+          >
+            Сумма Standart 80 TIO2:
+            {{ store.totalStandart80Tio2.toFixed(2) }}
+          </div>
         </div>
       </div>
     </div>
@@ -155,14 +224,26 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, computed } from 'vue'
+import { onMounted, computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useShopDataStore } from '~/stores/shopData'
 import Pagination from '~/components/Pagination.vue'
+import Multiselect from '@vueform/multiselect'
+import '@vueform/multiselect/themes/default.css'
 
 const store = useShopDataStore()
 const route = useRoute()
 const shop = computed(() => route.params.shop as 'shop2' | 'shop12')
+
+// Следим за изменением месяца и обновляем данные
+watch(
+  () => store.filter.month,
+  async newMonth => {
+    if (newMonth) {
+      await store.fetchData()
+    }
+  }
+)
 
 onMounted(() => {
   store.setShopType(shop.value)
@@ -198,6 +279,42 @@ function handlePageChange(page: number) {
   store.setPage(page)
   store.fetchData()
 }
+
+const invoiceNumberOptions = computed(() => {
+  const set = new Set<string>()
+  store.items.forEach(gtd => {
+    // Если выбраны ГТД, показываем только инвойсы из выбранных ГТД
+    if (
+      store.filter.gtdNumbers.length === 0 ||
+      store.filter.gtdNumbers.includes(gtd.GtdNumber)
+    ) {
+      ;(gtd.Invoices || []).forEach(inv => {
+        if (inv.InvoiceNumber) set.add(inv.InvoiceNumber)
+      })
+    }
+  })
+  return Array.from(set)
+    .sort((a, b) => b.localeCompare(a)) // Сортировка по убыванию
+    .map(value => ({ value, label: value }))
+})
+
+const gtdNumberOptions = computed(() => {
+  const set = new Set<string>()
+  store.items.forEach(gtd => {
+    // Если выбраны инвойсы, показываем только ГТД, содержащие выбранные инвойсы
+    if (
+      store.filter.invoiceNumbers.length === 0 ||
+      gtd.Invoices.some(inv =>
+        store.filter.invoiceNumbers.includes(inv.InvoiceNumber)
+      )
+    ) {
+      if (gtd.GtdNumber) set.add(gtd.GtdNumber)
+    }
+  })
+  return Array.from(set)
+    .sort((a, b) => b.localeCompare(a)) // Сортировка по убыванию
+    .map(value => ({ value, label: value }))
+})
 </script>
 
 <style>
@@ -224,5 +341,109 @@ input[type='month'] {
   position: relative;
   z-index: 1;
   background-color: transparent;
+}
+
+.multiselect-wrapper {
+  --ms-tag-bg: #4f46e5;
+  --ms-tag-color: #ffffff;
+  --ms-ring-color: #4f46e5;
+  --ms-option-bg-selected: #4f46e5;
+  --ms-option-bg-pointed: #f3f4f6;
+  --ms-option-color-pointed: #111827;
+  --ms-option-color-selected: #ffffff;
+  --ms-option-color-disabled: #9ca3af;
+  --ms-option-bg-disabled: #f3f4f6;
+  --ms-option-bg-selected-pointed: #4338ca;
+  --ms-option-color-selected-pointed: #ffffff;
+  --ms-option-bg-selected-disabled: #4f46e5;
+  --ms-option-color-selected-disabled: #9ca3af;
+  --ms-tag-bg-disabled: #9ca3af;
+  --ms-tag-color-disabled: #ffffff;
+  --ms-tag-bg-selected: #4f46e5;
+  --ms-tag-color-selected: #ffffff;
+  --ms-tag-bg-selected-pointed: #4338ca;
+  --ms-tag-color-selected-pointed: #ffffff;
+  --ms-tag-bg-selected-disabled: #9ca3af;
+  --ms-tag-color-selected-disabled: #ffffff;
+  --ms-tag-bg-pointed: #4338ca;
+  --ms-tag-color-pointed: #ffffff;
+  --ms-tag-bg-disabled-pointed: #9ca3af;
+  --ms-tag-color-disabled-pointed: #ffffff;
+  --ms-tag-bg-selected-disabled-pointed: #9ca3af;
+  --ms-tag-color-selected-disabled-pointed: #ffffff;
+}
+
+.multiselect {
+  min-height: 38px;
+  border-radius: 0.375rem;
+  border-color: #d1d5db;
+  transition: all 0.2s ease-in-out;
+}
+
+.multiselect.is-active {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 1px #4f46e5;
+}
+
+.multiselect-search {
+  background-color: transparent;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.multiselect-dropdown {
+  border-color: #d1d5db;
+  border-radius: 0.375rem;
+  margin-top: 2px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.multiselect-option {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.multiselect-option.is-selected {
+  background-color: #4f46e5;
+  color: white;
+}
+
+.multiselect-option.is-pointed {
+  background-color: #f3f4f6;
+  color: black;
+}
+
+.multiselect-placeholder {
+  color: #6b7280;
+  padding: 0.5rem;
+}
+
+.multiselect-tag {
+  background-color: #4f46e5;
+  color: white;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  margin: 0.125rem;
+  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.multiselect-tag:hover {
+  background-color: #4338ca;
+}
+
+.multiselect-tag-remove {
+  margin-left: 0.25rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.multiselect-tag-remove:hover {
+  opacity: 1;
 }
 </style>
