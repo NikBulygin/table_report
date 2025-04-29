@@ -270,10 +270,14 @@ const currentDate = ref(
 const currentYear = ref(currentDate.value.getFullYear())
 const currentMonth = ref(currentDate.value.getMonth())
 const rangeStart = ref<Date | null>(
-  Array.isArray(props.modelValue) ? props.modelValue[0] : null
+  Array.isArray(props.modelValue)
+    ? props.modelValue[0]
+    : new Date(new Date().getFullYear(), new Date().getMonth(), 1)
 )
 const rangeEnd = ref<Date | null>(
-  Array.isArray(props.modelValue) ? props.modelValue[1] : null
+  Array.isArray(props.modelValue)
+    ? props.modelValue[1]
+    : new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0)
 )
 
 // Constants
