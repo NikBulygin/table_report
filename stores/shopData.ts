@@ -22,7 +22,9 @@ export const useShopDataStore = defineStore('shopData', {
         currentPage: 1
       }
     },
-    shopType: 'shop2' as 'shop2' | 'shop12'
+    shopType: 'shop2' as 'shop2' | 'shop12',
+    isEditMode: false,
+    selectedIds: [] as (number | string)[]
   }),
   actions: {
     setShopType(type: 'shop2' | 'shop12') {
@@ -93,6 +95,25 @@ export const useShopDataStore = defineStore('shopData', {
       } finally {
         this.loading = false
       }
+    },
+    setEditMode(val: boolean) {
+      this.isEditMode = val
+    },
+    toggleEditMode() {
+      this.isEditMode = !this.isEditMode
+    },
+    selectRow(id: number | string) {
+      if (!this.selectedIds.includes(id)) this.selectedIds.push(id)
+    },
+    deselectRow(id: number | string) {
+      this.selectedIds = this.selectedIds.filter(x => x !== id)
+    },
+    clearSelection() {
+      this.selectedIds = []
+    },
+    deleteSelected() {
+      this.selectedIds.forEach(id => this.deleteItem(id))
+      this.clearSelection()
     }
   }
 })

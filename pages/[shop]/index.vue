@@ -72,6 +72,25 @@
               >
                 Применить фильтр
               </button>
+              <button
+                type="button"
+                class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700"
+                @click="store.toggleEditMode()"
+              >
+                {{
+                  store.isEditMode
+                    ? 'Выйти из режима редактирования'
+                    : 'Редактировать'
+                }}
+              </button>
+              <button
+                type="button"
+                class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700"
+                :disabled="!store.selectedIds.length"
+                @click="store.deleteSelected()"
+              >
+                Удалить выбранные
+              </button>
             </div>
           </form>
         </div>
@@ -102,15 +121,20 @@
         </div>
       </div>
     </div>
+    <div class="mt-8">
+      <TableShop2 v-if="shop === 'shop2'" :items="store.items" />
+      <TableShop12 v-if="shop === 'shop12'" :items="store.items" />
+    </div>
 
-    <ShopItemsTable />
+    <span>
+      {{ store.items }}
+    </span>
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import ShopItemsTable from '~/components/ShopItemsTable.vue'
 import { useShopDataStore } from '~/stores/shopData'
 
 const store = useShopDataStore()
