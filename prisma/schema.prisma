@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  posts Post[]
+}
+
+model Post {
+  id        Int     @id @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean @default(false)
+  author    User    @relation(fields: [authorId], references: [id])
+  authorId  Int
+}
+
+model Shop2GTD {
+  id        Int           @id @default(autoincrement())
+  GtdNumber String        @unique
+  GtdDate   DateTime
+  Invoices  Shop2Invoice[]
+}
+
+model Shop2Invoice {
+  id            Int        @id @default(autoincrement())
+  InvoiceNumber String     @unique
+  InvoiceDate   DateTime
+  MiroDocument  String
+  TotalWeight   Float
+  Gtd           Shop2GTD  @relation(fields: [gtdId], references: [id])
+  gtdId         Int
+  Items         Shop2Item[]
+}
+
+model Shop2Item {
+  id             Int           @id @default(autoincrement())
+  numberVagonOrTank String
+  weight          Float
+  perMetVklCert   Float
+  perTioCert      Float
+  perH2oCert      Float
+  H2OWeight       Float
+  DryWeight       Float
+  MetalTon        Float
+  MinusMetal      Float
+  standart80Tio2  Float
+  Invoice         Shop2Invoice @relation(fields: [invoiceId], references: [id])
+  invoiceId       Int
+}
+
+model Shop12GTD {
+  id        Int            @id @default(autoincrement())
+  GtdNumber String         @unique
+  GtdDate   DateTime
+  Invoices  Shop12Invoice[]
+}
+
+model Shop12Invoice {
+  id            Int         @id @default(autoincrement())
+  InvoiceNumber String      @unique
+  InvoiceDate   DateTime
+  TotalWeight   Float
+  Gtd           Shop12GTD  @relation(fields: [gtdId], references: [id])
+  gtdId         Int
+  Items         Shop12Item[]
+}
+
+model Shop12Item {
+  id               Int            @id @default(autoincrement())
+  vagonNumber      String
+  weight           Float
+  tio2Analysis     Float
+  h2oAnalysis      Float
+  recalculatedWeight Float
+  Invoice          Shop12Invoice @relation(fields: [invoiceId], references: [id])
+  invoiceId        Int
+}
