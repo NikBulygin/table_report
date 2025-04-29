@@ -1,6 +1,20 @@
 import metadata from './meta.json'
 import { prisma } from '~/server/utils/prisma'
 
+// Field mapping from meta.json to Prisma schema
+const fieldMapping = {
+  vagonNumber: 'vagonNumber',
+  weight: 'weight',
+  tio2Analysis: 'tio2Analysis',
+  h2oAnalysis: 'h2oAnalysis',
+  recalculatedWeight: 'recalculatedWeight',
+  dockumentNumberMiro: { path: ['Invoice', 'MiroDocument'] },
+  invoiceDate: { path: ['Invoice', 'InvoiceDate'] },
+  invoiceNumber: { path: ['Invoice', 'InvoiceNumber'] },
+  gtdDate: { path: ['Invoice', 'GTD', 'GtdDate'] },
+  gtdNumber: { path: ['Invoice', 'GTD', 'GtdNumber'] }
+}
+
 export default defineEventHandler(async event => {
   const query = getQuery(event)
   const {
@@ -11,7 +25,8 @@ export default defineEventHandler(async event => {
     dateFrom,
     dateTo,
     codeNumber,
-    meta = false
+    meta = false,
+    filters = {}
   } = query
 
   // Return metadata if requested
@@ -23,6 +38,7 @@ export default defineEventHandler(async event => {
     // Build where clause
     const where: any = {}
 
+    // Handle date range filtering
     if (dateFrom || dateTo) {
       where.Invoice = {
         InvoiceDate: {}
@@ -33,6 +49,7 @@ export default defineEventHandler(async event => {
         where.Invoice.InvoiceDate.lte = new Date(dateTo as string)
     }
 
+    // Handle code number filtering
     if (codeNumber) {
       where.Invoice = {
         ...where.Invoice,
@@ -40,6 +57,30 @@ export default defineEventHandler(async event => {
           contains: codeNumber as string
         }
       }
+    }
+
+    // Handle additional filters
+    if (filters && typeof filters === 'object') {
+      Object.entries(filters).forEach(([key, value]) => {
+        const mapping = fieldMapping[key]
+        if (mapping) {
+          if (typeof mapping === 'string') {
+            // Direct field mapping
+            where[mapping] = value
+          } else if (mapping.path) {
+            // Nested field mapping
+            let current = where
+            mapping.path.forEach((path, index) => {
+              if (index === mapping.path.length - 1) {
+                current[path] = value
+              } else {
+                current[path] = current[path] || {}
+                current = current[path]
+              }
+            })
+          }
+        }
+      })
     }
 
     // Get total count
