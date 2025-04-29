@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: theme('colors.primary.500');
+    --color-success: theme('colors.success.500');
+    --color-error: theme('colors.error.500');
+  }
+
+  .high-contrast {
+    --color-primary: theme('colors.primary.900');
+    --color-success: theme('colors.success.900');
+    --color-error: theme('colors.error.900');
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-md font-medium transition-colors duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-primary-500 text-white hover:bg-primary-600;
+  }
+
+  .btn-success {
+    @apply bg-success-500 text-white hover:bg-success-600;
+  }
+
+  .btn-error {
+    @apply bg-error-500 text-white hover:bg-error-600;
+  }
+
+  .high-contrast {
+    .btn {
+      @apply border-2 border-current;
+    }
+
+    input,
+    select,
+    textarea {
+      @apply border-2 border-current;
+    }
+
+    .bg-white {
+      @apply bg-transparent border-2 border-current;
+    }
+
+    .shadow {
+      @apply shadow-none border-2 border-current;
+    }
+  }
+}
