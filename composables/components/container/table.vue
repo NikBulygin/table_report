@@ -250,8 +250,8 @@
                   v-model="editedData[rowIndex][column.key]"
                   :label="''"
                   :placeholder="column.placeholder"
-                  :disabled="false"
-                  :readonly="false"
+                  :disabled="column.readonly"
+                  :readonly="column.readonly"
                   :show-spinner="false"
                   :required="column.validation?.required || false"
                   :min="column.validation?.min"
@@ -437,6 +437,7 @@ interface ColumnMeta {
   width?: string
   formula?: (row: any) => any
   validation?: ValidationMeta
+  readonly: boolean
 }
 
 interface Props {
@@ -616,7 +617,6 @@ const saveChanges = () => {
   })
 
   emit('save', changes)
-  cancelEdit()
 }
 
 // Обновим метод addNewRow

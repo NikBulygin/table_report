@@ -1,11 +1,33 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { defineNuxtConfig } from 'nuxt/config'
+import { createRequire } from 'module'
+import path from 'path'
+const require = createRequire(import.meta.url)
+const prismaClientPath = require.resolve('@prisma/client')
+const prismaClient = prismaClientPath.replace(
+  /@prisma(\/|\\)client(\/|\\).*/,
+  '.prisma/client/index-browser.js'
+)
+const prismaIndexBrowser = path.normalize(
+  path.relative(process.cwd(), prismaClient)
+)
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   css: ['@/assets/css/main.css'],
-  modules: ['@nuxtjs/i18n', '@nuxtjs/tailwindcss', '@nuxtjs/color-mode'],
+  modules: [
+    '@nuxtjs/i18n',
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/color-mode',
+    '@pinia/nuxt',
+    '@prisma/nuxt'
+  ],
+  prisma: {
+    generateClient: true,
+    installStudio: false,
+    runMigration: false
+  },
   colorMode: {
     classSuffix: '',
     preference: 'system',

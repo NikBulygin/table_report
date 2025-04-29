@@ -1,11 +1,4 @@
 <template>
-  <div class="w-1/2 bg-red-500 break-all whitespace-pre-wrap">
-    test testtest testtest testtest testtest testtest testtest testtest
-    testtest testtest testtest testtest testtest testtest testtest testtest
-    testtest testtest testtest testtest testtest testtest testtest testtest
-    testtest testtest testtest test
-  </div>
-  >
   <div v-if="currentShop" class="space-y-4">
     <!-- Filters -->
     <div
@@ -28,7 +21,6 @@
             v-model="filters.codeNumber"
             label="Код номер"
             placeholder="Введите код"
-            :required="true"
             regex="^[а-яА-Я0-9-]+$"
             error-message="Код может содержать только буквы, цифры и дефис"
           />

@@ -26,7 +26,7 @@
         </div>
       </div>
     </nav>
-    <main class="max-w-7xl mx-auto px-4 py-6">
+    <main class="w-full mx-auto px-16 py-6">
       <slot />
     </main>
   </div>

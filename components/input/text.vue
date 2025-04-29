@@ -17,7 +17,8 @@
       :class="[
         error
           ? 'border-danger dark:border-danger high-contrast:border-danger'
-          : 'border-border dark:border-dark-border high-contrast:border-high-contrast-border'
+          : 'border-border dark:border-dark-border high-contrast:border-high-contrast-border',
+        disabled ? 'bg-red-500' : ''
       ]"
       @input="handleInput"
     />

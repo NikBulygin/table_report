@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+
+model Shop2 {
+  id  Int @id @default(autoincrement())
+  numberVagonOrTank String
+  weight Float
+  perMetVklCert Float
+  perTioCert Float
+  perH2oCert Float
+  H2OWeight Float
+  DryWeight Float
+  MetalTon Float
+  MinusMetal Float
+  standart80Tio2 Float
+  InvoiceNumber String
+  Invoice Shop2Invoice @relation(fields: [InvoiceNumber], references: [InvoiceNumber])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Shop2Invoice {
+  MiroDocument  String
+  InvoiceNumber String @id
+  InvoiceDate DateTime
+  TotalWeight Float
+  data Shop2[]
+
+  GtdNumber String
+  GTD Shop2GTD @relation(fields: [GtdNumber], references: [GtdNumber])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model Shop2GTD {
+  GtdNumber String @id
+  GtdDate DateTime
+
+  invoices Shop2Invoice[]
+
+
+}
+
+
+
+
+
+
+model Shop12 {
+  id  Int @id @default(autoincrement())
+  vagonNumber String
+  weight Float
+  tio2Analysis Float
+  h2oAnalysis Float
+  recalculatedWeight Float
+  
+  InvoiceId Int
+  Invoice Shop12Invoice @relation(fields: [InvoiceId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Shop12Invoice {
+  id  Int @id @default(autoincrement())
+  MiroDocument  String
+  InvoiceNumber String
+  InvoiceDate DateTime
+
+  data Shop12[]
+
+  GTDId Int
+  GTD Shop12GTD @relation(fields: [GTDId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model Shop12GTD {
+  id  Int @id @default(autoincrement())
+  GtdNumber String
+  GtdDate DateTime
+
+  invoices Shop12Invoice[]
+}
