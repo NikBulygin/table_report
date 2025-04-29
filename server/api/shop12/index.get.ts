@@ -1,11 +1,13 @@
 import metadata from './meta.json'
-export default defineEventHandler(event => {
+import { prisma } from '~/server/utils/prisma'
+
+export default defineEventHandler(async event => {
   const query = getQuery(event)
   const {
     page = 1,
     pageSize = 10,
-    sortField = 'a',
-    sortOrder = 'asc',
+    sortField = 'createdAt',
+    sortOrder = 'desc',
     dateFrom,
     dateTo,
     codeNumber,
@@ -17,8 +19,63 @@ export default defineEventHandler(event => {
     return metadata
   }
 
-  return {
-    data: [],
-    total: 1
+  try {
+    // Build where clause
+    const where: any = {}
+
+    if (dateFrom || dateTo) {
+      where.createdAt = {}
+      if (dateFrom) where.createdAt.gte = new Date(dateFrom as string)
+      if (dateTo) where.createdAt.lte = new Date(dateTo as string)
+    }
+
+    if (codeNumber) {
+      where.Invoice = {
+        InvoiceNumber: {
+          contains: codeNumber as string
+        }
+      }
+    }
+
+    // Get total count
+    const total = await prisma.shop12.count({ where })
+
+    // Build orderBy clause
+    const orderBy: any = {}
+    if (sortField === 'createdAt') {
+      orderBy[sortField] = sortOrder
+    } else {
+      orderBy[sortField] = {
+        _count: sortOrder
+      }
+    }
+
+    // Fetch data with pagination
+    const data = await prisma.shop12.findMany({
+      where,
+      orderBy,
+      skip: (Number(page) - 1) * Number(pageSize),
+      take: Number(pageSize),
+      include: {
+        Invoice: {
+          include: {
+            GTD: true
+          }
+        }
+      }
+    })
+
+    return {
+      data,
+      total,
+      page: Number(page),
+      pageSize: Number(pageSize)
+    }
+  } catch (error) {
+    console.error('Error fetching shop12 data:', error)
+    throw createError({
+      statusCode: 500,
+      message: 'Error fetching data'
+    })
   }
 })
