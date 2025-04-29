@@ -5,6 +5,8 @@ import { Shop12Filter, Shop12GTD } from '~/composables/shop12'
 export const useShopDataStore = defineStore('shopData', {
   state: () => ({
     items: [] as any[],
+    itemsDelete: [] as any[],
+    itemsEdit: [] as any[],
     pagination: {
       total: 0,
       currentPage: 1,
@@ -34,6 +36,27 @@ export const useShopDataStore = defineStore('shopData', {
     },
     setPageSize(size: number) {
       this.filter.pagination.pageSize = size
+    },
+    deleteItem(itemId: number) {
+      const idx = this.items.findIndex(item => item.id === itemId)
+      if (idx !== -1) {
+        const [removed] = this.items.splice(idx, 1)
+        this.itemsDelete.push(removed)
+      }
+    },
+    editItem(editedItem: any) {
+      const idx = this.items.findIndex(item => item.id === editedItem.id)
+      if (idx !== -1) {
+        const [removed] = this.items.splice(idx, 1)
+        const editIdx = this.itemsEdit.findIndex(
+          item => item.id === editedItem.id
+        )
+        if (editIdx !== -1) {
+          this.itemsEdit[editIdx] = editedItem
+        } else {
+          this.itemsEdit.push(editedItem)
+        }
+      }
     },
     async fetchData() {
       this.loading = true

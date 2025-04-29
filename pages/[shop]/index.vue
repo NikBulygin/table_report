@@ -11,7 +11,7 @@
           </p>
         </div>
         <div class="mt-5 md:mt-0 md:col-span-2">
-          <form class="space-y-6" @submit.prevent="fetchData">
+          <form class="space-y-6" @submit.prevent="applyFilter">
             <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
               <div class="sm:col-span-3">
                 <label
@@ -22,7 +22,7 @@
                 <div class="mt-1 relative">
                   <input
                     type="month"
-                    v-model="filter.month"
+                    v-model="store.filter.month"
                     class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md cursor-pointer"
                     @click="openDatePicker"
                   />
@@ -44,8 +44,27 @@
                   </div>
                 </div>
               </div>
+              <div class="sm:col-span-3">
+                <label
+                  for="pageSize"
+                  class="block text-sm font-medium text-gray-700"
+                  >Количество карточек</label
+                >
+                <div class="mt-1">
+                  <select
+                    id="pageSize"
+                    v-model.number="store.filter.pagination.pageSize"
+                    @change="onPageSizeChange"
+                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                  >
+                    <option :value="10">10</option>
+                    <option :value="20">20</option>
+                    <option :value="50">50</option>
+                    <option :value="100">100</option>
+                  </select>
+                </div>
+              </div>
             </div>
-
             <div class="flex justify-end">
               <button
                 type="submit"
@@ -64,56 +83,47 @@
         <h3 class="text-lg font-medium leading-6 text-gray-900">
           Результаты
         </h3>
-        <div v-if="loading" class="text-center">
+        <div v-if="store.loading" class="text-center">
           <div
             class="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600 mx-auto"
           ></div>
         </div>
-        <div v-else-if="error" class="text-red-600">
-          {{ error }}
+        <div v-else-if="store.error" class="text-red-600">
+          {{ store.error }}
         </div>
         <div v-else class="space-y-2">
           <div class="text-sm text-gray-500">
-            Всего записей: {{ result?.pagination?.total || 0 }}
+            Всего записей: {{ store.pagination.total || 0 }}
           </div>
           <div class="text-sm text-gray-500">
-            Текущая страница: {{ result?.pagination?.currentPage || 0 }} из
-            {{ result?.pagination?.totalPages || 0 }}
+            Текущая страница: {{ store.pagination.currentPage || 0 }} из
+            {{ store.pagination.totalPages || 0 }}
           </div>
-          <pre class="bg-gray-50 p-4 rounded-md overflow-auto max-h-96">{{
-            JSON.stringify(result, null, 2)
-          }}</pre>
         </div>
       </div>
     </div>
+
+    <ShopItemsTable />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { Shop2Filter, Shop2GTD } from '~/composables/shop2'
-import { Shop12Filter, Shop12GTD } from '~/composables/shop12'
+import ShopItemsTable from '~/components/ShopItemsTable.vue'
+import { useShopDataStore } from '~/stores/shopData'
 
+const store = useShopDataStore()
 const route = useRoute()
-const shop = computed(() => route.params.shop as string)
+const shop = computed(() => route.params.shop as 'shop2' | 'shop12')
 
-const filter = ref({
-  month: '',
-  pagination: {
-    pageSize: 10,
-    currentPage: 1
-  }
-})
-
-const result = ref<any>(null)
-const loading = ref(false)
-const error = ref<string | null>(null)
-
-// Set current month as default
 onMounted(() => {
+  store.setShopType(shop.value)
+  // Установить текущий месяц и загрузить данные
   const now = new Date()
-  filter.value.month = now.toISOString().slice(0, 7)
+  const month = now.toISOString().slice(0, 7)
+  store.setMonth(month)
+  store.fetchData()
 })
 
 const openDatePicker = () => {
@@ -125,41 +135,16 @@ const openDatePicker = () => {
   }
 }
 
-const fetchData = async () => {
-  loading.value = true
-  error.value = null
+function onPageSizeChange(e: Event) {
+  const value = Number((e.target as HTMLSelectElement).value)
+  store.setPageSize(value)
+  store.fetchData()
+}
 
-  try {
-    const month = filter.value.month
-    if (!month) return
-
-    const startDate = new Date(month)
-    const endDate = new Date(
-      startDate.getFullYear(),
-      startDate.getMonth() + 1,
-      0
-    )
-
-    if (shop.value === 'shop2') {
-      const shop2Filter = new Shop2Filter(
-        startDate,
-        endDate,
-        filter.value.pagination
-      )
-      result.value = await Shop2GTD.findWithFilter(shop2Filter)
-    } else if (shop.value === 'shop12') {
-      const shop12Filter = new Shop12Filter(
-        startDate,
-        endDate,
-        filter.value.pagination
-      )
-      result.value = await Shop12GTD.findWithFilter(shop12Filter)
-    }
-  } catch (e) {
-    error.value = e instanceof Error ? e.message : 'Произошла ошибка'
-  } finally {
-    loading.value = false
-  }
+function applyFilter() {
+  store.setMonth(store.filter.month)
+  store.setPage(1)
+  store.fetchData()
 }
 </script>
 
