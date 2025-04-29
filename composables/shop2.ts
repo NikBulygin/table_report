@@ -9,27 +9,27 @@ export class Shop2Item {
 
   // ВЛАГА ТОНН = ОТГРУЖ НАТУРА * H2O ПО СЕРИТФ / 100
   get H2OWeight(): number {
-    return (this.weight * this.perH2oCert) / 100
+    return Number(((this.weight * this.perH2oCert) / 100).toFixed(3))
   }
 
   // СУХОЙ ВЕС НАТУРА = ОТГРУЖ НАТУРА - ВЛАГА ТОНН
   get DryWeight(): number {
-    return this.weight - this.H2OWeight
+    return Number((this.weight - this.H2OWeight).toFixed(3))
   }
 
   // МЕТАЛЛ ТОНН = МЕТ ВКЛ ПО СКРТИФ * СУХОЙ ВС НАУТРА / 100
   get MetalTon(): number {
-    return (this.DryWeight * this.perMetVklCert) / 100
+    return Number(((this.DryWeight * this.perMetVklCert) / 100).toFixed(3))
   }
 
   // ЗА МИНУС МЕТАЛЛ = СУХОЙ ВЕС - МЕТАЛЛ ТОНН
   get MinusMetal(): number {
-    return this.DryWeight - this.MetalTon
+    return Number((this.DryWeight - this.MetalTon).toFixed(3))
   }
 
   // СТАНДАРТ 80 TIO = TIO по СЕРТИФ * ЗА МИНУС МЕТАЛЛ / 80
   get standart80Tio2(): number {
-    return (this.perTioCert * this.MinusMetal) / 80
+    return Number(((this.perTioCert * this.MinusMetal) / 80).toFixed(3))
   }
 }
 
@@ -43,7 +43,11 @@ export class Shop2Invoice {
 
   // total = СУММА ВСЕХ СТАНДАРТ 80 TIO
   get TotalWeight(): number {
-    return this.items.reduce((sum, item) => sum + item.standart80Tio2, 0)
+    return Number(
+      this.items
+        .reduce((sum, item) => sum + item.standart80Tio2, 0)
+        .toFixed(3)
+    )
   }
 
   addItem(item: Shop2Item): void {

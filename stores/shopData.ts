@@ -115,6 +115,7 @@ export const useShopDataStore = defineStore('shopData', {
       if (editedItems.length > 0) {
         this.items = editedItems
       }
+      console.log('editedData', editedItems)
       this.isEditMode = false
       this.editBuffer = {}
     },
@@ -131,6 +132,7 @@ export const useShopDataStore = defineStore('shopData', {
     },
     deleteSelected() {
       this.selectedIds.forEach(id => this.deleteItem(id))
+      console.log('deleted data', this.selectedIds)
       this.clearSelection()
     },
     reset() {

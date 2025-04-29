@@ -94,8 +94,8 @@ const generateShop12Data = (count: number) => {
 export default defineEventHandler(async () => {
   try {
     // Generate 50 records for each shop
-    const shop2Data = generateShop2Data(50)
-    const shop12Data = generateShop12Data(50)
+    const shop2Data = generateShop2Data(5000)
+    const shop12Data = generateShop12Data(5000)
 
     // Save Shop2 data
     for (const gtd of shop2Data) {

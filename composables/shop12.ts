@@ -8,8 +8,11 @@ export class Shop12Item {
 
   // ВЕС ПЕРЕРАСЧЕТ = ВЕС *(100-H2O) * TIO2 / 4200
   get recalculatedWeight(): number {
-    return (
-      (this.weight * (100 - this.h2oAnalysis) * this.tio2Analysis) / 4200
+    return Number(
+      (
+        (this.weight * (100 - this.h2oAnalysis) * this.tio2Analysis) /
+        4200
+      ).toFixed(3)
     )
   }
 }
@@ -23,9 +26,10 @@ export class Shop12Invoice {
 
   // ТОТАЛ СУММА ВСЕХ ВЕС ПЕРЕРАСЧЕТ
   get TotalWeight(): number {
-    return this.items.reduce(
-      (sum, item) => sum + item.recalculatedWeight,
-      0
+    return Number(
+      this.items
+        .reduce((sum, item) => sum + item.recalculatedWeight, 0)
+        .toFixed(3)
     )
   }
 

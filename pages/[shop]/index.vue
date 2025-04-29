@@ -67,12 +67,6 @@
             </div>
             <div class="flex justify-end">
               <button
-                type="submit"
-                class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Применить фильтр
-              </button>
-              <button
                 type="button"
                 class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700"
                 @click="store.toggleEditMode()"
@@ -103,6 +97,12 @@
                 @click="store.deleteSelected()"
               >
                 Удалить выбранные
+              </button>
+              <button
+                type="submit"
+                class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Применить фильтр
               </button>
             </div>
           </form>
@@ -139,9 +139,18 @@
       <TableShop12 v-if="shop === 'shop12'" :items="store.items" />
     </div>
 
-    <span>
+    <Pagination
+      v-if="!store.loading && !store.error"
+      :current-page="store.pagination.currentPage"
+      :total-pages="store.pagination.totalPages"
+      :total="store.pagination.total"
+      :page-size="store.filter.pagination.pageSize"
+      @page-change="handlePageChange"
+    />
+
+    <!-- <span>
       {{ store.items }}
-    </span>
+    </span> -->
   </div>
 </template>
 
@@ -149,6 +158,7 @@
 import { onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useShopDataStore } from '~/stores/shopData'
+import Pagination from '~/components/Pagination.vue'
 
 const store = useShopDataStore()
 const route = useRoute()
@@ -181,6 +191,11 @@ function onPageSizeChange(e: Event) {
 function applyFilter() {
   store.setMonth(store.filter.month)
   store.setPage(1)
+  store.fetchData()
+}
+
+function handlePageChange(page: number) {
+  store.setPage(page)
   store.fetchData()
 }
 </script>
