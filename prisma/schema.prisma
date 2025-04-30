@@ -23,7 +23,7 @@ model Shop12 {
   GtdDate            DateTime
   GtdNumber          String
   createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  updatedAt          DateTime @updatedAt @default(now())
 }
 
 model Shop2 {

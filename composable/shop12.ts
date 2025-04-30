@@ -21,8 +21,6 @@ interface Filter {
 export const shop12Config = {
   label: 'Ильменит',
   columns: [
-    { key: 'InvoiceDate', label: 'Дата Инвойса', isCalculated: false },
-    { key: 'InvoiceNumber', label: 'Номер инвойса', isCalculated: false },
     { key: 'weight', label: 'Вес', isCalculated: false },
     { key: 'tio2Analysis', label: 'TiO2', isCalculated: false },
     { key: 'h2oAnalysis', label: 'H2O', isCalculated: false },
@@ -32,6 +30,9 @@ export const shop12Config = {
       isCalculated: true
     },
     { key: 'vagonNumber', label: 'номер вагона' },
+
+    { key: 'InvoiceDate', label: 'Дата Инвойса', isCalculated: false },
+    { key: 'InvoiceNumber', label: 'Номер инвойса', isCalculated: false },
     { key: 'GtdDate', label: 'ГТД дата' },
     { key: 'GtdNumber', label: 'ГТД номер' }
   ] as Column[],

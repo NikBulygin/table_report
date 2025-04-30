@@ -72,3 +72,9 @@ declare global {
     summary: Shop2Summary
   }
 }
+
+export interface DataChanges {
+  deleted: number[]
+  edited: (Shop12Item | Shop2Item)[]
+  added: (Shop12Item | Shop2Item)[]
+}

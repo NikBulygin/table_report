@@ -15,6 +15,20 @@ interface ShopState {
   summary: Shop12Summary | Shop2Summary
 }
 
+interface DataChanges {
+  deleted: number[]
+  edited: ShopItem[]
+  added: ShopItem[]
+}
+
+const normalizeDates = (items: ShopItem[]) => {
+  return items.map(item => ({
+    ...item,
+    InvoiceDate: new Date(item.InvoiceDate).toISOString(),
+    GtdDate: new Date(item.GtdDate).toISOString()
+  }))
+}
+
 export const useShopStore = defineStore('shop', {
   state: (): ShopState => {
     // Получаем текущую дату в формате месяц-год
@@ -77,7 +91,7 @@ export const useShopStore = defineStore('shop', {
     },
 
     setItems(items: ShopItem[]) {
-      this.items = items
+      this.items = normalizeDates(items)
     },
 
     setSummary(summary: Shop12Summary | Shop2Summary) {
@@ -119,6 +133,42 @@ export const useShopStore = defineStore('shop', {
       return null
     },
 
+    async saveChanges(changes: DataChanges) {
+      try {
+        // Отправляем изменения на сервер
+        const response = await $fetch(`/api/${this.shopName}`, {
+          method: 'POST',
+          body: changes
+        })
+
+        // Обновляем локальные данные
+        if (response.success) {
+          // Удаляем удаленные элементы
+          this.items = this.items.filter(
+            item => !changes.deleted.includes(item.id!)
+          )
+
+          // Обновляем измененные элементы
+          changes.edited.forEach(editedItem => {
+            const index = this.items.findIndex(
+              item => item.id === editedItem.id
+            )
+            if (index !== -1) {
+              this.items[index] = editedItem
+            }
+          })
+
+          // Добавляем новые элементы
+          this.items.push(...changes.added)
+        }
+
+        return response
+      } catch (error) {
+        console.error('Error saving changes:', error)
+        throw error
+      }
+    },
+
     async fetchItems() {
       try {
         const response = await $fetch<Shop12Response | Shop2Response>(
@@ -130,7 +180,7 @@ export const useShopStore = defineStore('shop', {
             }
           }
         )
-        this.items = response.items
+        this.items = normalizeDates(response.items)
         this.summary = response.summary
       } catch (error) {
         console.error('Error fetching items:', error)

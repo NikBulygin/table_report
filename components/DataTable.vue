@@ -207,6 +207,7 @@ import { ref, computed, watch } from 'vue'
 import { useShopStore } from '~/stores/shop'
 import { shop2Config } from '~/composable/shop2'
 import { shop12Config } from '~/composable/shop12'
+import type { DataChanges } from '~/types'
 
 interface Column {
   key: string
@@ -349,12 +350,42 @@ const saveChanges = async () => {
       return cleanedItem
     })
 
-    // Сохраняем изменения в store
-    shopStore.setItems(tempItems.value)
+    // Определяем изменения
+    const changes: DataChanges = {
+      deleted: [],
+      edited: [],
+      added: []
+    }
 
-    // Отправляем изменения на сервер
-    console.log('Saving changes to server:', tempItems.value)
-    // TODO: Реализовать API вызов для сохранения
+    // Сравниваем с исходными данными
+    const originalItems = shopStore.filteredItems
+    const originalIds = new Set(originalItems.map(item => item.id))
+
+    tempItems.value.forEach(item => {
+      if (!item.id) {
+        // Новый элемент
+        changes.added.push(item)
+      } else if (originalIds.has(item.id)) {
+        // Измененный элемент
+        const originalItem = originalItems.find(
+          original => original.id === item.id
+        )
+        if (JSON.stringify(originalItem) !== JSON.stringify(item)) {
+          changes.edited.push(item)
+        }
+      }
+    })
+
+    // Определяем удаленные элементы
+    const tempIds = new Set(tempItems.value.map(item => item.id))
+    originalItems.forEach(item => {
+      if (!tempIds.has(item.id)) {
+        changes.deleted.push(item.id!)
+      }
+    })
+
+    // Сохраняем изменения
+    await shopStore.saveChanges(changes)
 
     // Выходим из режима редактирования
     isEditing.value = false
@@ -362,6 +393,7 @@ const saveChanges = async () => {
     tempItems.value = []
   } catch (error) {
     console.error('Error saving changes:', error)
+    alert('Ошибка при сохранении изменений')
   }
 }
 

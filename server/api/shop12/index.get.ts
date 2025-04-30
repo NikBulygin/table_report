@@ -3,6 +3,24 @@ import { shop12Config } from '~/composable/shop12'
 
 const prisma = new PrismaClient()
 
+const normalizeDate = (date: string | Date | number) => {
+  if (typeof date === 'number') {
+    return new Date(date)
+  }
+  if (typeof date === 'string') {
+    // Handle YYYY-MM-DD format
+    if (date.includes('-')) {
+      return new Date(date)
+    }
+    // Handle DD.MM.YYYY format
+    if (date.includes('.')) {
+      const [day, month, year] = date.split('.')
+      return new Date(parseInt(year), parseInt(month) - 1, parseInt(day))
+    }
+  }
+  return new Date(date)
+}
+
 export default defineEventHandler(async event => {
   try {
     const query = getQuery(event)
@@ -14,19 +32,28 @@ export default defineEventHandler(async event => {
 
     if (dateFilter) {
       const [month, year] = dateFilter.split('-')
+      // Первый день месяца
       const startDate = new Date(parseInt(year), parseInt(month) - 1, 1)
-      const endDate = new Date(parseInt(year), parseInt(month), 0)
+      // Последний день месяца
+      const endDate = new Date(
+        parseInt(year),
+        parseInt(month),
+        0,
+        23,
+        59,
+        59,
+        999
+      )
 
       where.InvoiceDate = {
-        gte: startDate,
-        lte: endDate
+        gte: startDate.toISOString(),
+        lte: endDate.toISOString()
       }
     }
 
     if (invoiceFilter) {
       where.InvoiceNumber = {
-        contains: invoiceFilter,
-        mode: 'insensitive'
+        contains: invoiceFilter
       }
     }
 
@@ -37,6 +64,13 @@ export default defineEventHandler(async event => {
         InvoiceDate: 'desc'
       }
     })
+
+    // Нормализуем даты в результатах
+    const normalizedItems = items.map(item => ({
+      ...item,
+      InvoiceDate: normalizeDate(item.InvoiceDate).toISOString(),
+      GtdDate: normalizeDate(item.GtdDate).toISOString()
+    }))
 
     // Вычисляем итоги через агрегацию
     const summary = await prisma.shop12.aggregate({
@@ -49,8 +83,9 @@ export default defineEventHandler(async event => {
       }
     })
 
+    console.log(normalizedItems)
     return {
-      items,
+      items: normalizedItems,
       summary: {
         weight: summary._sum?.weight || 0,
         tio2Analysis: summary._sum?.tio2Analysis || 0,
