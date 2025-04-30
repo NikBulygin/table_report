@@ -220,6 +220,9 @@ const selectedItems = ref<any[]>([])
 const currentPage = ref(1)
 const itemsPerPage = ref(10)
 
+// Временное хранилище для редактирования
+const tempItems = ref<any[]>([])
+
 // Получаем конфигурацию в зависимости от магазина
 const config = computed(() => {
   switch (shopStore.shopName) {
@@ -243,7 +246,9 @@ const columns = computed(() => {
   return config.value.columns
 })
 
-const filteredItems = computed(() => shopStore.filteredItems)
+const filteredItems = computed(() =>
+  isEditing.value ? tempItems.value : shopStore.filteredItems
+)
 
 // Пагинация
 const totalPages = computed(() =>
@@ -288,20 +293,76 @@ const toggleSelectItem = (item: any) => {
 
 // Редактирование
 const startEditing = () => {
+  // Сохраняем копию данных для редактирования
+  tempItems.value = JSON.parse(JSON.stringify(shopStore.filteredItems))
   isEditing.value = true
 }
 
 const cancelEditing = () => {
+  // Откатываем изменения
+  tempItems.value = []
   isEditing.value = false
   selectedItems.value = []
-  // TODO: Восстановить исходные данные
 }
 
-const saveChanges = () => {
-  // TODO: Сохранить изменения на сервере
-  console.log('Saving changes:', shopStore.items)
-  isEditing.value = false
-  selectedItems.value = []
+const validateFields = (item: any) => {
+  return columns.value.every(column => {
+    const value = item[column.key]
+    if (value === undefined || value === null) return false
+
+    // Удаляем пробелы и проверяем на пустоту
+    const trimmedValue = String(value).trim()
+    if (trimmedValue === '') return false
+
+    // Для числовых полей проверяем, что значение является числом
+    if (
+      column.key === 'weight' ||
+      column.key === 'tio2Analysis' ||
+      column.key === 'h2oAnalysis'
+    ) {
+      return !isNaN(Number(trimmedValue))
+    }
+
+    return true
+  })
+}
+
+const saveChanges = async () => {
+  try {
+    // Проверяем все строки на валидность
+    const invalidItems = tempItems.value.filter(
+      item => !validateFields(item)
+    )
+    if (invalidItems.length > 0) {
+      alert('Пожалуйста, заполните все поля корректно')
+      return
+    }
+
+    // Очищаем пробелы в текстовых полях
+    tempItems.value = tempItems.value.map(item => {
+      const cleanedItem = { ...item }
+      columns.value.forEach(column => {
+        if (typeof cleanedItem[column.key] === 'string') {
+          cleanedItem[column.key] = cleanedItem[column.key].trim()
+        }
+      })
+      return cleanedItem
+    })
+
+    // Сохраняем изменения в store
+    shopStore.setItems(tempItems.value)
+
+    // Отправляем изменения на сервер
+    console.log('Saving changes to server:', tempItems.value)
+    // TODO: Реализовать API вызов для сохранения
+
+    // Выходим из режима редактирования
+    isEditing.value = false
+    selectedItems.value = []
+    tempItems.value = []
+  } catch (error) {
+    console.error('Error saving changes:', error)
+  }
 }
 
 const addRow = () => {
@@ -320,21 +381,21 @@ const addRow = () => {
       newItem[column.key] = '' // Текстовые поля пустые
     }
   })
-  shopStore.items.push(newItem)
+  tempItems.value.push(newItem)
 }
 
 const copySelected = () => {
   selectedItems.value.forEach(item => {
     const newItem = { ...item, id: undefined }
-    shopStore.items.push(newItem)
+    tempItems.value.push(newItem)
   })
 }
 
 const deleteSelected = () => {
   selectedItems.value.forEach(item => {
-    const index = shopStore.items.indexOf(item)
+    const index = tempItems.value.indexOf(item)
     if (index !== -1) {
-      shopStore.items.splice(index, 1)
+      tempItems.value.splice(index, 1)
     }
   })
   selectedItems.value = []
