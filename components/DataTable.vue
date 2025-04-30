@@ -33,6 +33,7 @@
           Добавить
         </button>
         <button
+          v-if="filteredItems.length > 0"
           @click="copySelected"
           :disabled="!hasSelected"
           class="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 disabled:opacity-50"
@@ -40,6 +41,7 @@
           Копировать
         </button>
         <button
+          v-if="filteredItems.length > 0"
           @click="deleteSelected"
           :disabled="!hasSelected"
           class="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50"
@@ -60,6 +62,7 @@
               class="relative w-12 px-6 sm:w-16 sm:px-8"
             >
               <input
+                v-if="filteredItems.length > 0"
                 type="checkbox"
                 class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                 :checked="isAllSelected"
@@ -77,8 +80,21 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
+          <tr v-if="filteredItems.length === 0">
+            <td
+              :colspan="isEditing ? columns.length + 1 : columns.length"
+              class="px-6 py-4 text-center text-sm text-gray-500"
+            >
+              {{
+                isEditing
+                  ? 'Нажмите "Добавить" для создания новой записи'
+                  : 'Нет данных для отображения'
+              }}
+            </td>
+          </tr>
           <tr
             v-for="(item, index) in paginatedItems"
+            v-else
             :key="item.id || index"
             :class="{
               'bg-gray-50': isEditing && selectedItems.includes(item)
@@ -134,7 +150,10 @@
           Сохранить
         </button>
       </div>
-      <div class="flex items-center space-x-2">
+      <div
+        v-if="filteredItems.length > 0"
+        class="flex items-center space-x-2"
+      >
         <span class="text-sm text-gray-700">
           Показано {{ paginatedItems.length }} из
           {{ filteredItems.length }}
@@ -175,7 +194,8 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { useShopStore } from '~/stores/shop'
-import { shop2Config, shop12Config } from '~/composable'
+import { shop2Config } from '~/composable/shop2'
+import { shop12Config } from '~/composable/shop12'
 
 interface Column {
   key: string

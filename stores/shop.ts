@@ -12,6 +12,7 @@ interface ShopState {
     date: string
     invoice: string
   }
+  summary: Shop12Summary | Shop2Summary
 }
 
 export const useShopStore = defineStore('shop', {
@@ -28,6 +29,12 @@ export const useShopStore = defineStore('shop', {
       filters: {
         date: defaultDate,
         invoice: ''
+      },
+      summary: {
+        weight: 0,
+        tio2Analysis: 0,
+        h2oAnalysis: 0,
+        recalculatedWeight: 0
       }
     }
   },
@@ -73,6 +80,10 @@ export const useShopStore = defineStore('shop', {
       this.items = items
     },
 
+    setSummary(summary: Shop12Summary | Shop2Summary) {
+      this.summary = summary
+    },
+
     setFilters(filters: Partial<{ date: string; invoice: string }>) {
       this.filters = { ...this.filters, ...filters }
     },
@@ -110,10 +121,17 @@ export const useShopStore = defineStore('shop', {
 
     async fetchItems() {
       try {
-        // TODO: Implement API call
-        console.log('Fetching items for shop:', this.shopName)
-        // const response = await $fetch(`/api/${this.shopName}`)
-        // this.items = response
+        const response = await $fetch<Shop12Response | Shop2Response>(
+          `/api/${this.shopName}`,
+          {
+            query: {
+              date: this.filters.date,
+              invoice: this.filters.invoice
+            }
+          }
+        )
+        this.items = response.items
+        this.summary = response.summary
       } catch (error) {
         console.error('Error fetching items:', error)
       }
