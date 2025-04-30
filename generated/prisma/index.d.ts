@@ -14,15 +14,15 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
- * Model User
+ * Model Shop12
  * 
  */
-export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+export type Shop12 = $Result.DefaultSelection<Prisma.$Shop12Payload>
 /**
- * Model Post
+ * Model Shop2
  * 
  */
-export type Post = $Result.DefaultSelection<Prisma.$PostPayload>
+export type Shop2 = $Result.DefaultSelection<Prisma.$Shop2Payload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -31,8 +31,8 @@ export type Post = $Result.DefaultSelection<Prisma.$PostPayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Users
- * const users = await prisma.user.findMany()
+ * // Fetch zero or more Shop12s
+ * const shop12s = await prisma.shop12.findMany()
  * ```
  *
  *
@@ -52,8 +52,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Users
-   * const users = await prisma.user.findMany()
+   * // Fetch zero or more Shop12s
+   * const shop12s = await prisma.shop12.findMany()
    * ```
    *
    *
@@ -150,24 +150,24 @@ export class PrismaClient<
   }>>
 
       /**
-   * `prisma.user`: Exposes CRUD operations for the **User** model.
+   * `prisma.shop12`: Exposes CRUD operations for the **Shop12** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Users
-    * const users = await prisma.user.findMany()
+    * // Fetch zero or more Shop12s
+    * const shop12s = await prisma.shop12.findMany()
     * ```
     */
-  get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+  get shop12(): Prisma.Shop12Delegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.post`: Exposes CRUD operations for the **Post** model.
+   * `prisma.shop2`: Exposes CRUD operations for the **Shop2** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Posts
-    * const posts = await prisma.post.findMany()
+    * // Fetch zero or more Shop2s
+    * const shop2s = await prisma.shop2.findMany()
     * ```
     */
-  get post(): Prisma.PostDelegate<ExtArgs, ClientOptions>;
+  get shop2(): Prisma.Shop2Delegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -226,8 +226,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.6.0
-   * Query Engine version: f676762280b54cd07c770017ed3711ddde35f37a
+   * Prisma Client JS version: 6.7.0
+   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
    */
   export type PrismaVersion = {
     client: string
@@ -608,8 +608,8 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    User: 'User',
-    Post: 'Post'
+    Shop12: 'Shop12',
+    Shop2: 'Shop2'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -628,155 +628,155 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "post"
+      modelProps: "shop12" | "shop2"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
-      User: {
-        payload: Prisma.$UserPayload<ExtArgs>
-        fields: Prisma.UserFieldRefs
+      Shop12: {
+        payload: Prisma.$Shop12Payload<ExtArgs>
+        fields: Prisma.Shop12FieldRefs
         operations: {
           findUnique: {
-            args: Prisma.UserFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+            args: Prisma.Shop12FindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop12Payload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.Shop12FindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop12Payload>
           }
           findFirst: {
-            args: Prisma.UserFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+            args: Prisma.Shop12FindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop12Payload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.Shop12FindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop12Payload>
           }
           findMany: {
-            args: Prisma.UserFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+            args: Prisma.Shop12FindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop12Payload>[]
           }
           create: {
-            args: Prisma.UserCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.Shop12CreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop12Payload>
           }
           createMany: {
-            args: Prisma.UserCreateManyArgs<ExtArgs>
+            args: Prisma.Shop12CreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+            args: Prisma.Shop12CreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop12Payload>[]
           }
           delete: {
-            args: Prisma.UserDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.Shop12DeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop12Payload>
           }
           update: {
-            args: Prisma.UserUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.Shop12UpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop12Payload>
           }
           deleteMany: {
-            args: Prisma.UserDeleteManyArgs<ExtArgs>
+            args: Prisma.Shop12DeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.UserUpdateManyArgs<ExtArgs>
+            args: Prisma.Shop12UpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.UserUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+            args: Prisma.Shop12UpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop12Payload>[]
           }
           upsert: {
-            args: Prisma.UserUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.Shop12UpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop12Payload>
           }
           aggregate: {
-            args: Prisma.UserAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateUser>
+            args: Prisma.Shop12AggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateShop12>
           }
           groupBy: {
-            args: Prisma.UserGroupByArgs<ExtArgs>
-            result: $Utils.Optional<UserGroupByOutputType>[]
+            args: Prisma.Shop12GroupByArgs<ExtArgs>
+            result: $Utils.Optional<Shop12GroupByOutputType>[]
           }
           count: {
-            args: Prisma.UserCountArgs<ExtArgs>
-            result: $Utils.Optional<UserCountAggregateOutputType> | number
+            args: Prisma.Shop12CountArgs<ExtArgs>
+            result: $Utils.Optional<Shop12CountAggregateOutputType> | number
           }
         }
       }
-      Post: {
-        payload: Prisma.$PostPayload<ExtArgs>
-        fields: Prisma.PostFieldRefs
+      Shop2: {
+        payload: Prisma.$Shop2Payload<ExtArgs>
+        fields: Prisma.Shop2FieldRefs
         operations: {
           findUnique: {
-            args: Prisma.PostFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload> | null
+            args: Prisma.Shop2FindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop2Payload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.PostFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload>
+            args: Prisma.Shop2FindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop2Payload>
           }
           findFirst: {
-            args: Prisma.PostFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload> | null
+            args: Prisma.Shop2FindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop2Payload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.PostFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload>
+            args: Prisma.Shop2FindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop2Payload>
           }
           findMany: {
-            args: Prisma.PostFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload>[]
+            args: Prisma.Shop2FindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop2Payload>[]
           }
           create: {
-            args: Prisma.PostCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload>
+            args: Prisma.Shop2CreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop2Payload>
           }
           createMany: {
-            args: Prisma.PostCreateManyArgs<ExtArgs>
+            args: Prisma.Shop2CreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.PostCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload>[]
+            args: Prisma.Shop2CreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop2Payload>[]
           }
           delete: {
-            args: Prisma.PostDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload>
+            args: Prisma.Shop2DeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop2Payload>
           }
           update: {
-            args: Prisma.PostUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload>
+            args: Prisma.Shop2UpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop2Payload>
           }
           deleteMany: {
-            args: Prisma.PostDeleteManyArgs<ExtArgs>
+            args: Prisma.Shop2DeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.PostUpdateManyArgs<ExtArgs>
+            args: Prisma.Shop2UpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.PostUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload>[]
+            args: Prisma.Shop2UpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop2Payload>[]
           }
           upsert: {
-            args: Prisma.PostUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload>
+            args: Prisma.Shop2UpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Shop2Payload>
           }
           aggregate: {
-            args: Prisma.PostAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregatePost>
+            args: Prisma.Shop2AggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateShop2>
           }
           groupBy: {
-            args: Prisma.PostGroupByArgs<ExtArgs>
-            result: $Utils.Optional<PostGroupByOutputType>[]
+            args: Prisma.Shop2GroupByArgs<ExtArgs>
+            result: $Utils.Optional<Shop2GroupByOutputType>[]
           }
           count: {
-            args: Prisma.PostCountArgs<ExtArgs>
-            result: $Utils.Optional<PostCountAggregateOutputType> | number
+            args: Prisma.Shop2CountArgs<ExtArgs>
+            result: $Utils.Optional<Shop2CountAggregateOutputType> | number
           }
         }
       }
@@ -864,8 +864,8 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
-    user?: UserOmit
-    post?: PostOmit
+    shop12?: Shop12Omit
+    shop2?: Shop2Omit
   }
 
   /* Types for Logging */
@@ -955,392 +955,476 @@ export namespace Prisma {
    */
 
 
-  /**
-   * Count Type UserCountOutputType
-   */
-
-  export type UserCountOutputType = {
-    posts: number
-  }
-
-  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    posts?: boolean | UserCountOutputTypeCountPostsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserCountOutputType
-     */
-    select?: UserCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PostWhereInput
-  }
-
 
   /**
    * Models
    */
 
   /**
-   * Model User
+   * Model Shop12
    */
 
-  export type AggregateUser = {
-    _count: UserCountAggregateOutputType | null
-    _avg: UserAvgAggregateOutputType | null
-    _sum: UserSumAggregateOutputType | null
-    _min: UserMinAggregateOutputType | null
-    _max: UserMaxAggregateOutputType | null
+  export type AggregateShop12 = {
+    _count: Shop12CountAggregateOutputType | null
+    _avg: Shop12AvgAggregateOutputType | null
+    _sum: Shop12SumAggregateOutputType | null
+    _min: Shop12MinAggregateOutputType | null
+    _max: Shop12MaxAggregateOutputType | null
   }
 
-  export type UserAvgAggregateOutputType = {
+  export type Shop12AvgAggregateOutputType = {
     id: number | null
+    weight: number | null
+    tio2Analysis: number | null
+    h2oAnalysis: number | null
+    recalculatedWeight: number | null
   }
 
-  export type UserSumAggregateOutputType = {
+  export type Shop12SumAggregateOutputType = {
     id: number | null
+    weight: number | null
+    tio2Analysis: number | null
+    h2oAnalysis: number | null
+    recalculatedWeight: number | null
   }
 
-  export type UserMinAggregateOutputType = {
+  export type Shop12MinAggregateOutputType = {
     id: number | null
-    email: string | null
-    name: string | null
+    vagonNumber: string | null
+    weight: number | null
+    tio2Analysis: number | null
+    h2oAnalysis: number | null
+    recalculatedWeight: number | null
+    InvoiceDate: Date | null
+    InvoiceNumber: string | null
+    GtdDate: Date | null
+    GtdNumber: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
-  export type UserMaxAggregateOutputType = {
+  export type Shop12MaxAggregateOutputType = {
     id: number | null
-    email: string | null
-    name: string | null
+    vagonNumber: string | null
+    weight: number | null
+    tio2Analysis: number | null
+    h2oAnalysis: number | null
+    recalculatedWeight: number | null
+    InvoiceDate: Date | null
+    InvoiceNumber: string | null
+    GtdDate: Date | null
+    GtdNumber: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
-  export type UserCountAggregateOutputType = {
+  export type Shop12CountAggregateOutputType = {
     id: number
-    email: number
-    name: number
+    vagonNumber: number
+    weight: number
+    tio2Analysis: number
+    h2oAnalysis: number
+    recalculatedWeight: number
+    InvoiceDate: number
+    InvoiceNumber: number
+    GtdDate: number
+    GtdNumber: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
 
-  export type UserAvgAggregateInputType = {
+  export type Shop12AvgAggregateInputType = {
     id?: true
+    weight?: true
+    tio2Analysis?: true
+    h2oAnalysis?: true
+    recalculatedWeight?: true
   }
 
-  export type UserSumAggregateInputType = {
+  export type Shop12SumAggregateInputType = {
     id?: true
+    weight?: true
+    tio2Analysis?: true
+    h2oAnalysis?: true
+    recalculatedWeight?: true
   }
 
-  export type UserMinAggregateInputType = {
+  export type Shop12MinAggregateInputType = {
     id?: true
-    email?: true
-    name?: true
+    vagonNumber?: true
+    weight?: true
+    tio2Analysis?: true
+    h2oAnalysis?: true
+    recalculatedWeight?: true
+    InvoiceDate?: true
+    InvoiceNumber?: true
+    GtdDate?: true
+    GtdNumber?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
-  export type UserMaxAggregateInputType = {
+  export type Shop12MaxAggregateInputType = {
     id?: true
-    email?: true
-    name?: true
+    vagonNumber?: true
+    weight?: true
+    tio2Analysis?: true
+    h2oAnalysis?: true
+    recalculatedWeight?: true
+    InvoiceDate?: true
+    InvoiceNumber?: true
+    GtdDate?: true
+    GtdNumber?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
-  export type UserCountAggregateInputType = {
+  export type Shop12CountAggregateInputType = {
     id?: true
-    email?: true
-    name?: true
+    vagonNumber?: true
+    weight?: true
+    tio2Analysis?: true
+    h2oAnalysis?: true
+    recalculatedWeight?: true
+    InvoiceDate?: true
+    InvoiceNumber?: true
+    GtdDate?: true
+    GtdNumber?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
-  export type UserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop12AggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which User to aggregate.
+     * Filter which Shop12 to aggregate.
      */
-    where?: UserWhereInput
+    where?: Shop12WhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Users to fetch.
+     * Determine the order of Shop12s to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: Shop12OrderByWithRelationInput | Shop12OrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: Shop12WhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Users from the position of the cursor.
+     * Take `±n` Shop12s from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Users.
+     * Skip the first `n` Shop12s.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Users
+     * Count returned Shop12s
     **/
-    _count?: true | UserCountAggregateInputType
+    _count?: true | Shop12CountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: UserAvgAggregateInputType
+    _avg?: Shop12AvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: UserSumAggregateInputType
+    _sum?: Shop12SumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: UserMinAggregateInputType
+    _min?: Shop12MinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: UserMaxAggregateInputType
+    _max?: Shop12MaxAggregateInputType
   }
 
-  export type GetUserAggregateType<T extends UserAggregateArgs> = {
-        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
+  export type GetShop12AggregateType<T extends Shop12AggregateArgs> = {
+        [P in keyof T & keyof AggregateShop12]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateUser[P]>
-      : GetScalarType<T[P], AggregateUser[P]>
+        : GetScalarType<T[P], AggregateShop12[P]>
+      : GetScalarType<T[P], AggregateShop12[P]>
   }
 
 
 
 
-  export type UserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserWhereInput
-    orderBy?: UserOrderByWithAggregationInput | UserOrderByWithAggregationInput[]
-    by: UserScalarFieldEnum[] | UserScalarFieldEnum
-    having?: UserScalarWhereWithAggregatesInput
+  export type Shop12GroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Shop12WhereInput
+    orderBy?: Shop12OrderByWithAggregationInput | Shop12OrderByWithAggregationInput[]
+    by: Shop12ScalarFieldEnum[] | Shop12ScalarFieldEnum
+    having?: Shop12ScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: UserCountAggregateInputType | true
-    _avg?: UserAvgAggregateInputType
-    _sum?: UserSumAggregateInputType
-    _min?: UserMinAggregateInputType
-    _max?: UserMaxAggregateInputType
+    _count?: Shop12CountAggregateInputType | true
+    _avg?: Shop12AvgAggregateInputType
+    _sum?: Shop12SumAggregateInputType
+    _min?: Shop12MinAggregateInputType
+    _max?: Shop12MaxAggregateInputType
   }
 
-  export type UserGroupByOutputType = {
+  export type Shop12GroupByOutputType = {
     id: number
-    email: string
-    name: string | null
-    _count: UserCountAggregateOutputType | null
-    _avg: UserAvgAggregateOutputType | null
-    _sum: UserSumAggregateOutputType | null
-    _min: UserMinAggregateOutputType | null
-    _max: UserMaxAggregateOutputType | null
+    vagonNumber: string
+    weight: number
+    tio2Analysis: number
+    h2oAnalysis: number
+    recalculatedWeight: number
+    InvoiceDate: Date
+    InvoiceNumber: string
+    GtdDate: Date
+    GtdNumber: string
+    createdAt: Date
+    updatedAt: Date
+    _count: Shop12CountAggregateOutputType | null
+    _avg: Shop12AvgAggregateOutputType | null
+    _sum: Shop12SumAggregateOutputType | null
+    _min: Shop12MinAggregateOutputType | null
+    _max: Shop12MaxAggregateOutputType | null
   }
 
-  type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
+  type GetShop12GroupByPayload<T extends Shop12GroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<UserGroupByOutputType, T['by']> &
+      PickEnumerable<Shop12GroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof Shop12GroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], UserGroupByOutputType[P]>
-            : GetScalarType<T[P], UserGroupByOutputType[P]>
+              : GetScalarType<T[P], Shop12GroupByOutputType[P]>
+            : GetScalarType<T[P], Shop12GroupByOutputType[P]>
         }
       >
     >
 
 
-  export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type Shop12Select<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    email?: boolean
-    name?: boolean
-    posts?: boolean | User$postsArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["user"]>
+    vagonNumber?: boolean
+    weight?: boolean
+    tio2Analysis?: boolean
+    h2oAnalysis?: boolean
+    recalculatedWeight?: boolean
+    InvoiceDate?: boolean
+    InvoiceNumber?: boolean
+    GtdDate?: boolean
+    GtdNumber?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["shop12"]>
 
-  export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type Shop12SelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    email?: boolean
-    name?: boolean
-  }, ExtArgs["result"]["user"]>
+    vagonNumber?: boolean
+    weight?: boolean
+    tio2Analysis?: boolean
+    h2oAnalysis?: boolean
+    recalculatedWeight?: boolean
+    InvoiceDate?: boolean
+    InvoiceNumber?: boolean
+    GtdDate?: boolean
+    GtdNumber?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["shop12"]>
 
-  export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type Shop12SelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    email?: boolean
-    name?: boolean
-  }, ExtArgs["result"]["user"]>
+    vagonNumber?: boolean
+    weight?: boolean
+    tio2Analysis?: boolean
+    h2oAnalysis?: boolean
+    recalculatedWeight?: boolean
+    InvoiceDate?: boolean
+    InvoiceNumber?: boolean
+    GtdDate?: boolean
+    GtdNumber?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["shop12"]>
 
-  export type UserSelectScalar = {
+  export type Shop12SelectScalar = {
     id?: boolean
-    email?: boolean
-    name?: boolean
+    vagonNumber?: boolean
+    weight?: boolean
+    tio2Analysis?: boolean
+    h2oAnalysis?: boolean
+    recalculatedWeight?: boolean
+    InvoiceDate?: boolean
+    InvoiceNumber?: boolean
+    GtdDate?: boolean
+    GtdNumber?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name", ExtArgs["result"]["user"]>
-  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    posts?: boolean | User$postsArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type Shop12Omit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "vagonNumber" | "weight" | "tio2Analysis" | "h2oAnalysis" | "recalculatedWeight" | "InvoiceDate" | "InvoiceNumber" | "GtdDate" | "GtdNumber" | "createdAt" | "updatedAt", ExtArgs["result"]["shop12"]>
 
-  export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "User"
-    objects: {
-      posts: Prisma.$PostPayload<ExtArgs>[]
-    }
+  export type $Shop12Payload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Shop12"
+    objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      email: string
-      name: string | null
-    }, ExtArgs["result"]["user"]>
+      vagonNumber: string
+      weight: number
+      tio2Analysis: number
+      h2oAnalysis: number
+      recalculatedWeight: number
+      InvoiceDate: Date
+      InvoiceNumber: string
+      GtdDate: Date
+      GtdNumber: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["shop12"]>
     composites: {}
   }
 
-  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
+  type Shop12GetPayload<S extends boolean | null | undefined | Shop12DefaultArgs> = $Result.GetResult<Prisma.$Shop12Payload, S>
 
-  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: UserCountAggregateInputType | true
+  type Shop12CountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<Shop12FindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Shop12CountAggregateInputType | true
     }
 
-  export interface UserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
+  export interface Shop12Delegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Shop12'], meta: { name: 'Shop12' } }
     /**
-     * Find zero or one User that matches the filter.
-     * @param {UserFindUniqueArgs} args - Arguments to find a User
+     * Find zero or one Shop12 that matches the filter.
+     * @param {Shop12FindUniqueArgs} args - Arguments to find a Shop12
      * @example
-     * // Get one User
-     * const user = await prisma.user.findUnique({
+     * // Get one Shop12
+     * const shop12 = await prisma.shop12.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends UserFindUniqueArgs>(args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends Shop12FindUniqueArgs>(args: SelectSubset<T, Shop12FindUniqueArgs<ExtArgs>>): Prisma__Shop12Client<$Result.GetResult<Prisma.$Shop12Payload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one User that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Shop12 that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
+     * @param {Shop12FindUniqueOrThrowArgs} args - Arguments to find a Shop12
      * @example
-     * // Get one User
-     * const user = await prisma.user.findUniqueOrThrow({
+     * // Get one Shop12
+     * const shop12 = await prisma.shop12.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(args: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends Shop12FindUniqueOrThrowArgs>(args: SelectSubset<T, Shop12FindUniqueOrThrowArgs<ExtArgs>>): Prisma__Shop12Client<$Result.GetResult<Prisma.$Shop12Payload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first User that matches the filter.
+     * Find the first Shop12 that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindFirstArgs} args - Arguments to find a User
+     * @param {Shop12FindFirstArgs} args - Arguments to find a Shop12
      * @example
-     * // Get one User
-     * const user = await prisma.user.findFirst({
+     * // Get one Shop12
+     * const shop12 = await prisma.shop12.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends UserFindFirstArgs>(args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends Shop12FindFirstArgs>(args?: SelectSubset<T, Shop12FindFirstArgs<ExtArgs>>): Prisma__Shop12Client<$Result.GetResult<Prisma.$Shop12Payload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first User that matches the filter or
+     * Find the first Shop12 that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
+     * @param {Shop12FindFirstOrThrowArgs} args - Arguments to find a Shop12
      * @example
-     * // Get one User
-     * const user = await prisma.user.findFirstOrThrow({
+     * // Get one Shop12
+     * const shop12 = await prisma.shop12.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends Shop12FindFirstOrThrowArgs>(args?: SelectSubset<T, Shop12FindFirstOrThrowArgs<ExtArgs>>): Prisma__Shop12Client<$Result.GetResult<Prisma.$Shop12Payload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Users that matches the filter.
+     * Find zero or more Shop12s that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {Shop12FindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Users
-     * const users = await prisma.user.findMany()
+     * // Get all Shop12s
+     * const shop12s = await prisma.shop12.findMany()
      * 
-     * // Get first 10 Users
-     * const users = await prisma.user.findMany({ take: 10 })
+     * // Get first 10 Shop12s
+     * const shop12s = await prisma.shop12.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
+     * const shop12WithIdOnly = await prisma.shop12.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends UserFindManyArgs>(args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends Shop12FindManyArgs>(args?: SelectSubset<T, Shop12FindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Shop12Payload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a User.
-     * @param {UserCreateArgs} args - Arguments to create a User.
+     * Create a Shop12.
+     * @param {Shop12CreateArgs} args - Arguments to create a Shop12.
      * @example
-     * // Create one User
-     * const User = await prisma.user.create({
+     * // Create one Shop12
+     * const Shop12 = await prisma.shop12.create({
      *   data: {
-     *     // ... data to create a User
+     *     // ... data to create a Shop12
      *   }
      * })
      * 
      */
-    create<T extends UserCreateArgs>(args: SelectSubset<T, UserCreateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends Shop12CreateArgs>(args: SelectSubset<T, Shop12CreateArgs<ExtArgs>>): Prisma__Shop12Client<$Result.GetResult<Prisma.$Shop12Payload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Users.
-     * @param {UserCreateManyArgs} args - Arguments to create many Users.
+     * Create many Shop12s.
+     * @param {Shop12CreateManyArgs} args - Arguments to create many Shop12s.
      * @example
-     * // Create many Users
-     * const user = await prisma.user.createMany({
+     * // Create many Shop12s
+     * const shop12 = await prisma.shop12.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends UserCreateManyArgs>(args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends Shop12CreateManyArgs>(args?: SelectSubset<T, Shop12CreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Users and returns the data saved in the database.
-     * @param {UserCreateManyAndReturnArgs} args - Arguments to create many Users.
+     * Create many Shop12s and returns the data saved in the database.
+     * @param {Shop12CreateManyAndReturnArgs} args - Arguments to create many Shop12s.
      * @example
-     * // Create many Users
-     * const user = await prisma.user.createManyAndReturn({
+     * // Create many Shop12s
+     * const shop12 = await prisma.shop12.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Users and only return the `id`
-     * const userWithIdOnly = await prisma.user.createManyAndReturn({
+     * // Create many Shop12s and only return the `id`
+     * const shop12WithIdOnly = await prisma.shop12.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -1350,28 +1434,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends UserCreateManyAndReturnArgs>(args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends Shop12CreateManyAndReturnArgs>(args?: SelectSubset<T, Shop12CreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Shop12Payload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a User.
-     * @param {UserDeleteArgs} args - Arguments to delete one User.
+     * Delete a Shop12.
+     * @param {Shop12DeleteArgs} args - Arguments to delete one Shop12.
      * @example
-     * // Delete one User
-     * const User = await prisma.user.delete({
+     * // Delete one Shop12
+     * const Shop12 = await prisma.shop12.delete({
      *   where: {
-     *     // ... filter to delete one User
+     *     // ... filter to delete one Shop12
      *   }
      * })
      * 
      */
-    delete<T extends UserDeleteArgs>(args: SelectSubset<T, UserDeleteArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends Shop12DeleteArgs>(args: SelectSubset<T, Shop12DeleteArgs<ExtArgs>>): Prisma__Shop12Client<$Result.GetResult<Prisma.$Shop12Payload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one User.
-     * @param {UserUpdateArgs} args - Arguments to update one User.
+     * Update one Shop12.
+     * @param {Shop12UpdateArgs} args - Arguments to update one Shop12.
      * @example
-     * // Update one User
-     * const user = await prisma.user.update({
+     * // Update one Shop12
+     * const shop12 = await prisma.shop12.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1381,30 +1465,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends UserUpdateArgs>(args: SelectSubset<T, UserUpdateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends Shop12UpdateArgs>(args: SelectSubset<T, Shop12UpdateArgs<ExtArgs>>): Prisma__Shop12Client<$Result.GetResult<Prisma.$Shop12Payload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Users.
-     * @param {UserDeleteManyArgs} args - Arguments to filter Users to delete.
+     * Delete zero or more Shop12s.
+     * @param {Shop12DeleteManyArgs} args - Arguments to filter Shop12s to delete.
      * @example
-     * // Delete a few Users
-     * const { count } = await prisma.user.deleteMany({
+     * // Delete a few Shop12s
+     * const { count } = await prisma.shop12.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends UserDeleteManyArgs>(args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends Shop12DeleteManyArgs>(args?: SelectSubset<T, Shop12DeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Users.
+     * Update zero or more Shop12s.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {Shop12UpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Users
-     * const user = await prisma.user.updateMany({
+     * // Update many Shop12s
+     * const shop12 = await prisma.shop12.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1414,14 +1498,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends UserUpdateManyArgs>(args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends Shop12UpdateManyArgs>(args: SelectSubset<T, Shop12UpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Users and returns the data updated in the database.
-     * @param {UserUpdateManyAndReturnArgs} args - Arguments to update many Users.
+     * Update zero or more Shop12s and returns the data updated in the database.
+     * @param {Shop12UpdateManyAndReturnArgs} args - Arguments to update many Shop12s.
      * @example
-     * // Update many Users
-     * const user = await prisma.user.updateManyAndReturn({
+     * // Update many Shop12s
+     * const shop12 = await prisma.shop12.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1430,8 +1514,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Users and only return the `id`
-     * const userWithIdOnly = await prisma.user.updateManyAndReturn({
+     * // Update zero or more Shop12s and only return the `id`
+     * const shop12WithIdOnly = await prisma.shop12.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -1444,56 +1528,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends UserUpdateManyAndReturnArgs>(args: SelectSubset<T, UserUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends Shop12UpdateManyAndReturnArgs>(args: SelectSubset<T, Shop12UpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Shop12Payload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one User.
-     * @param {UserUpsertArgs} args - Arguments to update or create a User.
+     * Create or update one Shop12.
+     * @param {Shop12UpsertArgs} args - Arguments to update or create a Shop12.
      * @example
-     * // Update or create a User
-     * const user = await prisma.user.upsert({
+     * // Update or create a Shop12
+     * const shop12 = await prisma.shop12.upsert({
      *   create: {
-     *     // ... data to create a User
+     *     // ... data to create a Shop12
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the User we want to update
+     *     // ... the filter for the Shop12 we want to update
      *   }
      * })
      */
-    upsert<T extends UserUpsertArgs>(args: SelectSubset<T, UserUpsertArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends Shop12UpsertArgs>(args: SelectSubset<T, Shop12UpsertArgs<ExtArgs>>): Prisma__Shop12Client<$Result.GetResult<Prisma.$Shop12Payload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Users.
+     * Count the number of Shop12s.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserCountArgs} args - Arguments to filter Users to count.
+     * @param {Shop12CountArgs} args - Arguments to filter Shop12s to count.
      * @example
-     * // Count the number of Users
-     * const count = await prisma.user.count({
+     * // Count the number of Shop12s
+     * const count = await prisma.shop12.count({
      *   where: {
-     *     // ... the filter for the Users we want to count
+     *     // ... the filter for the Shop12s we want to count
      *   }
      * })
     **/
-    count<T extends UserCountArgs>(
-      args?: Subset<T, UserCountArgs>,
+    count<T extends Shop12CountArgs>(
+      args?: Subset<T, Shop12CountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], UserCountAggregateOutputType>
+          : GetScalarType<T['select'], Shop12CountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a User.
+     * Allows you to perform aggregations operations on a Shop12.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {Shop12AggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -1513,13 +1597,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Prisma.PrismaPromise<GetUserAggregateType<T>>
+    aggregate<T extends Shop12AggregateArgs>(args: Subset<T, Shop12AggregateArgs>): Prisma.PrismaPromise<GetShop12AggregateType<T>>
 
     /**
-     * Group by User.
+     * Group by Shop12.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserGroupByArgs} args - Group by arguments.
+     * @param {Shop12GroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -1534,14 +1618,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends UserGroupByArgs,
+      T extends Shop12GroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: UserGroupByArgs['orderBy'] }
-        : { orderBy?: UserGroupByArgs['orderBy'] },
+        ? { orderBy: Shop12GroupByArgs['orderBy'] }
+        : { orderBy?: Shop12GroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -1590,22 +1674,21 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, Shop12GroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetShop12GroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the User model
+   * Fields of the Shop12 model
    */
-  readonly fields: UserFieldRefs;
+  readonly fields: Shop12FieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for User.
+   * The delegate class that acts as a "Promise-like" for Shop12.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__Shop12Client<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1632,823 +1715,942 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the User model
+   * Fields of the Shop12 model
    */
-  interface UserFieldRefs {
-    readonly id: FieldRef<"User", 'Int'>
-    readonly email: FieldRef<"User", 'String'>
-    readonly name: FieldRef<"User", 'String'>
+  interface Shop12FieldRefs {
+    readonly id: FieldRef<"Shop12", 'Int'>
+    readonly vagonNumber: FieldRef<"Shop12", 'String'>
+    readonly weight: FieldRef<"Shop12", 'Float'>
+    readonly tio2Analysis: FieldRef<"Shop12", 'Float'>
+    readonly h2oAnalysis: FieldRef<"Shop12", 'Float'>
+    readonly recalculatedWeight: FieldRef<"Shop12", 'Float'>
+    readonly InvoiceDate: FieldRef<"Shop12", 'DateTime'>
+    readonly InvoiceNumber: FieldRef<"Shop12", 'String'>
+    readonly GtdDate: FieldRef<"Shop12", 'DateTime'>
+    readonly GtdNumber: FieldRef<"Shop12", 'String'>
+    readonly createdAt: FieldRef<"Shop12", 'DateTime'>
+    readonly updatedAt: FieldRef<"Shop12", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * User findUnique
+   * Shop12 findUnique
    */
-  export type UserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop12FindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Shop12
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: Shop12Select<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the Shop12
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: Shop12Omit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which Shop12 to fetch.
      */
-    include?: UserInclude<ExtArgs> | null
-    /**
-     * Filter, which User to fetch.
-     */
-    where: UserWhereUniqueInput
+    where: Shop12WhereUniqueInput
   }
 
   /**
-   * User findUniqueOrThrow
+   * Shop12 findUniqueOrThrow
    */
-  export type UserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop12FindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Shop12
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: Shop12Select<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the Shop12
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: Shop12Omit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which Shop12 to fetch.
      */
-    include?: UserInclude<ExtArgs> | null
-    /**
-     * Filter, which User to fetch.
-     */
-    where: UserWhereUniqueInput
+    where: Shop12WhereUniqueInput
   }
 
   /**
-   * User findFirst
+   * Shop12 findFirst
    */
-  export type UserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop12FindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Shop12
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: Shop12Select<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the Shop12
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: Shop12Omit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which Shop12 to fetch.
      */
-    include?: UserInclude<ExtArgs> | null
-    /**
-     * Filter, which User to fetch.
-     */
-    where?: UserWhereInput
+    where?: Shop12WhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Users to fetch.
+     * Determine the order of Shop12s to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: Shop12OrderByWithRelationInput | Shop12OrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Users.
+     * Sets the position for searching for Shop12s.
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: Shop12WhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Users from the position of the cursor.
+     * Take `±n` Shop12s from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Users.
+     * Skip the first `n` Shop12s.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Users.
+     * Filter by unique combinations of Shop12s.
      */
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+    distinct?: Shop12ScalarFieldEnum | Shop12ScalarFieldEnum[]
   }
 
   /**
-   * User findFirstOrThrow
+   * Shop12 findFirstOrThrow
    */
-  export type UserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop12FindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Shop12
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: Shop12Select<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the Shop12
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: Shop12Omit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which Shop12 to fetch.
      */
-    include?: UserInclude<ExtArgs> | null
-    /**
-     * Filter, which User to fetch.
-     */
-    where?: UserWhereInput
+    where?: Shop12WhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Users to fetch.
+     * Determine the order of Shop12s to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: Shop12OrderByWithRelationInput | Shop12OrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Users.
+     * Sets the position for searching for Shop12s.
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: Shop12WhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Users from the position of the cursor.
+     * Take `±n` Shop12s from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Users.
+     * Skip the first `n` Shop12s.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Users.
+     * Filter by unique combinations of Shop12s.
      */
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+    distinct?: Shop12ScalarFieldEnum | Shop12ScalarFieldEnum[]
   }
 
   /**
-   * User findMany
+   * Shop12 findMany
    */
-  export type UserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop12FindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Shop12
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: Shop12Select<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the Shop12
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: Shop12Omit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which Shop12s to fetch.
      */
-    include?: UserInclude<ExtArgs> | null
-    /**
-     * Filter, which Users to fetch.
-     */
-    where?: UserWhereInput
+    where?: Shop12WhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Users to fetch.
+     * Determine the order of Shop12s to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: Shop12OrderByWithRelationInput | Shop12OrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Users.
+     * Sets the position for listing Shop12s.
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: Shop12WhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Users from the position of the cursor.
+     * Take `±n` Shop12s from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Users.
+     * Skip the first `n` Shop12s.
      */
     skip?: number
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+    distinct?: Shop12ScalarFieldEnum | Shop12ScalarFieldEnum[]
   }
 
   /**
-   * User create
+   * Shop12 create
    */
-  export type UserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop12CreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Shop12
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: Shop12Select<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the Shop12
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: Shop12Omit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * The data needed to create a Shop12.
      */
-    include?: UserInclude<ExtArgs> | null
-    /**
-     * The data needed to create a User.
-     */
-    data: XOR<UserCreateInput, UserUncheckedCreateInput>
+    data: XOR<Shop12CreateInput, Shop12UncheckedCreateInput>
   }
 
   /**
-   * User createMany
+   * Shop12 createMany
    */
-  export type UserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop12CreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Users.
+     * The data used to create many Shop12s.
      */
-    data: UserCreateManyInput | UserCreateManyInput[]
+    data: Shop12CreateManyInput | Shop12CreateManyInput[]
   }
 
   /**
-   * User createManyAndReturn
+   * Shop12 createManyAndReturn
    */
-  export type UserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop12CreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Shop12
      */
-    select?: UserSelectCreateManyAndReturn<ExtArgs> | null
+    select?: Shop12SelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the Shop12
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: Shop12Omit<ExtArgs> | null
     /**
-     * The data used to create many Users.
+     * The data used to create many Shop12s.
      */
-    data: UserCreateManyInput | UserCreateManyInput[]
+    data: Shop12CreateManyInput | Shop12CreateManyInput[]
   }
 
   /**
-   * User update
+   * Shop12 update
    */
-  export type UserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop12UpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Shop12
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: Shop12Select<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the Shop12
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: Shop12Omit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * The data needed to update a Shop12.
      */
-    include?: UserInclude<ExtArgs> | null
+    data: XOR<Shop12UpdateInput, Shop12UncheckedUpdateInput>
     /**
-     * The data needed to update a User.
+     * Choose, which Shop12 to update.
      */
-    data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
-    /**
-     * Choose, which User to update.
-     */
-    where: UserWhereUniqueInput
+    where: Shop12WhereUniqueInput
   }
 
   /**
-   * User updateMany
+   * Shop12 updateMany
    */
-  export type UserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop12UpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Users.
+     * The data used to update Shop12s.
      */
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    data: XOR<Shop12UpdateManyMutationInput, Shop12UncheckedUpdateManyInput>
     /**
-     * Filter which Users to update
+     * Filter which Shop12s to update
      */
-    where?: UserWhereInput
+    where?: Shop12WhereInput
     /**
-     * Limit how many Users to update.
+     * Limit how many Shop12s to update.
      */
     limit?: number
   }
 
   /**
-   * User updateManyAndReturn
+   * Shop12 updateManyAndReturn
    */
-  export type UserUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop12UpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Shop12
      */
-    select?: UserSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: Shop12SelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the Shop12
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: Shop12Omit<ExtArgs> | null
     /**
-     * The data used to update Users.
+     * The data used to update Shop12s.
      */
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    data: XOR<Shop12UpdateManyMutationInput, Shop12UncheckedUpdateManyInput>
     /**
-     * Filter which Users to update
+     * Filter which Shop12s to update
      */
-    where?: UserWhereInput
+    where?: Shop12WhereInput
     /**
-     * Limit how many Users to update.
+     * Limit how many Shop12s to update.
      */
     limit?: number
   }
 
   /**
-   * User upsert
+   * Shop12 upsert
    */
-  export type UserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop12UpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Shop12
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: Shop12Select<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the Shop12
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: Shop12Omit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * The filter to search for the Shop12 to update in case it exists.
      */
-    include?: UserInclude<ExtArgs> | null
+    where: Shop12WhereUniqueInput
     /**
-     * The filter to search for the User to update in case it exists.
+     * In case the Shop12 found by the `where` argument doesn't exist, create a new Shop12 with this data.
      */
-    where: UserWhereUniqueInput
+    create: XOR<Shop12CreateInput, Shop12UncheckedCreateInput>
     /**
-     * In case the User found by the `where` argument doesn't exist, create a new User with this data.
+     * In case the Shop12 was found with the provided `where` argument, update it with this data.
      */
-    create: XOR<UserCreateInput, UserUncheckedCreateInput>
-    /**
-     * In case the User was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+    update: XOR<Shop12UpdateInput, Shop12UncheckedUpdateInput>
   }
 
   /**
-   * User delete
+   * Shop12 delete
    */
-  export type UserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop12DeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Shop12
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: Shop12Select<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the Shop12
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: Shop12Omit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter which Shop12 to delete.
      */
-    include?: UserInclude<ExtArgs> | null
-    /**
-     * Filter which User to delete.
-     */
-    where: UserWhereUniqueInput
+    where: Shop12WhereUniqueInput
   }
 
   /**
-   * User deleteMany
+   * Shop12 deleteMany
    */
-  export type UserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop12DeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Users to delete
+     * Filter which Shop12s to delete
      */
-    where?: UserWhereInput
+    where?: Shop12WhereInput
     /**
-     * Limit how many Users to delete.
+     * Limit how many Shop12s to delete.
      */
     limit?: number
   }
 
   /**
-   * User.posts
+   * Shop12 without action
    */
-  export type User$postsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop12DefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Post
+     * Select specific fields to fetch from the Shop12
      */
-    select?: PostSelect<ExtArgs> | null
+    select?: Shop12Select<ExtArgs> | null
     /**
-     * Omit specific fields from the Post
+     * Omit specific fields from the Shop12
      */
-    omit?: PostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PostInclude<ExtArgs> | null
-    where?: PostWhereInput
-    orderBy?: PostOrderByWithRelationInput | PostOrderByWithRelationInput[]
-    cursor?: PostWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
-  }
-
-  /**
-   * User without action
-   */
-  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
+    omit?: Shop12Omit<ExtArgs> | null
   }
 
 
   /**
-   * Model Post
+   * Model Shop2
    */
 
-  export type AggregatePost = {
-    _count: PostCountAggregateOutputType | null
-    _avg: PostAvgAggregateOutputType | null
-    _sum: PostSumAggregateOutputType | null
-    _min: PostMinAggregateOutputType | null
-    _max: PostMaxAggregateOutputType | null
+  export type AggregateShop2 = {
+    _count: Shop2CountAggregateOutputType | null
+    _avg: Shop2AvgAggregateOutputType | null
+    _sum: Shop2SumAggregateOutputType | null
+    _min: Shop2MinAggregateOutputType | null
+    _max: Shop2MaxAggregateOutputType | null
   }
 
-  export type PostAvgAggregateOutputType = {
+  export type Shop2AvgAggregateOutputType = {
     id: number | null
-    authorId: number | null
+    weight: number | null
+    perMetVklCert: number | null
+    perTioCert: number | null
+    perH2oCert: number | null
+    H2OWeight: number | null
+    DryWeight: number | null
+    MetalTon: number | null
+    MinusMetal: number | null
+    standart80Tio2: number | null
   }
 
-  export type PostSumAggregateOutputType = {
+  export type Shop2SumAggregateOutputType = {
     id: number | null
-    authorId: number | null
+    weight: number | null
+    perMetVklCert: number | null
+    perTioCert: number | null
+    perH2oCert: number | null
+    H2OWeight: number | null
+    DryWeight: number | null
+    MetalTon: number | null
+    MinusMetal: number | null
+    standart80Tio2: number | null
   }
 
-  export type PostMinAggregateOutputType = {
+  export type Shop2MinAggregateOutputType = {
     id: number | null
-    title: string | null
-    content: string | null
-    published: boolean | null
-    authorId: number | null
+    numberVagonOrTank: string | null
+    weight: number | null
+    perMetVklCert: number | null
+    perTioCert: number | null
+    perH2oCert: number | null
+    H2OWeight: number | null
+    DryWeight: number | null
+    MetalTon: number | null
+    MinusMetal: number | null
+    standart80Tio2: number | null
+    InvoiceDate: Date | null
+    InvoiceNumber: string | null
+    GtdDate: Date | null
+    GtdNumber: string | null
+    MiroDocument: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
-  export type PostMaxAggregateOutputType = {
+  export type Shop2MaxAggregateOutputType = {
     id: number | null
-    title: string | null
-    content: string | null
-    published: boolean | null
-    authorId: number | null
+    numberVagonOrTank: string | null
+    weight: number | null
+    perMetVklCert: number | null
+    perTioCert: number | null
+    perH2oCert: number | null
+    H2OWeight: number | null
+    DryWeight: number | null
+    MetalTon: number | null
+    MinusMetal: number | null
+    standart80Tio2: number | null
+    InvoiceDate: Date | null
+    InvoiceNumber: string | null
+    GtdDate: Date | null
+    GtdNumber: string | null
+    MiroDocument: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
-  export type PostCountAggregateOutputType = {
+  export type Shop2CountAggregateOutputType = {
     id: number
-    title: number
-    content: number
-    published: number
-    authorId: number
+    numberVagonOrTank: number
+    weight: number
+    perMetVklCert: number
+    perTioCert: number
+    perH2oCert: number
+    H2OWeight: number
+    DryWeight: number
+    MetalTon: number
+    MinusMetal: number
+    standart80Tio2: number
+    InvoiceDate: number
+    InvoiceNumber: number
+    GtdDate: number
+    GtdNumber: number
+    MiroDocument: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
 
-  export type PostAvgAggregateInputType = {
+  export type Shop2AvgAggregateInputType = {
     id?: true
-    authorId?: true
+    weight?: true
+    perMetVklCert?: true
+    perTioCert?: true
+    perH2oCert?: true
+    H2OWeight?: true
+    DryWeight?: true
+    MetalTon?: true
+    MinusMetal?: true
+    standart80Tio2?: true
   }
 
-  export type PostSumAggregateInputType = {
+  export type Shop2SumAggregateInputType = {
     id?: true
-    authorId?: true
+    weight?: true
+    perMetVklCert?: true
+    perTioCert?: true
+    perH2oCert?: true
+    H2OWeight?: true
+    DryWeight?: true
+    MetalTon?: true
+    MinusMetal?: true
+    standart80Tio2?: true
   }
 
-  export type PostMinAggregateInputType = {
+  export type Shop2MinAggregateInputType = {
     id?: true
-    title?: true
-    content?: true
-    published?: true
-    authorId?: true
+    numberVagonOrTank?: true
+    weight?: true
+    perMetVklCert?: true
+    perTioCert?: true
+    perH2oCert?: true
+    H2OWeight?: true
+    DryWeight?: true
+    MetalTon?: true
+    MinusMetal?: true
+    standart80Tio2?: true
+    InvoiceDate?: true
+    InvoiceNumber?: true
+    GtdDate?: true
+    GtdNumber?: true
+    MiroDocument?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
-  export type PostMaxAggregateInputType = {
+  export type Shop2MaxAggregateInputType = {
     id?: true
-    title?: true
-    content?: true
-    published?: true
-    authorId?: true
+    numberVagonOrTank?: true
+    weight?: true
+    perMetVklCert?: true
+    perTioCert?: true
+    perH2oCert?: true
+    H2OWeight?: true
+    DryWeight?: true
+    MetalTon?: true
+    MinusMetal?: true
+    standart80Tio2?: true
+    InvoiceDate?: true
+    InvoiceNumber?: true
+    GtdDate?: true
+    GtdNumber?: true
+    MiroDocument?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
-  export type PostCountAggregateInputType = {
+  export type Shop2CountAggregateInputType = {
     id?: true
-    title?: true
-    content?: true
-    published?: true
-    authorId?: true
+    numberVagonOrTank?: true
+    weight?: true
+    perMetVklCert?: true
+    perTioCert?: true
+    perH2oCert?: true
+    H2OWeight?: true
+    DryWeight?: true
+    MetalTon?: true
+    MinusMetal?: true
+    standart80Tio2?: true
+    InvoiceDate?: true
+    InvoiceNumber?: true
+    GtdDate?: true
+    GtdNumber?: true
+    MiroDocument?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
-  export type PostAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop2AggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Post to aggregate.
+     * Filter which Shop2 to aggregate.
      */
-    where?: PostWhereInput
+    where?: Shop2WhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Posts to fetch.
+     * Determine the order of Shop2s to fetch.
      */
-    orderBy?: PostOrderByWithRelationInput | PostOrderByWithRelationInput[]
+    orderBy?: Shop2OrderByWithRelationInput | Shop2OrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: PostWhereUniqueInput
+    cursor?: Shop2WhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Posts from the position of the cursor.
+     * Take `±n` Shop2s from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Posts.
+     * Skip the first `n` Shop2s.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Posts
+     * Count returned Shop2s
     **/
-    _count?: true | PostCountAggregateInputType
+    _count?: true | Shop2CountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: PostAvgAggregateInputType
+    _avg?: Shop2AvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: PostSumAggregateInputType
+    _sum?: Shop2SumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: PostMinAggregateInputType
+    _min?: Shop2MinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: PostMaxAggregateInputType
+    _max?: Shop2MaxAggregateInputType
   }
 
-  export type GetPostAggregateType<T extends PostAggregateArgs> = {
-        [P in keyof T & keyof AggregatePost]: P extends '_count' | 'count'
+  export type GetShop2AggregateType<T extends Shop2AggregateArgs> = {
+        [P in keyof T & keyof AggregateShop2]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregatePost[P]>
-      : GetScalarType<T[P], AggregatePost[P]>
+        : GetScalarType<T[P], AggregateShop2[P]>
+      : GetScalarType<T[P], AggregateShop2[P]>
   }
 
 
 
 
-  export type PostGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PostWhereInput
-    orderBy?: PostOrderByWithAggregationInput | PostOrderByWithAggregationInput[]
-    by: PostScalarFieldEnum[] | PostScalarFieldEnum
-    having?: PostScalarWhereWithAggregatesInput
+  export type Shop2GroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Shop2WhereInput
+    orderBy?: Shop2OrderByWithAggregationInput | Shop2OrderByWithAggregationInput[]
+    by: Shop2ScalarFieldEnum[] | Shop2ScalarFieldEnum
+    having?: Shop2ScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: PostCountAggregateInputType | true
-    _avg?: PostAvgAggregateInputType
-    _sum?: PostSumAggregateInputType
-    _min?: PostMinAggregateInputType
-    _max?: PostMaxAggregateInputType
+    _count?: Shop2CountAggregateInputType | true
+    _avg?: Shop2AvgAggregateInputType
+    _sum?: Shop2SumAggregateInputType
+    _min?: Shop2MinAggregateInputType
+    _max?: Shop2MaxAggregateInputType
   }
 
-  export type PostGroupByOutputType = {
+  export type Shop2GroupByOutputType = {
     id: number
-    title: string
-    content: string | null
-    published: boolean
-    authorId: number
-    _count: PostCountAggregateOutputType | null
-    _avg: PostAvgAggregateOutputType | null
-    _sum: PostSumAggregateOutputType | null
-    _min: PostMinAggregateOutputType | null
-    _max: PostMaxAggregateOutputType | null
+    numberVagonOrTank: string
+    weight: number
+    perMetVklCert: number
+    perTioCert: number
+    perH2oCert: number
+    H2OWeight: number
+    DryWeight: number
+    MetalTon: number
+    MinusMetal: number
+    standart80Tio2: number
+    InvoiceDate: Date
+    InvoiceNumber: string
+    GtdDate: Date
+    GtdNumber: string
+    MiroDocument: string
+    createdAt: Date
+    updatedAt: Date
+    _count: Shop2CountAggregateOutputType | null
+    _avg: Shop2AvgAggregateOutputType | null
+    _sum: Shop2SumAggregateOutputType | null
+    _min: Shop2MinAggregateOutputType | null
+    _max: Shop2MaxAggregateOutputType | null
   }
 
-  type GetPostGroupByPayload<T extends PostGroupByArgs> = Prisma.PrismaPromise<
+  type GetShop2GroupByPayload<T extends Shop2GroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<PostGroupByOutputType, T['by']> &
+      PickEnumerable<Shop2GroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof PostGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof Shop2GroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], PostGroupByOutputType[P]>
-            : GetScalarType<T[P], PostGroupByOutputType[P]>
+              : GetScalarType<T[P], Shop2GroupByOutputType[P]>
+            : GetScalarType<T[P], Shop2GroupByOutputType[P]>
         }
       >
     >
 
 
-  export type PostSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type Shop2Select<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    title?: boolean
-    content?: boolean
-    published?: boolean
-    authorId?: boolean
-    author?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["post"]>
+    numberVagonOrTank?: boolean
+    weight?: boolean
+    perMetVklCert?: boolean
+    perTioCert?: boolean
+    perH2oCert?: boolean
+    H2OWeight?: boolean
+    DryWeight?: boolean
+    MetalTon?: boolean
+    MinusMetal?: boolean
+    standart80Tio2?: boolean
+    InvoiceDate?: boolean
+    InvoiceNumber?: boolean
+    GtdDate?: boolean
+    GtdNumber?: boolean
+    MiroDocument?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["shop2"]>
 
-  export type PostSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type Shop2SelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    title?: boolean
-    content?: boolean
-    published?: boolean
-    authorId?: boolean
-    author?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["post"]>
+    numberVagonOrTank?: boolean
+    weight?: boolean
+    perMetVklCert?: boolean
+    perTioCert?: boolean
+    perH2oCert?: boolean
+    H2OWeight?: boolean
+    DryWeight?: boolean
+    MetalTon?: boolean
+    MinusMetal?: boolean
+    standart80Tio2?: boolean
+    InvoiceDate?: boolean
+    InvoiceNumber?: boolean
+    GtdDate?: boolean
+    GtdNumber?: boolean
+    MiroDocument?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["shop2"]>
 
-  export type PostSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type Shop2SelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    title?: boolean
-    content?: boolean
-    published?: boolean
-    authorId?: boolean
-    author?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["post"]>
+    numberVagonOrTank?: boolean
+    weight?: boolean
+    perMetVklCert?: boolean
+    perTioCert?: boolean
+    perH2oCert?: boolean
+    H2OWeight?: boolean
+    DryWeight?: boolean
+    MetalTon?: boolean
+    MinusMetal?: boolean
+    standart80Tio2?: boolean
+    InvoiceDate?: boolean
+    InvoiceNumber?: boolean
+    GtdDate?: boolean
+    GtdNumber?: boolean
+    MiroDocument?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["shop2"]>
 
-  export type PostSelectScalar = {
+  export type Shop2SelectScalar = {
     id?: boolean
-    title?: boolean
-    content?: boolean
-    published?: boolean
-    authorId?: boolean
+    numberVagonOrTank?: boolean
+    weight?: boolean
+    perMetVklCert?: boolean
+    perTioCert?: boolean
+    perH2oCert?: boolean
+    H2OWeight?: boolean
+    DryWeight?: boolean
+    MetalTon?: boolean
+    MinusMetal?: boolean
+    standart80Tio2?: boolean
+    InvoiceDate?: boolean
+    InvoiceNumber?: boolean
+    GtdDate?: boolean
+    GtdNumber?: boolean
+    MiroDocument?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "published" | "authorId", ExtArgs["result"]["post"]>
-  export type PostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    author?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type PostIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    author?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type PostIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    author?: boolean | UserDefaultArgs<ExtArgs>
-  }
+  export type Shop2Omit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "numberVagonOrTank" | "weight" | "perMetVklCert" | "perTioCert" | "perH2oCert" | "H2OWeight" | "DryWeight" | "MetalTon" | "MinusMetal" | "standart80Tio2" | "InvoiceDate" | "InvoiceNumber" | "GtdDate" | "GtdNumber" | "MiroDocument" | "createdAt" | "updatedAt", ExtArgs["result"]["shop2"]>
 
-  export type $PostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Post"
-    objects: {
-      author: Prisma.$UserPayload<ExtArgs>
-    }
+  export type $Shop2Payload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Shop2"
+    objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      title: string
-      content: string | null
-      published: boolean
-      authorId: number
-    }, ExtArgs["result"]["post"]>
+      numberVagonOrTank: string
+      weight: number
+      perMetVklCert: number
+      perTioCert: number
+      perH2oCert: number
+      H2OWeight: number
+      DryWeight: number
+      MetalTon: number
+      MinusMetal: number
+      standart80Tio2: number
+      InvoiceDate: Date
+      InvoiceNumber: string
+      GtdDate: Date
+      GtdNumber: string
+      MiroDocument: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["shop2"]>
     composites: {}
   }
 
-  type PostGetPayload<S extends boolean | null | undefined | PostDefaultArgs> = $Result.GetResult<Prisma.$PostPayload, S>
+  type Shop2GetPayload<S extends boolean | null | undefined | Shop2DefaultArgs> = $Result.GetResult<Prisma.$Shop2Payload, S>
 
-  type PostCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<PostFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: PostCountAggregateInputType | true
+  type Shop2CountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<Shop2FindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Shop2CountAggregateInputType | true
     }
 
-  export interface PostDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Post'], meta: { name: 'Post' } }
+  export interface Shop2Delegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Shop2'], meta: { name: 'Shop2' } }
     /**
-     * Find zero or one Post that matches the filter.
-     * @param {PostFindUniqueArgs} args - Arguments to find a Post
+     * Find zero or one Shop2 that matches the filter.
+     * @param {Shop2FindUniqueArgs} args - Arguments to find a Shop2
      * @example
-     * // Get one Post
-     * const post = await prisma.post.findUnique({
+     * // Get one Shop2
+     * const shop2 = await prisma.shop2.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends PostFindUniqueArgs>(args: SelectSubset<T, PostFindUniqueArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends Shop2FindUniqueArgs>(args: SelectSubset<T, Shop2FindUniqueArgs<ExtArgs>>): Prisma__Shop2Client<$Result.GetResult<Prisma.$Shop2Payload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Post that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Shop2 that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {PostFindUniqueOrThrowArgs} args - Arguments to find a Post
+     * @param {Shop2FindUniqueOrThrowArgs} args - Arguments to find a Shop2
      * @example
-     * // Get one Post
-     * const post = await prisma.post.findUniqueOrThrow({
+     * // Get one Shop2
+     * const shop2 = await prisma.shop2.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends PostFindUniqueOrThrowArgs>(args: SelectSubset<T, PostFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends Shop2FindUniqueOrThrowArgs>(args: SelectSubset<T, Shop2FindUniqueOrThrowArgs<ExtArgs>>): Prisma__Shop2Client<$Result.GetResult<Prisma.$Shop2Payload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Post that matches the filter.
+     * Find the first Shop2 that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostFindFirstArgs} args - Arguments to find a Post
+     * @param {Shop2FindFirstArgs} args - Arguments to find a Shop2
      * @example
-     * // Get one Post
-     * const post = await prisma.post.findFirst({
+     * // Get one Shop2
+     * const shop2 = await prisma.shop2.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends PostFindFirstArgs>(args?: SelectSubset<T, PostFindFirstArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends Shop2FindFirstArgs>(args?: SelectSubset<T, Shop2FindFirstArgs<ExtArgs>>): Prisma__Shop2Client<$Result.GetResult<Prisma.$Shop2Payload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Post that matches the filter or
+     * Find the first Shop2 that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostFindFirstOrThrowArgs} args - Arguments to find a Post
+     * @param {Shop2FindFirstOrThrowArgs} args - Arguments to find a Shop2
      * @example
-     * // Get one Post
-     * const post = await prisma.post.findFirstOrThrow({
+     * // Get one Shop2
+     * const shop2 = await prisma.shop2.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends PostFindFirstOrThrowArgs>(args?: SelectSubset<T, PostFindFirstOrThrowArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends Shop2FindFirstOrThrowArgs>(args?: SelectSubset<T, Shop2FindFirstOrThrowArgs<ExtArgs>>): Prisma__Shop2Client<$Result.GetResult<Prisma.$Shop2Payload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Posts that matches the filter.
+     * Find zero or more Shop2s that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {Shop2FindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Posts
-     * const posts = await prisma.post.findMany()
+     * // Get all Shop2s
+     * const shop2s = await prisma.shop2.findMany()
      * 
-     * // Get first 10 Posts
-     * const posts = await prisma.post.findMany({ take: 10 })
+     * // Get first 10 Shop2s
+     * const shop2s = await prisma.shop2.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const postWithIdOnly = await prisma.post.findMany({ select: { id: true } })
+     * const shop2WithIdOnly = await prisma.shop2.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends PostFindManyArgs>(args?: SelectSubset<T, PostFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends Shop2FindManyArgs>(args?: SelectSubset<T, Shop2FindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Shop2Payload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Post.
-     * @param {PostCreateArgs} args - Arguments to create a Post.
+     * Create a Shop2.
+     * @param {Shop2CreateArgs} args - Arguments to create a Shop2.
      * @example
-     * // Create one Post
-     * const Post = await prisma.post.create({
+     * // Create one Shop2
+     * const Shop2 = await prisma.shop2.create({
      *   data: {
-     *     // ... data to create a Post
+     *     // ... data to create a Shop2
      *   }
      * })
      * 
      */
-    create<T extends PostCreateArgs>(args: SelectSubset<T, PostCreateArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends Shop2CreateArgs>(args: SelectSubset<T, Shop2CreateArgs<ExtArgs>>): Prisma__Shop2Client<$Result.GetResult<Prisma.$Shop2Payload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Posts.
-     * @param {PostCreateManyArgs} args - Arguments to create many Posts.
+     * Create many Shop2s.
+     * @param {Shop2CreateManyArgs} args - Arguments to create many Shop2s.
      * @example
-     * // Create many Posts
-     * const post = await prisma.post.createMany({
+     * // Create many Shop2s
+     * const shop2 = await prisma.shop2.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends PostCreateManyArgs>(args?: SelectSubset<T, PostCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends Shop2CreateManyArgs>(args?: SelectSubset<T, Shop2CreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Posts and returns the data saved in the database.
-     * @param {PostCreateManyAndReturnArgs} args - Arguments to create many Posts.
+     * Create many Shop2s and returns the data saved in the database.
+     * @param {Shop2CreateManyAndReturnArgs} args - Arguments to create many Shop2s.
      * @example
-     * // Create many Posts
-     * const post = await prisma.post.createManyAndReturn({
+     * // Create many Shop2s
+     * const shop2 = await prisma.shop2.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Posts and only return the `id`
-     * const postWithIdOnly = await prisma.post.createManyAndReturn({
+     * // Create many Shop2s and only return the `id`
+     * const shop2WithIdOnly = await prisma.shop2.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -2458,28 +2660,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends PostCreateManyAndReturnArgs>(args?: SelectSubset<T, PostCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends Shop2CreateManyAndReturnArgs>(args?: SelectSubset<T, Shop2CreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Shop2Payload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a Post.
-     * @param {PostDeleteArgs} args - Arguments to delete one Post.
+     * Delete a Shop2.
+     * @param {Shop2DeleteArgs} args - Arguments to delete one Shop2.
      * @example
-     * // Delete one Post
-     * const Post = await prisma.post.delete({
+     * // Delete one Shop2
+     * const Shop2 = await prisma.shop2.delete({
      *   where: {
-     *     // ... filter to delete one Post
+     *     // ... filter to delete one Shop2
      *   }
      * })
      * 
      */
-    delete<T extends PostDeleteArgs>(args: SelectSubset<T, PostDeleteArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends Shop2DeleteArgs>(args: SelectSubset<T, Shop2DeleteArgs<ExtArgs>>): Prisma__Shop2Client<$Result.GetResult<Prisma.$Shop2Payload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Post.
-     * @param {PostUpdateArgs} args - Arguments to update one Post.
+     * Update one Shop2.
+     * @param {Shop2UpdateArgs} args - Arguments to update one Shop2.
      * @example
-     * // Update one Post
-     * const post = await prisma.post.update({
+     * // Update one Shop2
+     * const shop2 = await prisma.shop2.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2489,30 +2691,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends PostUpdateArgs>(args: SelectSubset<T, PostUpdateArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends Shop2UpdateArgs>(args: SelectSubset<T, Shop2UpdateArgs<ExtArgs>>): Prisma__Shop2Client<$Result.GetResult<Prisma.$Shop2Payload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Posts.
-     * @param {PostDeleteManyArgs} args - Arguments to filter Posts to delete.
+     * Delete zero or more Shop2s.
+     * @param {Shop2DeleteManyArgs} args - Arguments to filter Shop2s to delete.
      * @example
-     * // Delete a few Posts
-     * const { count } = await prisma.post.deleteMany({
+     * // Delete a few Shop2s
+     * const { count } = await prisma.shop2.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends PostDeleteManyArgs>(args?: SelectSubset<T, PostDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends Shop2DeleteManyArgs>(args?: SelectSubset<T, Shop2DeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Posts.
+     * Update zero or more Shop2s.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {Shop2UpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Posts
-     * const post = await prisma.post.updateMany({
+     * // Update many Shop2s
+     * const shop2 = await prisma.shop2.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2522,14 +2724,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends PostUpdateManyArgs>(args: SelectSubset<T, PostUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends Shop2UpdateManyArgs>(args: SelectSubset<T, Shop2UpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Posts and returns the data updated in the database.
-     * @param {PostUpdateManyAndReturnArgs} args - Arguments to update many Posts.
+     * Update zero or more Shop2s and returns the data updated in the database.
+     * @param {Shop2UpdateManyAndReturnArgs} args - Arguments to update many Shop2s.
      * @example
-     * // Update many Posts
-     * const post = await prisma.post.updateManyAndReturn({
+     * // Update many Shop2s
+     * const shop2 = await prisma.shop2.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2538,8 +2740,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Posts and only return the `id`
-     * const postWithIdOnly = await prisma.post.updateManyAndReturn({
+     * // Update zero or more Shop2s and only return the `id`
+     * const shop2WithIdOnly = await prisma.shop2.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -2552,56 +2754,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends PostUpdateManyAndReturnArgs>(args: SelectSubset<T, PostUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends Shop2UpdateManyAndReturnArgs>(args: SelectSubset<T, Shop2UpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Shop2Payload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one Post.
-     * @param {PostUpsertArgs} args - Arguments to update or create a Post.
+     * Create or update one Shop2.
+     * @param {Shop2UpsertArgs} args - Arguments to update or create a Shop2.
      * @example
-     * // Update or create a Post
-     * const post = await prisma.post.upsert({
+     * // Update or create a Shop2
+     * const shop2 = await prisma.shop2.upsert({
      *   create: {
-     *     // ... data to create a Post
+     *     // ... data to create a Shop2
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Post we want to update
+     *     // ... the filter for the Shop2 we want to update
      *   }
      * })
      */
-    upsert<T extends PostUpsertArgs>(args: SelectSubset<T, PostUpsertArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends Shop2UpsertArgs>(args: SelectSubset<T, Shop2UpsertArgs<ExtArgs>>): Prisma__Shop2Client<$Result.GetResult<Prisma.$Shop2Payload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Posts.
+     * Count the number of Shop2s.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostCountArgs} args - Arguments to filter Posts to count.
+     * @param {Shop2CountArgs} args - Arguments to filter Shop2s to count.
      * @example
-     * // Count the number of Posts
-     * const count = await prisma.post.count({
+     * // Count the number of Shop2s
+     * const count = await prisma.shop2.count({
      *   where: {
-     *     // ... the filter for the Posts we want to count
+     *     // ... the filter for the Shop2s we want to count
      *   }
      * })
     **/
-    count<T extends PostCountArgs>(
-      args?: Subset<T, PostCountArgs>,
+    count<T extends Shop2CountArgs>(
+      args?: Subset<T, Shop2CountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], PostCountAggregateOutputType>
+          : GetScalarType<T['select'], Shop2CountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Post.
+     * Allows you to perform aggregations operations on a Shop2.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {Shop2AggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -2621,13 +2823,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends PostAggregateArgs>(args: Subset<T, PostAggregateArgs>): Prisma.PrismaPromise<GetPostAggregateType<T>>
+    aggregate<T extends Shop2AggregateArgs>(args: Subset<T, Shop2AggregateArgs>): Prisma.PrismaPromise<GetShop2AggregateType<T>>
 
     /**
-     * Group by Post.
+     * Group by Shop2.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostGroupByArgs} args - Group by arguments.
+     * @param {Shop2GroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -2642,14 +2844,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends PostGroupByArgs,
+      T extends Shop2GroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: PostGroupByArgs['orderBy'] }
-        : { orderBy?: PostGroupByArgs['orderBy'] },
+        ? { orderBy: Shop2GroupByArgs['orderBy'] }
+        : { orderBy?: Shop2GroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -2698,22 +2900,21 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, PostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPostGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, Shop2GroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetShop2GroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Post model
+   * Fields of the Shop2 model
    */
-  readonly fields: PostFieldRefs;
+  readonly fields: Shop2FieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Post.
+   * The delegate class that acts as a "Promise-like" for Shop2.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__PostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__Shop2Client<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2740,423 +2941,388 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Post model
+   * Fields of the Shop2 model
    */
-  interface PostFieldRefs {
-    readonly id: FieldRef<"Post", 'Int'>
-    readonly title: FieldRef<"Post", 'String'>
-    readonly content: FieldRef<"Post", 'String'>
-    readonly published: FieldRef<"Post", 'Boolean'>
-    readonly authorId: FieldRef<"Post", 'Int'>
+  interface Shop2FieldRefs {
+    readonly id: FieldRef<"Shop2", 'Int'>
+    readonly numberVagonOrTank: FieldRef<"Shop2", 'String'>
+    readonly weight: FieldRef<"Shop2", 'Float'>
+    readonly perMetVklCert: FieldRef<"Shop2", 'Float'>
+    readonly perTioCert: FieldRef<"Shop2", 'Float'>
+    readonly perH2oCert: FieldRef<"Shop2", 'Float'>
+    readonly H2OWeight: FieldRef<"Shop2", 'Float'>
+    readonly DryWeight: FieldRef<"Shop2", 'Float'>
+    readonly MetalTon: FieldRef<"Shop2", 'Float'>
+    readonly MinusMetal: FieldRef<"Shop2", 'Float'>
+    readonly standart80Tio2: FieldRef<"Shop2", 'Float'>
+    readonly InvoiceDate: FieldRef<"Shop2", 'DateTime'>
+    readonly InvoiceNumber: FieldRef<"Shop2", 'String'>
+    readonly GtdDate: FieldRef<"Shop2", 'DateTime'>
+    readonly GtdNumber: FieldRef<"Shop2", 'String'>
+    readonly MiroDocument: FieldRef<"Shop2", 'String'>
+    readonly createdAt: FieldRef<"Shop2", 'DateTime'>
+    readonly updatedAt: FieldRef<"Shop2", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * Post findUnique
+   * Shop2 findUnique
    */
-  export type PostFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop2FindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Post
+     * Select specific fields to fetch from the Shop2
      */
-    select?: PostSelect<ExtArgs> | null
+    select?: Shop2Select<ExtArgs> | null
     /**
-     * Omit specific fields from the Post
+     * Omit specific fields from the Shop2
      */
-    omit?: PostOmit<ExtArgs> | null
+    omit?: Shop2Omit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which Shop2 to fetch.
      */
-    include?: PostInclude<ExtArgs> | null
-    /**
-     * Filter, which Post to fetch.
-     */
-    where: PostWhereUniqueInput
+    where: Shop2WhereUniqueInput
   }
 
   /**
-   * Post findUniqueOrThrow
+   * Shop2 findUniqueOrThrow
    */
-  export type PostFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop2FindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Post
+     * Select specific fields to fetch from the Shop2
      */
-    select?: PostSelect<ExtArgs> | null
+    select?: Shop2Select<ExtArgs> | null
     /**
-     * Omit specific fields from the Post
+     * Omit specific fields from the Shop2
      */
-    omit?: PostOmit<ExtArgs> | null
+    omit?: Shop2Omit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which Shop2 to fetch.
      */
-    include?: PostInclude<ExtArgs> | null
-    /**
-     * Filter, which Post to fetch.
-     */
-    where: PostWhereUniqueInput
+    where: Shop2WhereUniqueInput
   }
 
   /**
-   * Post findFirst
+   * Shop2 findFirst
    */
-  export type PostFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop2FindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Post
+     * Select specific fields to fetch from the Shop2
      */
-    select?: PostSelect<ExtArgs> | null
+    select?: Shop2Select<ExtArgs> | null
     /**
-     * Omit specific fields from the Post
+     * Omit specific fields from the Shop2
      */
-    omit?: PostOmit<ExtArgs> | null
+    omit?: Shop2Omit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which Shop2 to fetch.
      */
-    include?: PostInclude<ExtArgs> | null
-    /**
-     * Filter, which Post to fetch.
-     */
-    where?: PostWhereInput
+    where?: Shop2WhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Posts to fetch.
+     * Determine the order of Shop2s to fetch.
      */
-    orderBy?: PostOrderByWithRelationInput | PostOrderByWithRelationInput[]
+    orderBy?: Shop2OrderByWithRelationInput | Shop2OrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Posts.
+     * Sets the position for searching for Shop2s.
      */
-    cursor?: PostWhereUniqueInput
+    cursor?: Shop2WhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Posts from the position of the cursor.
+     * Take `±n` Shop2s from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Posts.
+     * Skip the first `n` Shop2s.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Posts.
+     * Filter by unique combinations of Shop2s.
      */
-    distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
+    distinct?: Shop2ScalarFieldEnum | Shop2ScalarFieldEnum[]
   }
 
   /**
-   * Post findFirstOrThrow
+   * Shop2 findFirstOrThrow
    */
-  export type PostFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop2FindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Post
+     * Select specific fields to fetch from the Shop2
      */
-    select?: PostSelect<ExtArgs> | null
+    select?: Shop2Select<ExtArgs> | null
     /**
-     * Omit specific fields from the Post
+     * Omit specific fields from the Shop2
      */
-    omit?: PostOmit<ExtArgs> | null
+    omit?: Shop2Omit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which Shop2 to fetch.
      */
-    include?: PostInclude<ExtArgs> | null
-    /**
-     * Filter, which Post to fetch.
-     */
-    where?: PostWhereInput
+    where?: Shop2WhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Posts to fetch.
+     * Determine the order of Shop2s to fetch.
      */
-    orderBy?: PostOrderByWithRelationInput | PostOrderByWithRelationInput[]
+    orderBy?: Shop2OrderByWithRelationInput | Shop2OrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Posts.
+     * Sets the position for searching for Shop2s.
      */
-    cursor?: PostWhereUniqueInput
+    cursor?: Shop2WhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Posts from the position of the cursor.
+     * Take `±n` Shop2s from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Posts.
+     * Skip the first `n` Shop2s.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Posts.
+     * Filter by unique combinations of Shop2s.
      */
-    distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
+    distinct?: Shop2ScalarFieldEnum | Shop2ScalarFieldEnum[]
   }
 
   /**
-   * Post findMany
+   * Shop2 findMany
    */
-  export type PostFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop2FindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Post
+     * Select specific fields to fetch from the Shop2
      */
-    select?: PostSelect<ExtArgs> | null
+    select?: Shop2Select<ExtArgs> | null
     /**
-     * Omit specific fields from the Post
+     * Omit specific fields from the Shop2
      */
-    omit?: PostOmit<ExtArgs> | null
+    omit?: Shop2Omit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which Shop2s to fetch.
      */
-    include?: PostInclude<ExtArgs> | null
-    /**
-     * Filter, which Posts to fetch.
-     */
-    where?: PostWhereInput
+    where?: Shop2WhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Posts to fetch.
+     * Determine the order of Shop2s to fetch.
      */
-    orderBy?: PostOrderByWithRelationInput | PostOrderByWithRelationInput[]
+    orderBy?: Shop2OrderByWithRelationInput | Shop2OrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Posts.
+     * Sets the position for listing Shop2s.
      */
-    cursor?: PostWhereUniqueInput
+    cursor?: Shop2WhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Posts from the position of the cursor.
+     * Take `±n` Shop2s from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Posts.
+     * Skip the first `n` Shop2s.
      */
     skip?: number
-    distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
+    distinct?: Shop2ScalarFieldEnum | Shop2ScalarFieldEnum[]
   }
 
   /**
-   * Post create
+   * Shop2 create
    */
-  export type PostCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop2CreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Post
+     * Select specific fields to fetch from the Shop2
      */
-    select?: PostSelect<ExtArgs> | null
+    select?: Shop2Select<ExtArgs> | null
     /**
-     * Omit specific fields from the Post
+     * Omit specific fields from the Shop2
      */
-    omit?: PostOmit<ExtArgs> | null
+    omit?: Shop2Omit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * The data needed to create a Shop2.
      */
-    include?: PostInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Post.
-     */
-    data: XOR<PostCreateInput, PostUncheckedCreateInput>
+    data: XOR<Shop2CreateInput, Shop2UncheckedCreateInput>
   }
 
   /**
-   * Post createMany
+   * Shop2 createMany
    */
-  export type PostCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop2CreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Posts.
+     * The data used to create many Shop2s.
      */
-    data: PostCreateManyInput | PostCreateManyInput[]
+    data: Shop2CreateManyInput | Shop2CreateManyInput[]
   }
 
   /**
-   * Post createManyAndReturn
+   * Shop2 createManyAndReturn
    */
-  export type PostCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop2CreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Post
+     * Select specific fields to fetch from the Shop2
      */
-    select?: PostSelectCreateManyAndReturn<ExtArgs> | null
+    select?: Shop2SelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Post
+     * Omit specific fields from the Shop2
      */
-    omit?: PostOmit<ExtArgs> | null
+    omit?: Shop2Omit<ExtArgs> | null
     /**
-     * The data used to create many Posts.
+     * The data used to create many Shop2s.
      */
-    data: PostCreateManyInput | PostCreateManyInput[]
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PostIncludeCreateManyAndReturn<ExtArgs> | null
+    data: Shop2CreateManyInput | Shop2CreateManyInput[]
   }
 
   /**
-   * Post update
+   * Shop2 update
    */
-  export type PostUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop2UpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Post
+     * Select specific fields to fetch from the Shop2
      */
-    select?: PostSelect<ExtArgs> | null
+    select?: Shop2Select<ExtArgs> | null
     /**
-     * Omit specific fields from the Post
+     * Omit specific fields from the Shop2
      */
-    omit?: PostOmit<ExtArgs> | null
+    omit?: Shop2Omit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * The data needed to update a Shop2.
      */
-    include?: PostInclude<ExtArgs> | null
+    data: XOR<Shop2UpdateInput, Shop2UncheckedUpdateInput>
     /**
-     * The data needed to update a Post.
+     * Choose, which Shop2 to update.
      */
-    data: XOR<PostUpdateInput, PostUncheckedUpdateInput>
-    /**
-     * Choose, which Post to update.
-     */
-    where: PostWhereUniqueInput
+    where: Shop2WhereUniqueInput
   }
 
   /**
-   * Post updateMany
+   * Shop2 updateMany
    */
-  export type PostUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop2UpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Posts.
+     * The data used to update Shop2s.
      */
-    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyInput>
+    data: XOR<Shop2UpdateManyMutationInput, Shop2UncheckedUpdateManyInput>
     /**
-     * Filter which Posts to update
+     * Filter which Shop2s to update
      */
-    where?: PostWhereInput
+    where?: Shop2WhereInput
     /**
-     * Limit how many Posts to update.
+     * Limit how many Shop2s to update.
      */
     limit?: number
   }
 
   /**
-   * Post updateManyAndReturn
+   * Shop2 updateManyAndReturn
    */
-  export type PostUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop2UpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Post
+     * Select specific fields to fetch from the Shop2
      */
-    select?: PostSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: Shop2SelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Post
+     * Omit specific fields from the Shop2
      */
-    omit?: PostOmit<ExtArgs> | null
+    omit?: Shop2Omit<ExtArgs> | null
     /**
-     * The data used to update Posts.
+     * The data used to update Shop2s.
      */
-    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyInput>
+    data: XOR<Shop2UpdateManyMutationInput, Shop2UncheckedUpdateManyInput>
     /**
-     * Filter which Posts to update
+     * Filter which Shop2s to update
      */
-    where?: PostWhereInput
+    where?: Shop2WhereInput
     /**
-     * Limit how many Posts to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PostIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Post upsert
-   */
-  export type PostUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Post
-     */
-    omit?: PostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PostInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Post to update in case it exists.
-     */
-    where: PostWhereUniqueInput
-    /**
-     * In case the Post found by the `where` argument doesn't exist, create a new Post with this data.
-     */
-    create: XOR<PostCreateInput, PostUncheckedCreateInput>
-    /**
-     * In case the Post was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<PostUpdateInput, PostUncheckedUpdateInput>
-  }
-
-  /**
-   * Post delete
-   */
-  export type PostDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Post
-     */
-    omit?: PostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PostInclude<ExtArgs> | null
-    /**
-     * Filter which Post to delete.
-     */
-    where: PostWhereUniqueInput
-  }
-
-  /**
-   * Post deleteMany
-   */
-  export type PostDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Posts to delete
-     */
-    where?: PostWhereInput
-    /**
-     * Limit how many Posts to delete.
+     * Limit how many Shop2s to update.
      */
     limit?: number
   }
 
   /**
-   * Post without action
+   * Shop2 upsert
    */
-  export type PostDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Shop2UpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Post
+     * Select specific fields to fetch from the Shop2
      */
-    select?: PostSelect<ExtArgs> | null
+    select?: Shop2Select<ExtArgs> | null
     /**
-     * Omit specific fields from the Post
+     * Omit specific fields from the Shop2
      */
-    omit?: PostOmit<ExtArgs> | null
+    omit?: Shop2Omit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * The filter to search for the Shop2 to update in case it exists.
      */
-    include?: PostInclude<ExtArgs> | null
+    where: Shop2WhereUniqueInput
+    /**
+     * In case the Shop2 found by the `where` argument doesn't exist, create a new Shop2 with this data.
+     */
+    create: XOR<Shop2CreateInput, Shop2UncheckedCreateInput>
+    /**
+     * In case the Shop2 was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<Shop2UpdateInput, Shop2UncheckedUpdateInput>
+  }
+
+  /**
+   * Shop2 delete
+   */
+  export type Shop2DeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Shop2
+     */
+    select?: Shop2Select<ExtArgs> | null
+    /**
+     * Omit specific fields from the Shop2
+     */
+    omit?: Shop2Omit<ExtArgs> | null
+    /**
+     * Filter which Shop2 to delete.
+     */
+    where: Shop2WhereUniqueInput
+  }
+
+  /**
+   * Shop2 deleteMany
+   */
+  export type Shop2DeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Shop2s to delete
+     */
+    where?: Shop2WhereInput
+    /**
+     * Limit how many Shop2s to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Shop2 without action
+   */
+  export type Shop2DefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Shop2
+     */
+    select?: Shop2Select<ExtArgs> | null
+    /**
+     * Omit specific fields from the Shop2
+     */
+    omit?: Shop2Omit<ExtArgs> | null
   }
 
 
@@ -3171,24 +3337,46 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-  export const UserScalarFieldEnum: {
+  export const Shop12ScalarFieldEnum: {
     id: 'id',
-    email: 'email',
-    name: 'name'
+    vagonNumber: 'vagonNumber',
+    weight: 'weight',
+    tio2Analysis: 'tio2Analysis',
+    h2oAnalysis: 'h2oAnalysis',
+    recalculatedWeight: 'recalculatedWeight',
+    InvoiceDate: 'InvoiceDate',
+    InvoiceNumber: 'InvoiceNumber',
+    GtdDate: 'GtdDate',
+    GtdNumber: 'GtdNumber',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
-  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+  export type Shop12ScalarFieldEnum = (typeof Shop12ScalarFieldEnum)[keyof typeof Shop12ScalarFieldEnum]
 
 
-  export const PostScalarFieldEnum: {
+  export const Shop2ScalarFieldEnum: {
     id: 'id',
-    title: 'title',
-    content: 'content',
-    published: 'published',
-    authorId: 'authorId'
+    numberVagonOrTank: 'numberVagonOrTank',
+    weight: 'weight',
+    perMetVklCert: 'perMetVklCert',
+    perTioCert: 'perTioCert',
+    perH2oCert: 'perH2oCert',
+    H2OWeight: 'H2OWeight',
+    DryWeight: 'DryWeight',
+    MetalTon: 'MetalTon',
+    MinusMetal: 'MinusMetal',
+    standart80Tio2: 'standart80Tio2',
+    InvoiceDate: 'InvoiceDate',
+    InvoiceNumber: 'InvoiceNumber',
+    GtdDate: 'GtdDate',
+    GtdNumber: 'GtdNumber',
+    MiroDocument: 'MiroDocument',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
-  export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
+  export type Shop2ScalarFieldEnum = (typeof Shop2ScalarFieldEnum)[keyof typeof Shop2ScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -3197,14 +3385,6 @@ export namespace Prisma {
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
-
-
-  export const NullsOrder: {
-    first: 'first',
-    last: 'last'
-  };
-
-  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -3227,219 +3407,474 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Boolean'
+   * Reference to a field of type 'Float'
    */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
   /**
-   * Reference to a field of type 'Float'
+   * Reference to a field of type 'DateTime'
    */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
     
   /**
    * Deep Input Types
    */
 
 
-  export type UserWhereInput = {
-    AND?: UserWhereInput | UserWhereInput[]
-    OR?: UserWhereInput[]
-    NOT?: UserWhereInput | UserWhereInput[]
-    id?: IntFilter<"User"> | number
-    email?: StringFilter<"User"> | string
-    name?: StringNullableFilter<"User"> | string | null
-    posts?: PostListRelationFilter
+  export type Shop12WhereInput = {
+    AND?: Shop12WhereInput | Shop12WhereInput[]
+    OR?: Shop12WhereInput[]
+    NOT?: Shop12WhereInput | Shop12WhereInput[]
+    id?: IntFilter<"Shop12"> | number
+    vagonNumber?: StringFilter<"Shop12"> | string
+    weight?: FloatFilter<"Shop12"> | number
+    tio2Analysis?: FloatFilter<"Shop12"> | number
+    h2oAnalysis?: FloatFilter<"Shop12"> | number
+    recalculatedWeight?: FloatFilter<"Shop12"> | number
+    InvoiceDate?: DateTimeFilter<"Shop12"> | Date | string
+    InvoiceNumber?: StringFilter<"Shop12"> | string
+    GtdDate?: DateTimeFilter<"Shop12"> | Date | string
+    GtdNumber?: StringFilter<"Shop12"> | string
+    createdAt?: DateTimeFilter<"Shop12"> | Date | string
+    updatedAt?: DateTimeFilter<"Shop12"> | Date | string
   }
 
-  export type UserOrderByWithRelationInput = {
+  export type Shop12OrderByWithRelationInput = {
     id?: SortOrder
-    email?: SortOrder
-    name?: SortOrderInput | SortOrder
-    posts?: PostOrderByRelationAggregateInput
+    vagonNumber?: SortOrder
+    weight?: SortOrder
+    tio2Analysis?: SortOrder
+    h2oAnalysis?: SortOrder
+    recalculatedWeight?: SortOrder
+    InvoiceDate?: SortOrder
+    InvoiceNumber?: SortOrder
+    GtdDate?: SortOrder
+    GtdNumber?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type UserWhereUniqueInput = Prisma.AtLeast<{
+  export type Shop12WhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    email?: string
-    AND?: UserWhereInput | UserWhereInput[]
-    OR?: UserWhereInput[]
-    NOT?: UserWhereInput | UserWhereInput[]
-    name?: StringNullableFilter<"User"> | string | null
-    posts?: PostListRelationFilter
-  }, "id" | "email">
-
-  export type UserOrderByWithAggregationInput = {
-    id?: SortOrder
-    email?: SortOrder
-    name?: SortOrderInput | SortOrder
-    _count?: UserCountOrderByAggregateInput
-    _avg?: UserAvgOrderByAggregateInput
-    _max?: UserMaxOrderByAggregateInput
-    _min?: UserMinOrderByAggregateInput
-    _sum?: UserSumOrderByAggregateInput
-  }
-
-  export type UserScalarWhereWithAggregatesInput = {
-    AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
-    OR?: UserScalarWhereWithAggregatesInput[]
-    NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"User"> | number
-    email?: StringWithAggregatesFilter<"User"> | string
-    name?: StringNullableWithAggregatesFilter<"User"> | string | null
-  }
-
-  export type PostWhereInput = {
-    AND?: PostWhereInput | PostWhereInput[]
-    OR?: PostWhereInput[]
-    NOT?: PostWhereInput | PostWhereInput[]
-    id?: IntFilter<"Post"> | number
-    title?: StringFilter<"Post"> | string
-    content?: StringNullableFilter<"Post"> | string | null
-    published?: BoolFilter<"Post"> | boolean
-    authorId?: IntFilter<"Post"> | number
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }
-
-  export type PostOrderByWithRelationInput = {
-    id?: SortOrder
-    title?: SortOrder
-    content?: SortOrderInput | SortOrder
-    published?: SortOrder
-    authorId?: SortOrder
-    author?: UserOrderByWithRelationInput
-  }
-
-  export type PostWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: PostWhereInput | PostWhereInput[]
-    OR?: PostWhereInput[]
-    NOT?: PostWhereInput | PostWhereInput[]
-    title?: StringFilter<"Post"> | string
-    content?: StringNullableFilter<"Post"> | string | null
-    published?: BoolFilter<"Post"> | boolean
-    authorId?: IntFilter<"Post"> | number
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    AND?: Shop12WhereInput | Shop12WhereInput[]
+    OR?: Shop12WhereInput[]
+    NOT?: Shop12WhereInput | Shop12WhereInput[]
+    vagonNumber?: StringFilter<"Shop12"> | string
+    weight?: FloatFilter<"Shop12"> | number
+    tio2Analysis?: FloatFilter<"Shop12"> | number
+    h2oAnalysis?: FloatFilter<"Shop12"> | number
+    recalculatedWeight?: FloatFilter<"Shop12"> | number
+    InvoiceDate?: DateTimeFilter<"Shop12"> | Date | string
+    InvoiceNumber?: StringFilter<"Shop12"> | string
+    GtdDate?: DateTimeFilter<"Shop12"> | Date | string
+    GtdNumber?: StringFilter<"Shop12"> | string
+    createdAt?: DateTimeFilter<"Shop12"> | Date | string
+    updatedAt?: DateTimeFilter<"Shop12"> | Date | string
   }, "id">
 
-  export type PostOrderByWithAggregationInput = {
+  export type Shop12OrderByWithAggregationInput = {
     id?: SortOrder
-    title?: SortOrder
-    content?: SortOrderInput | SortOrder
-    published?: SortOrder
-    authorId?: SortOrder
-    _count?: PostCountOrderByAggregateInput
-    _avg?: PostAvgOrderByAggregateInput
-    _max?: PostMaxOrderByAggregateInput
-    _min?: PostMinOrderByAggregateInput
-    _sum?: PostSumOrderByAggregateInput
+    vagonNumber?: SortOrder
+    weight?: SortOrder
+    tio2Analysis?: SortOrder
+    h2oAnalysis?: SortOrder
+    recalculatedWeight?: SortOrder
+    InvoiceDate?: SortOrder
+    InvoiceNumber?: SortOrder
+    GtdDate?: SortOrder
+    GtdNumber?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: Shop12CountOrderByAggregateInput
+    _avg?: Shop12AvgOrderByAggregateInput
+    _max?: Shop12MaxOrderByAggregateInput
+    _min?: Shop12MinOrderByAggregateInput
+    _sum?: Shop12SumOrderByAggregateInput
   }
 
-  export type PostScalarWhereWithAggregatesInput = {
-    AND?: PostScalarWhereWithAggregatesInput | PostScalarWhereWithAggregatesInput[]
-    OR?: PostScalarWhereWithAggregatesInput[]
-    NOT?: PostScalarWhereWithAggregatesInput | PostScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Post"> | number
-    title?: StringWithAggregatesFilter<"Post"> | string
-    content?: StringNullableWithAggregatesFilter<"Post"> | string | null
-    published?: BoolWithAggregatesFilter<"Post"> | boolean
-    authorId?: IntWithAggregatesFilter<"Post"> | number
+  export type Shop12ScalarWhereWithAggregatesInput = {
+    AND?: Shop12ScalarWhereWithAggregatesInput | Shop12ScalarWhereWithAggregatesInput[]
+    OR?: Shop12ScalarWhereWithAggregatesInput[]
+    NOT?: Shop12ScalarWhereWithAggregatesInput | Shop12ScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Shop12"> | number
+    vagonNumber?: StringWithAggregatesFilter<"Shop12"> | string
+    weight?: FloatWithAggregatesFilter<"Shop12"> | number
+    tio2Analysis?: FloatWithAggregatesFilter<"Shop12"> | number
+    h2oAnalysis?: FloatWithAggregatesFilter<"Shop12"> | number
+    recalculatedWeight?: FloatWithAggregatesFilter<"Shop12"> | number
+    InvoiceDate?: DateTimeWithAggregatesFilter<"Shop12"> | Date | string
+    InvoiceNumber?: StringWithAggregatesFilter<"Shop12"> | string
+    GtdDate?: DateTimeWithAggregatesFilter<"Shop12"> | Date | string
+    GtdNumber?: StringWithAggregatesFilter<"Shop12"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Shop12"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Shop12"> | Date | string
   }
 
-  export type UserCreateInput = {
-    email: string
-    name?: string | null
-    posts?: PostCreateNestedManyWithoutAuthorInput
+  export type Shop2WhereInput = {
+    AND?: Shop2WhereInput | Shop2WhereInput[]
+    OR?: Shop2WhereInput[]
+    NOT?: Shop2WhereInput | Shop2WhereInput[]
+    id?: IntFilter<"Shop2"> | number
+    numberVagonOrTank?: StringFilter<"Shop2"> | string
+    weight?: FloatFilter<"Shop2"> | number
+    perMetVklCert?: FloatFilter<"Shop2"> | number
+    perTioCert?: FloatFilter<"Shop2"> | number
+    perH2oCert?: FloatFilter<"Shop2"> | number
+    H2OWeight?: FloatFilter<"Shop2"> | number
+    DryWeight?: FloatFilter<"Shop2"> | number
+    MetalTon?: FloatFilter<"Shop2"> | number
+    MinusMetal?: FloatFilter<"Shop2"> | number
+    standart80Tio2?: FloatFilter<"Shop2"> | number
+    InvoiceDate?: DateTimeFilter<"Shop2"> | Date | string
+    InvoiceNumber?: StringFilter<"Shop2"> | string
+    GtdDate?: DateTimeFilter<"Shop2"> | Date | string
+    GtdNumber?: StringFilter<"Shop2"> | string
+    MiroDocument?: StringFilter<"Shop2"> | string
+    createdAt?: DateTimeFilter<"Shop2"> | Date | string
+    updatedAt?: DateTimeFilter<"Shop2"> | Date | string
   }
 
-  export type UserUncheckedCreateInput = {
+  export type Shop2OrderByWithRelationInput = {
+    id?: SortOrder
+    numberVagonOrTank?: SortOrder
+    weight?: SortOrder
+    perMetVklCert?: SortOrder
+    perTioCert?: SortOrder
+    perH2oCert?: SortOrder
+    H2OWeight?: SortOrder
+    DryWeight?: SortOrder
+    MetalTon?: SortOrder
+    MinusMetal?: SortOrder
+    standart80Tio2?: SortOrder
+    InvoiceDate?: SortOrder
+    InvoiceNumber?: SortOrder
+    GtdDate?: SortOrder
+    GtdNumber?: SortOrder
+    MiroDocument?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type Shop2WhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    email: string
-    name?: string | null
-    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    AND?: Shop2WhereInput | Shop2WhereInput[]
+    OR?: Shop2WhereInput[]
+    NOT?: Shop2WhereInput | Shop2WhereInput[]
+    numberVagonOrTank?: StringFilter<"Shop2"> | string
+    weight?: FloatFilter<"Shop2"> | number
+    perMetVklCert?: FloatFilter<"Shop2"> | number
+    perTioCert?: FloatFilter<"Shop2"> | number
+    perH2oCert?: FloatFilter<"Shop2"> | number
+    H2OWeight?: FloatFilter<"Shop2"> | number
+    DryWeight?: FloatFilter<"Shop2"> | number
+    MetalTon?: FloatFilter<"Shop2"> | number
+    MinusMetal?: FloatFilter<"Shop2"> | number
+    standart80Tio2?: FloatFilter<"Shop2"> | number
+    InvoiceDate?: DateTimeFilter<"Shop2"> | Date | string
+    InvoiceNumber?: StringFilter<"Shop2"> | string
+    GtdDate?: DateTimeFilter<"Shop2"> | Date | string
+    GtdNumber?: StringFilter<"Shop2"> | string
+    MiroDocument?: StringFilter<"Shop2"> | string
+    createdAt?: DateTimeFilter<"Shop2"> | Date | string
+    updatedAt?: DateTimeFilter<"Shop2"> | Date | string
+  }, "id">
+
+  export type Shop2OrderByWithAggregationInput = {
+    id?: SortOrder
+    numberVagonOrTank?: SortOrder
+    weight?: SortOrder
+    perMetVklCert?: SortOrder
+    perTioCert?: SortOrder
+    perH2oCert?: SortOrder
+    H2OWeight?: SortOrder
+    DryWeight?: SortOrder
+    MetalTon?: SortOrder
+    MinusMetal?: SortOrder
+    standart80Tio2?: SortOrder
+    InvoiceDate?: SortOrder
+    InvoiceNumber?: SortOrder
+    GtdDate?: SortOrder
+    GtdNumber?: SortOrder
+    MiroDocument?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: Shop2CountOrderByAggregateInput
+    _avg?: Shop2AvgOrderByAggregateInput
+    _max?: Shop2MaxOrderByAggregateInput
+    _min?: Shop2MinOrderByAggregateInput
+    _sum?: Shop2SumOrderByAggregateInput
   }
 
-  export type UserUpdateInput = {
-    email?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    posts?: PostUpdateManyWithoutAuthorNestedInput
+  export type Shop2ScalarWhereWithAggregatesInput = {
+    AND?: Shop2ScalarWhereWithAggregatesInput | Shop2ScalarWhereWithAggregatesInput[]
+    OR?: Shop2ScalarWhereWithAggregatesInput[]
+    NOT?: Shop2ScalarWhereWithAggregatesInput | Shop2ScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Shop2"> | number
+    numberVagonOrTank?: StringWithAggregatesFilter<"Shop2"> | string
+    weight?: FloatWithAggregatesFilter<"Shop2"> | number
+    perMetVklCert?: FloatWithAggregatesFilter<"Shop2"> | number
+    perTioCert?: FloatWithAggregatesFilter<"Shop2"> | number
+    perH2oCert?: FloatWithAggregatesFilter<"Shop2"> | number
+    H2OWeight?: FloatWithAggregatesFilter<"Shop2"> | number
+    DryWeight?: FloatWithAggregatesFilter<"Shop2"> | number
+    MetalTon?: FloatWithAggregatesFilter<"Shop2"> | number
+    MinusMetal?: FloatWithAggregatesFilter<"Shop2"> | number
+    standart80Tio2?: FloatWithAggregatesFilter<"Shop2"> | number
+    InvoiceDate?: DateTimeWithAggregatesFilter<"Shop2"> | Date | string
+    InvoiceNumber?: StringWithAggregatesFilter<"Shop2"> | string
+    GtdDate?: DateTimeWithAggregatesFilter<"Shop2"> | Date | string
+    GtdNumber?: StringWithAggregatesFilter<"Shop2"> | string
+    MiroDocument?: StringWithAggregatesFilter<"Shop2"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Shop2"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Shop2"> | Date | string
   }
 
-  export type UserUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    email?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+  export type Shop12CreateInput = {
+    vagonNumber: string
+    weight: number
+    tio2Analysis: number
+    h2oAnalysis: number
+    recalculatedWeight: number
+    InvoiceDate: Date | string
+    InvoiceNumber: string
+    GtdDate: Date | string
+    GtdNumber: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type UserCreateManyInput = {
+  export type Shop12UncheckedCreateInput = {
     id?: number
-    email: string
-    name?: string | null
+    vagonNumber: string
+    weight: number
+    tio2Analysis: number
+    h2oAnalysis: number
+    recalculatedWeight: number
+    InvoiceDate: Date | string
+    InvoiceNumber: string
+    GtdDate: Date | string
+    GtdNumber: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type UserUpdateManyMutationInput = {
-    email?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+  export type Shop12UpdateInput = {
+    vagonNumber?: StringFieldUpdateOperationsInput | string
+    weight?: FloatFieldUpdateOperationsInput | number
+    tio2Analysis?: FloatFieldUpdateOperationsInput | number
+    h2oAnalysis?: FloatFieldUpdateOperationsInput | number
+    recalculatedWeight?: FloatFieldUpdateOperationsInput | number
+    InvoiceDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    InvoiceNumber?: StringFieldUpdateOperationsInput | string
+    GtdDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    GtdNumber?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserUncheckedUpdateManyInput = {
+  export type Shop12UncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    email?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    vagonNumber?: StringFieldUpdateOperationsInput | string
+    weight?: FloatFieldUpdateOperationsInput | number
+    tio2Analysis?: FloatFieldUpdateOperationsInput | number
+    h2oAnalysis?: FloatFieldUpdateOperationsInput | number
+    recalculatedWeight?: FloatFieldUpdateOperationsInput | number
+    InvoiceDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    InvoiceNumber?: StringFieldUpdateOperationsInput | string
+    GtdDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    GtdNumber?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PostCreateInput = {
-    title: string
-    content?: string | null
-    published?: boolean
-    author: UserCreateNestedOneWithoutPostsInput
-  }
-
-  export type PostUncheckedCreateInput = {
+  export type Shop12CreateManyInput = {
     id?: number
-    title: string
-    content?: string | null
-    published?: boolean
-    authorId: number
+    vagonNumber: string
+    weight: number
+    tio2Analysis: number
+    h2oAnalysis: number
+    recalculatedWeight: number
+    InvoiceDate: Date | string
+    InvoiceNumber: string
+    GtdDate: Date | string
+    GtdNumber: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type PostUpdateInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    content?: NullableStringFieldUpdateOperationsInput | string | null
-    published?: BoolFieldUpdateOperationsInput | boolean
-    author?: UserUpdateOneRequiredWithoutPostsNestedInput
+  export type Shop12UpdateManyMutationInput = {
+    vagonNumber?: StringFieldUpdateOperationsInput | string
+    weight?: FloatFieldUpdateOperationsInput | number
+    tio2Analysis?: FloatFieldUpdateOperationsInput | number
+    h2oAnalysis?: FloatFieldUpdateOperationsInput | number
+    recalculatedWeight?: FloatFieldUpdateOperationsInput | number
+    InvoiceDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    InvoiceNumber?: StringFieldUpdateOperationsInput | string
+    GtdDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    GtdNumber?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PostUncheckedUpdateInput = {
+  export type Shop12UncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    content?: NullableStringFieldUpdateOperationsInput | string | null
-    published?: BoolFieldUpdateOperationsInput | boolean
-    authorId?: IntFieldUpdateOperationsInput | number
+    vagonNumber?: StringFieldUpdateOperationsInput | string
+    weight?: FloatFieldUpdateOperationsInput | number
+    tio2Analysis?: FloatFieldUpdateOperationsInput | number
+    h2oAnalysis?: FloatFieldUpdateOperationsInput | number
+    recalculatedWeight?: FloatFieldUpdateOperationsInput | number
+    InvoiceDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    InvoiceNumber?: StringFieldUpdateOperationsInput | string
+    GtdDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    GtdNumber?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PostCreateManyInput = {
+  export type Shop2CreateInput = {
+    numberVagonOrTank: string
+    weight: number
+    perMetVklCert: number
+    perTioCert: number
+    perH2oCert: number
+    H2OWeight: number
+    DryWeight: number
+    MetalTon: number
+    MinusMetal: number
+    standart80Tio2: number
+    InvoiceDate: Date | string
+    InvoiceNumber: string
+    GtdDate: Date | string
+    GtdNumber: string
+    MiroDocument: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type Shop2UncheckedCreateInput = {
     id?: number
-    title: string
-    content?: string | null
-    published?: boolean
-    authorId: number
+    numberVagonOrTank: string
+    weight: number
+    perMetVklCert: number
+    perTioCert: number
+    perH2oCert: number
+    H2OWeight: number
+    DryWeight: number
+    MetalTon: number
+    MinusMetal: number
+    standart80Tio2: number
+    InvoiceDate: Date | string
+    InvoiceNumber: string
+    GtdDate: Date | string
+    GtdNumber: string
+    MiroDocument: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type PostUpdateManyMutationInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    content?: NullableStringFieldUpdateOperationsInput | string | null
-    published?: BoolFieldUpdateOperationsInput | boolean
+  export type Shop2UpdateInput = {
+    numberVagonOrTank?: StringFieldUpdateOperationsInput | string
+    weight?: FloatFieldUpdateOperationsInput | number
+    perMetVklCert?: FloatFieldUpdateOperationsInput | number
+    perTioCert?: FloatFieldUpdateOperationsInput | number
+    perH2oCert?: FloatFieldUpdateOperationsInput | number
+    H2OWeight?: FloatFieldUpdateOperationsInput | number
+    DryWeight?: FloatFieldUpdateOperationsInput | number
+    MetalTon?: FloatFieldUpdateOperationsInput | number
+    MinusMetal?: FloatFieldUpdateOperationsInput | number
+    standart80Tio2?: FloatFieldUpdateOperationsInput | number
+    InvoiceDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    InvoiceNumber?: StringFieldUpdateOperationsInput | string
+    GtdDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    GtdNumber?: StringFieldUpdateOperationsInput | string
+    MiroDocument?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PostUncheckedUpdateManyInput = {
+  export type Shop2UncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    content?: NullableStringFieldUpdateOperationsInput | string | null
-    published?: BoolFieldUpdateOperationsInput | boolean
-    authorId?: IntFieldUpdateOperationsInput | number
+    numberVagonOrTank?: StringFieldUpdateOperationsInput | string
+    weight?: FloatFieldUpdateOperationsInput | number
+    perMetVklCert?: FloatFieldUpdateOperationsInput | number
+    perTioCert?: FloatFieldUpdateOperationsInput | number
+    perH2oCert?: FloatFieldUpdateOperationsInput | number
+    H2OWeight?: FloatFieldUpdateOperationsInput | number
+    DryWeight?: FloatFieldUpdateOperationsInput | number
+    MetalTon?: FloatFieldUpdateOperationsInput | number
+    MinusMetal?: FloatFieldUpdateOperationsInput | number
+    standart80Tio2?: FloatFieldUpdateOperationsInput | number
+    InvoiceDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    InvoiceNumber?: StringFieldUpdateOperationsInput | string
+    GtdDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    GtdNumber?: StringFieldUpdateOperationsInput | string
+    MiroDocument?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Shop2CreateManyInput = {
+    id?: number
+    numberVagonOrTank: string
+    weight: number
+    perMetVklCert: number
+    perTioCert: number
+    perH2oCert: number
+    H2OWeight: number
+    DryWeight: number
+    MetalTon: number
+    MinusMetal: number
+    standart80Tio2: number
+    InvoiceDate: Date | string
+    InvoiceNumber: string
+    GtdDate: Date | string
+    GtdNumber: string
+    MiroDocument: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type Shop2UpdateManyMutationInput = {
+    numberVagonOrTank?: StringFieldUpdateOperationsInput | string
+    weight?: FloatFieldUpdateOperationsInput | number
+    perMetVklCert?: FloatFieldUpdateOperationsInput | number
+    perTioCert?: FloatFieldUpdateOperationsInput | number
+    perH2oCert?: FloatFieldUpdateOperationsInput | number
+    H2OWeight?: FloatFieldUpdateOperationsInput | number
+    DryWeight?: FloatFieldUpdateOperationsInput | number
+    MetalTon?: FloatFieldUpdateOperationsInput | number
+    MinusMetal?: FloatFieldUpdateOperationsInput | number
+    standart80Tio2?: FloatFieldUpdateOperationsInput | number
+    InvoiceDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    InvoiceNumber?: StringFieldUpdateOperationsInput | string
+    GtdDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    GtdNumber?: StringFieldUpdateOperationsInput | string
+    MiroDocument?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Shop2UncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    numberVagonOrTank?: StringFieldUpdateOperationsInput | string
+    weight?: FloatFieldUpdateOperationsInput | number
+    perMetVklCert?: FloatFieldUpdateOperationsInput | number
+    perTioCert?: FloatFieldUpdateOperationsInput | number
+    perH2oCert?: FloatFieldUpdateOperationsInput | number
+    H2OWeight?: FloatFieldUpdateOperationsInput | number
+    DryWeight?: FloatFieldUpdateOperationsInput | number
+    MetalTon?: FloatFieldUpdateOperationsInput | number
+    MinusMetal?: FloatFieldUpdateOperationsInput | number
+    standart80Tio2?: FloatFieldUpdateOperationsInput | number
+    InvoiceDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    InvoiceNumber?: StringFieldUpdateOperationsInput | string
+    GtdDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    GtdNumber?: StringFieldUpdateOperationsInput | string
+    MiroDocument?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -3467,59 +3902,87 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type PostListRelationFilter = {
-    every?: PostWhereInput
-    some?: PostWhereInput
-    none?: PostWhereInput
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
-  export type PostOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type UserCountOrderByAggregateInput = {
+  export type Shop12CountOrderByAggregateInput = {
     id?: SortOrder
-    email?: SortOrder
-    name?: SortOrder
+    vagonNumber?: SortOrder
+    weight?: SortOrder
+    tio2Analysis?: SortOrder
+    h2oAnalysis?: SortOrder
+    recalculatedWeight?: SortOrder
+    InvoiceDate?: SortOrder
+    InvoiceNumber?: SortOrder
+    GtdDate?: SortOrder
+    GtdNumber?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type UserAvgOrderByAggregateInput = {
+  export type Shop12AvgOrderByAggregateInput = {
     id?: SortOrder
+    weight?: SortOrder
+    tio2Analysis?: SortOrder
+    h2oAnalysis?: SortOrder
+    recalculatedWeight?: SortOrder
   }
 
-  export type UserMaxOrderByAggregateInput = {
+  export type Shop12MaxOrderByAggregateInput = {
     id?: SortOrder
-    email?: SortOrder
-    name?: SortOrder
+    vagonNumber?: SortOrder
+    weight?: SortOrder
+    tio2Analysis?: SortOrder
+    h2oAnalysis?: SortOrder
+    recalculatedWeight?: SortOrder
+    InvoiceDate?: SortOrder
+    InvoiceNumber?: SortOrder
+    GtdDate?: SortOrder
+    GtdNumber?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type UserMinOrderByAggregateInput = {
+  export type Shop12MinOrderByAggregateInput = {
     id?: SortOrder
-    email?: SortOrder
-    name?: SortOrder
+    vagonNumber?: SortOrder
+    weight?: SortOrder
+    tio2Analysis?: SortOrder
+    h2oAnalysis?: SortOrder
+    recalculatedWeight?: SortOrder
+    InvoiceDate?: SortOrder
+    InvoiceNumber?: SortOrder
+    GtdDate?: SortOrder
+    GtdNumber?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type UserSumOrderByAggregateInput = {
+  export type Shop12SumOrderByAggregateInput = {
     id?: SortOrder
+    weight?: SortOrder
+    tio2Analysis?: SortOrder
+    h2oAnalysis?: SortOrder
+    recalculatedWeight?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -3555,109 +4018,139 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
-  }
-
-  export type PostCountOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    content?: SortOrder
-    published?: SortOrder
-    authorId?: SortOrder
-  }
-
-  export type PostAvgOrderByAggregateInput = {
-    id?: SortOrder
-    authorId?: SortOrder
-  }
-
-  export type PostMaxOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    content?: SortOrder
-    published?: SortOrder
-    authorId?: SortOrder
-  }
-
-  export type PostMinOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    content?: SortOrder
-    published?: SortOrder
-    authorId?: SortOrder
-  }
-
-  export type PostSumOrderByAggregateInput = {
-    id?: SortOrder
-    authorId?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type PostCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
-    createMany?: PostCreateManyAuthorInputEnvelope
-    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type PostUncheckedCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
-    createMany?: PostCreateManyAuthorInputEnvelope
-    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  export type Shop2CountOrderByAggregateInput = {
+    id?: SortOrder
+    numberVagonOrTank?: SortOrder
+    weight?: SortOrder
+    perMetVklCert?: SortOrder
+    perTioCert?: SortOrder
+    perH2oCert?: SortOrder
+    H2OWeight?: SortOrder
+    DryWeight?: SortOrder
+    MetalTon?: SortOrder
+    MinusMetal?: SortOrder
+    standart80Tio2?: SortOrder
+    InvoiceDate?: SortOrder
+    InvoiceNumber?: SortOrder
+    GtdDate?: SortOrder
+    GtdNumber?: SortOrder
+    MiroDocument?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type Shop2AvgOrderByAggregateInput = {
+    id?: SortOrder
+    weight?: SortOrder
+    perMetVklCert?: SortOrder
+    perTioCert?: SortOrder
+    perH2oCert?: SortOrder
+    H2OWeight?: SortOrder
+    DryWeight?: SortOrder
+    MetalTon?: SortOrder
+    MinusMetal?: SortOrder
+    standart80Tio2?: SortOrder
+  }
+
+  export type Shop2MaxOrderByAggregateInput = {
+    id?: SortOrder
+    numberVagonOrTank?: SortOrder
+    weight?: SortOrder
+    perMetVklCert?: SortOrder
+    perTioCert?: SortOrder
+    perH2oCert?: SortOrder
+    H2OWeight?: SortOrder
+    DryWeight?: SortOrder
+    MetalTon?: SortOrder
+    MinusMetal?: SortOrder
+    standart80Tio2?: SortOrder
+    InvoiceDate?: SortOrder
+    InvoiceNumber?: SortOrder
+    GtdDate?: SortOrder
+    GtdNumber?: SortOrder
+    MiroDocument?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type Shop2MinOrderByAggregateInput = {
+    id?: SortOrder
+    numberVagonOrTank?: SortOrder
+    weight?: SortOrder
+    perMetVklCert?: SortOrder
+    perTioCert?: SortOrder
+    perH2oCert?: SortOrder
+    H2OWeight?: SortOrder
+    DryWeight?: SortOrder
+    MetalTon?: SortOrder
+    MinusMetal?: SortOrder
+    standart80Tio2?: SortOrder
+    InvoiceDate?: SortOrder
+    InvoiceNumber?: SortOrder
+    GtdDate?: SortOrder
+    GtdNumber?: SortOrder
+    MiroDocument?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type Shop2SumOrderByAggregateInput = {
+    id?: SortOrder
+    weight?: SortOrder
+    perMetVklCert?: SortOrder
+    perTioCert?: SortOrder
+    perH2oCert?: SortOrder
+    H2OWeight?: SortOrder
+    DryWeight?: SortOrder
+    MetalTon?: SortOrder
+    MinusMetal?: SortOrder
+    standart80Tio2?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
-  export type PostUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
-    upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput | PostUpsertWithWhereUniqueWithoutAuthorInput[]
-    createMany?: PostCreateManyAuthorInputEnvelope
-    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    update?: PostUpdateWithWhereUniqueWithoutAuthorInput | PostUpdateWithWhereUniqueWithoutAuthorInput[]
-    updateMany?: PostUpdateManyWithWhereWithoutAuthorInput | PostUpdateManyWithWhereWithoutAuthorInput[]
-    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -3666,38 +4159,6 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type PostUncheckedUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
-    upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput | PostUpsertWithWhereUniqueWithoutAuthorInput[]
-    createMany?: PostCreateManyAuthorInputEnvelope
-    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    update?: PostUpdateWithWhereUniqueWithoutAuthorInput | PostUpdateWithWhereUniqueWithoutAuthorInput[]
-    updateMany?: PostUpdateManyWithWhereWithoutAuthorInput | PostUpdateManyWithWhereWithoutAuthorInput[]
-    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
-  }
-
-  export type UserCreateNestedOneWithoutPostsInput = {
-    create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPostsInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
-  export type UserUpdateOneRequiredWithoutPostsNestedInput = {
-    create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPostsInput
-    upsert?: UserUpsertWithoutPostsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPostsInput, UserUpdateWithoutPostsInput>, UserUncheckedUpdateWithoutPostsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -3725,18 +4186,26 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -3753,17 +4222,6 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -3783,159 +4241,34 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type PostCreateWithoutAuthorInput = {
-    title: string
-    content?: string | null
-    published?: boolean
-  }
-
-  export type PostUncheckedCreateWithoutAuthorInput = {
-    id?: number
-    title: string
-    content?: string | null
-    published?: boolean
-  }
-
-  export type PostCreateOrConnectWithoutAuthorInput = {
-    where: PostWhereUniqueInput
-    create: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput>
-  }
-
-  export type PostCreateManyAuthorInputEnvelope = {
-    data: PostCreateManyAuthorInput | PostCreateManyAuthorInput[]
-  }
-
-  export type PostUpsertWithWhereUniqueWithoutAuthorInput = {
-    where: PostWhereUniqueInput
-    update: XOR<PostUpdateWithoutAuthorInput, PostUncheckedUpdateWithoutAuthorInput>
-    create: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput>
-  }
-
-  export type PostUpdateWithWhereUniqueWithoutAuthorInput = {
-    where: PostWhereUniqueInput
-    data: XOR<PostUpdateWithoutAuthorInput, PostUncheckedUpdateWithoutAuthorInput>
-  }
-
-  export type PostUpdateManyWithWhereWithoutAuthorInput = {
-    where: PostScalarWhereInput
-    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutAuthorInput>
-  }
-
-  export type PostScalarWhereInput = {
-    AND?: PostScalarWhereInput | PostScalarWhereInput[]
-    OR?: PostScalarWhereInput[]
-    NOT?: PostScalarWhereInput | PostScalarWhereInput[]
-    id?: IntFilter<"Post"> | number
-    title?: StringFilter<"Post"> | string
-    content?: StringNullableFilter<"Post"> | string | null
-    published?: BoolFilter<"Post"> | boolean
-    authorId?: IntFilter<"Post"> | number
-  }
-
-  export type UserCreateWithoutPostsInput = {
-    email: string
-    name?: string | null
-  }
-
-  export type UserUncheckedCreateWithoutPostsInput = {
-    id?: number
-    email: string
-    name?: string | null
-  }
-
-  export type UserCreateOrConnectWithoutPostsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
-  }
-
-  export type UserUpsertWithoutPostsInput = {
-    update: XOR<UserUpdateWithoutPostsInput, UserUncheckedUpdateWithoutPostsInput>
-    create: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutPostsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutPostsInput, UserUncheckedUpdateWithoutPostsInput>
-  }
-
-  export type UserUpdateWithoutPostsInput = {
-    email?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type UserUncheckedUpdateWithoutPostsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    email?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type PostCreateManyAuthorInput = {
-    id?: number
-    title: string
-    content?: string | null
-    published?: boolean
-  }
-
-  export type PostUpdateWithoutAuthorInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    content?: NullableStringFieldUpdateOperationsInput | string | null
-    published?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type PostUncheckedUpdateWithoutAuthorInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    content?: NullableStringFieldUpdateOperationsInput | string | null
-    published?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type PostUncheckedUpdateManyWithoutAuthorInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    content?: NullableStringFieldUpdateOperationsInput | string | null
-    published?: BoolFieldUpdateOperationsInput | boolean
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
 

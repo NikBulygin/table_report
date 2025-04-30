@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Shop12 {
+  id                 Int      @id @default(autoincrement())
+  vagonNumber        String
+  weight             Float
+  tio2Analysis       Float
+  h2oAnalysis        Float
+  recalculatedWeight Float
+  InvoiceDate        DateTime
+  InvoiceNumber      String
+  GtdDate            DateTime
+  GtdNumber          String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model Shop2 {
+  id                Int      @id @default(autoincrement())
+  numberVagonOrTank String
+  weight            Float
+  perMetVklCert     Float
+  perTioCert        Float
+  perH2oCert        Float
+  H2OWeight         Float
+  DryWeight         Float
+  MetalTon          Float
+  MinusMetal        Float
+  standart80Tio2    Float
+  InvoiceDate       DateTime
+  InvoiceNumber     String
+  GtdDate           DateTime
+  GtdNumber         String
+  MiroDocument      String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
