@@ -185,6 +185,10 @@ export const useShopDataStore = defineStore('shopData', {
     loading: false,
     error: null as string | null,
     totalStandart80Tio2: 0,
+    totalWeight: 0,
+    totalDryWeight: 0,
+    availableGtdNumbers: [] as string[],
+    availableInvoiceNumbers: [] as string[],
     filter: {
       month: '',
       pagination: {
@@ -197,7 +201,8 @@ export const useShopDataStore = defineStore('shopData', {
     shopType: 'shop2' as 'shop2' | 'shop12',
     isEditMode: false,
     selectedIds: [] as (number | string)[],
-    editBuffer: {} as Record<string, any>
+    editBuffer: {} as Record<string, any>,
+    skipFilterUpdate: false
   }),
   actions: {
     setShopType(type: 'shop2' | 'shop12') {
@@ -261,6 +266,21 @@ export const useShopDataStore = defineStore('shopData', {
           )
           result = await Shop2GTD.findWithFilter(filter)
           this.totalStandart80Tio2 = result.totalStandart80Tio2 || 0
+          this.totalWeight = result.totalWeight || 0
+          this.totalDryWeight = result.totalDryWeight || 0
+          this.availableGtdNumbers = result.availableGtdNumbers || []
+          this.availableInvoiceNumbers =
+            result.availableInvoiceNumbers || []
+
+          // Очищаем выбранные фильтры, если они больше не доступны
+          if (!this.skipFilterUpdate) {
+            this.filter.gtdNumbers = this.filter.gtdNumbers.filter(num =>
+              this.availableGtdNumbers.includes(num)
+            )
+            this.filter.invoiceNumbers = this.filter.invoiceNumbers.filter(
+              num => this.availableInvoiceNumbers.includes(num)
+            )
+          }
         } else {
           const filter = new Shop12Filter(
             startDate,
@@ -269,6 +289,10 @@ export const useShopDataStore = defineStore('shopData', {
           )
           result = await Shop12GTD.findWithFilter(filter)
           this.totalStandart80Tio2 = 0
+          this.totalWeight = 0
+          this.totalDryWeight = 0
+          this.availableGtdNumbers = []
+          this.availableInvoiceNumbers = []
         }
         this.items = result.items
         this.pagination = result.pagination
@@ -276,6 +300,7 @@ export const useShopDataStore = defineStore('shopData', {
         this.error = e?.message || 'Ошибка загрузки данных'
       } finally {
         this.loading = false
+        this.skipFilterUpdate = false
       }
     },
     toggleEditMode() {
@@ -291,34 +316,51 @@ export const useShopDataStore = defineStore('shopData', {
       this.editBuffer = {}
       this.fetchData()
     },
-    applyEdit() {
-      const editedItems = Object.values(this.editBuffer)
-      console.log(editedItems)
-      // Проверяем все новые записи на валидность
-      const newItems = editedItems.filter(
-        item => typeof item.id === 'string' && item.id.startsWith('new_')
-      )
-      console.log('Новые записи для валидации:', newItems)
+    async applyEdit() {
+      try {
+        // Собираем все измененные и новые записи
+        const editedItems = Object.values(this.editBuffer)
 
-      for (const item of newItems) {
-        const error = validateNewRow(item)
-        if (error) {
-          alert(`Ошибка в новой строке: ${error}`)
-          return
+        // Проверяем валидность новых записей
+        const newItems = editedItems.filter(
+          item => typeof item.id === 'string' && item.id.startsWith('new_')
+        )
+
+        for (const item of newItems) {
+          const error = validateNewRow(item)
+          if (error) {
+            throw new Error(`Ошибка в новой строке: ${error}`)
+          }
         }
-      }
 
-      if (editedItems.length > 0) {
-        this.items = [
-          ...this.items.filter(
-            item => !editedItems.some(e => e.id === item.id)
-          ),
-          ...editedItems
-        ]
+        // Отправляем изменения на сервер
+        const response = await fetch('/api/shop2', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            items: editedItems,
+            itemsDelete: this.itemsDelete
+          })
+        })
+
+        if (!response.ok) {
+          const error = await response.json()
+          throw new Error(
+            error.message || 'Ошибка при сохранении изменений'
+          )
+        }
+
+        // Очищаем буферы и обновляем данные
+        this.itemsDelete = []
+        this.editBuffer = {}
+        this.isEditMode = false
+        await this.fetchData()
+      } catch (error: any) {
+        this.error = error.message
+        throw error
       }
-      console.log('editedData', editedItems)
-      this.isEditMode = false
-      this.editBuffer = {}
     },
     selectRow(id: number | string) {
       if (!this.selectedIds.includes(id)) {
@@ -331,10 +373,41 @@ export const useShopDataStore = defineStore('shopData', {
     clearSelection() {
       this.selectedIds = []
     },
-    deleteSelected() {
-      this.selectedIds.forEach(id => this.deleteItem(id))
-      console.log('deleted data', this.selectedIds)
-      this.clearSelection()
+    async deleteSelected() {
+      try {
+        if (this.selectedIds.length === 0) return
+
+        // Собираем номера ГТД для удаления
+        const gtdNumbers = this.selectedIds
+          .map(id => {
+            const item = this.items.find(item => item.id === id)
+            return item?.GtdNumber
+          })
+          .filter(Boolean)
+
+        if (gtdNumbers.length === 0) return
+
+        // Отправляем запрос на удаление
+        const response = await fetch('/api/shop2', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ gtdNumbers })
+        })
+
+        if (!response.ok) {
+          const error = await response.json()
+          throw new Error(error.message || 'Ошибка при удалении')
+        }
+
+        // Очищаем выбранные элементы и обновляем данные
+        this.selectedIds = []
+        await this.fetchData()
+      } catch (error: any) {
+        this.error = error.message
+        throw error
+      }
     },
     reset() {
       this.items = []
@@ -348,6 +421,10 @@ export const useShopDataStore = defineStore('shopData', {
       this.loading = false
       this.error = null
       this.totalStandart80Tio2 = 0
+      this.totalWeight = 0
+      this.totalDryWeight = 0
+      this.availableGtdNumbers = []
+      this.availableInvoiceNumbers = []
       this.filter = {
         month: '',
         pagination: {

@@ -1,5 +1,29 @@
 <template>
   <div class="w-[90%] mx-auto overflow-x-auto">
+    <!-- Totals row -->
+    <div v-if="items.length > 0" class="mb-4 p-4 bg-gray-50 rounded-lg">
+      <div class="grid grid-cols-3 gap-4">
+        <div class="text-sm">
+          <span class="font-medium">Отгруженная натура:</span>
+          <span class="ml-2">{{
+            store.totalWeight?.toFixed(2) || '0.00'
+          }}</span>
+        </div>
+        <div class="text-sm">
+          <span class="font-medium">Сухой вес:</span>
+          <span class="ml-2">{{
+            store.totalDryWeight?.toFixed(2) || '0.00'
+          }}</span>
+        </div>
+        <div class="text-sm">
+          <span class="font-medium">Стандарт 80 TiO2:</span>
+          <span class="ml-2">{{
+            store.totalStandart80Tio2?.toFixed(2) || '0.00'
+          }}</span>
+        </div>
+      </div>
+    </div>
+
     <!-- Кнопка добавления -->
     <div v-if="store.isEditMode" class="mb-4 flex justify-end">
       <button

@@ -193,13 +193,6 @@
             Текущая страница: {{ store.pagination.currentPage || 0 }} из
             {{ store.pagination.totalPages || 0 }}
           </div>
-          <div
-            v-if="store.totalStandart80Tio2"
-            class="text-sm text-gray-500"
-          >
-            Сумма Standart 80 TIO2:
-            {{ store.totalStandart80Tio2.toFixed(2) }}
-          </div>
         </div>
       </div>
     </div>
@@ -235,6 +228,21 @@ const store = useShopDataStore()
 const route = useRoute()
 const shop = computed(() => route.params.shop as 'shop2' | 'shop12')
 
+// Создаем debounced функцию для fetchData
+const debouncedFetch = ref<number | null>(null)
+
+const invoiceNumberOptions = computed(() => {
+  return store.availableInvoiceNumbers
+    .sort((a, b) => b.localeCompare(a))
+    .map(value => ({ value, label: value }))
+})
+
+const gtdNumberOptions = computed(() => {
+  return store.availableGtdNumbers
+    .sort((a, b) => b.localeCompare(a))
+    .map(value => ({ value, label: value }))
+})
+
 // Следим за изменением месяца и обновляем данные
 watch(
   () => store.filter.month,
@@ -243,6 +251,22 @@ watch(
       await store.fetchData()
     }
   }
+)
+
+// Следим за изменением фильтров и обновляем данные с debounce
+watch(
+  () => [store.filter.gtdNumbers, store.filter.invoiceNumbers],
+  () => {
+    if (debouncedFetch.value) {
+      clearTimeout(debouncedFetch.value)
+    }
+    debouncedFetch.value = window.setTimeout(async () => {
+      store.skipFilterUpdate = true
+      await store.fetchData()
+      debouncedFetch.value = null
+    }, 300) // Задержка 300мс
+  },
+  { deep: true }
 )
 
 onMounted(() => {
@@ -279,42 +303,6 @@ function handlePageChange(page: number) {
   store.setPage(page)
   store.fetchData()
 }
-
-const invoiceNumberOptions = computed(() => {
-  const set = new Set<string>()
-  store.items.forEach(gtd => {
-    // Если выбраны ГТД, показываем только инвойсы из выбранных ГТД
-    if (
-      store.filter.gtdNumbers.length === 0 ||
-      store.filter.gtdNumbers.includes(gtd.GtdNumber)
-    ) {
-      ;(gtd.Invoices || []).forEach(inv => {
-        if (inv.InvoiceNumber) set.add(inv.InvoiceNumber)
-      })
-    }
-  })
-  return Array.from(set)
-    .sort((a, b) => b.localeCompare(a)) // Сортировка по убыванию
-    .map(value => ({ value, label: value }))
-})
-
-const gtdNumberOptions = computed(() => {
-  const set = new Set<string>()
-  store.items.forEach(gtd => {
-    // Если выбраны инвойсы, показываем только ГТД, содержащие выбранные инвойсы
-    if (
-      store.filter.invoiceNumbers.length === 0 ||
-      gtd.Invoices.some(inv =>
-        store.filter.invoiceNumbers.includes(inv.InvoiceNumber)
-      )
-    ) {
-      if (gtd.GtdNumber) set.add(gtd.GtdNumber)
-    }
-  })
-  return Array.from(set)
-    .sort((a, b) => b.localeCompare(a)) // Сортировка по убыванию
-    .map(value => ({ value, label: value }))
-})
 </script>
 
 <style>

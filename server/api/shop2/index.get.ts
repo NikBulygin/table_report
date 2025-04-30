@@ -43,12 +43,6 @@ export default defineEventHandler(async event => {
           Invoices: {
             some: {
               AND: [
-                filter.startDate
-                  ? { InvoiceDate: { gte: filter.startDate } }
-                  : {},
-                filter.endDate
-                  ? { InvoiceDate: { lte: filter.endDate } }
-                  : {},
                 invoiceNumbers.length > 0
                   ? { InvoiceNumber: { in: invoiceNumbers } }
                   : {}
@@ -79,16 +73,67 @@ export default defineEventHandler(async event => {
           }
         }
       },
-      skip:
-        (filter.pagination.currentPage - 1) * filter.pagination.pageSize,
-      take: filter.pagination.pageSize,
-      orderBy: orderBy
+      skip,
+      take,
+      orderBy
     })
 
     const total = await prisma.shop2GTD.count({ where })
     const totalPages = Math.ceil(total / filter.pagination.pageSize)
 
-    // Получаем все записи для расчета суммы standart80Tio2
+    // Получаем доступные номера ГТД и инвойсов
+    const availableGtdNumbers = await prisma.shop2GTD
+      .findMany({
+        where: {
+          AND: [
+            filter.startDate ? { GtdDate: { gte: filter.startDate } } : {},
+            filter.endDate ? { GtdDate: { lte: filter.endDate } } : {},
+            invoiceNumbers.length > 0
+              ? {
+                  Invoices: {
+                    some: {
+                      InvoiceNumber: { in: invoiceNumbers }
+                    }
+                  }
+                }
+              : {}
+          ]
+        },
+        select: {
+          GtdNumber: true
+        },
+        distinct: ['GtdNumber']
+      })
+      .then(gtds => gtds.map(gtd => gtd.GtdNumber))
+
+    const availableInvoiceNumbers = await prisma.shop2GTD
+      .findMany({
+        where: {
+          AND: [
+            filter.startDate ? { GtdDate: { gte: filter.startDate } } : {},
+            filter.endDate ? { GtdDate: { lte: filter.endDate } } : {},
+            gtdNumbers.length > 0 ? { GtdNumber: { in: gtdNumbers } } : {}
+          ]
+        },
+        select: {
+          Invoices: {
+            select: {
+              InvoiceNumber: true
+            }
+          }
+        }
+      })
+      .then(gtds => {
+        const invoiceNumbers = new Set<string>()
+        gtds.forEach(gtd => {
+          gtd.Invoices.forEach(invoice => {
+            invoiceNumbers.add(invoice.InvoiceNumber)
+          })
+        })
+        return Array.from(invoiceNumbers)
+      })
+
+    // Получаем те же данные что и в result, но без пагинации
     const allRecords = await prisma.shop2GTD.findMany({
       where,
       include: {
@@ -97,18 +142,44 @@ export default defineEventHandler(async event => {
             Items: true
           }
         }
-      }
+      },
+      orderBy
     })
 
-    // Calculate total standart80Tio2 по всем записям
+    // Calculate totals
     let totalStandart80Tio2 = 0
+    let totalWeight = 0
+    let totalDryWeight = 0
+    console.log(invoiceNumbers)
+    console.log(gtdNumbers)
     allRecords.forEach(gtd => {
+      // Фильтруем по ГТД
+      if (gtdNumbers.length > 0 && !gtdNumbers.includes(gtd.GtdNumber)) {
+        return
+      }
+
       gtd.Invoices.forEach(invoice => {
+        // Фильтруем по инвойсам
+        if (
+          invoiceNumbers.length > 0 &&
+          !invoiceNumbers.includes(invoice.InvoiceNumber)
+        ) {
+          return
+        }
+        console.log(invoice.InvoiceNumber)
         invoice.Items.forEach(item => {
+          console.log(item)
           totalStandart80Tio2 += item.standart80Tio2
+          totalWeight += item.weight
+          totalDryWeight += item.DryWeight
         })
       })
     })
+
+    // Округляем итоговые значения до 2 знаков после запятой
+    totalStandart80Tio2 = Number(totalStandart80Tio2.toFixed(2))
+    totalWeight = Number(totalWeight.toFixed(2))
+    totalDryWeight = Number(totalDryWeight.toFixed(2))
 
     return {
       items: result,
@@ -117,7 +188,11 @@ export default defineEventHandler(async event => {
         currentPage: filter.pagination.currentPage,
         totalPages
       },
-      totalStandart80Tio2
+      totalStandart80Tio2,
+      totalWeight,
+      totalDryWeight,
+      availableGtdNumbers,
+      availableInvoiceNumbers
     }
   } catch (error) {
     console.error('Error fetching Shop2 data:', error)

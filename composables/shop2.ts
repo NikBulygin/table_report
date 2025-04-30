@@ -91,6 +91,10 @@ export class Shop2GTD {
       totalPages: number
     }
     totalStandart80Tio2: number
+    totalWeight: number
+    totalDryWeight: number
+    availableGtdNumbers: string[]
+    availableInvoiceNumbers: string[]
   }> {
     const query = new URLSearchParams()
 
