@@ -16,6 +16,8 @@ interface Filter {
   fields: string[]
 }
 
+const round = (value: number) => Number(value.toFixed(3))
+
 export const shop2Config = {
   label: 'Шлак',
   columns: [
@@ -56,11 +58,13 @@ export const shop2Config = {
   ] as Column[],
 
   calc: {
-    H2OWeight: (row: any) => (row.weight * row.perH2oCert) / 100,
-    DryWeight: (row: any) => row.weight - row.H2OWeight,
-    MetalTon: (row: any) => (row.DryWeight * row.perMetVklCert) / 100,
-    MinusMetal: (row: any) => row.DryWeight - row.MetalTon,
-    standart80Tio2: (row: any) => (row.MinusMetal * row.perTioCert) / 80
+    H2OWeight: (row: any) => round((row.weight * row.perH2oCert) / 100),
+    DryWeight: (row: any) => round(row.weight - row.H2OWeight),
+    MetalTon: (row: any) =>
+      round((row.DryWeight * row.perMetVklCert) / 100),
+    MinusMetal: (row: any) => round(row.DryWeight - row.MetalTon),
+    standart80Tio2: (row: any) =>
+      round((row.MinusMetal * row.perTioCert) / 80)
   } as Calculation,
 
   summary: {
