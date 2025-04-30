@@ -1,6 +1,7 @@
 interface Column {
   key: string
   label: string
+  isCalculated: boolean
 }
 
 interface Calculation {
@@ -18,21 +19,40 @@ interface Filter {
 export const shop2Config = {
   label: 'Шлак',
   columns: [
-    { key: 'numberVagonOrTank', label: 'номер вагона/танка' },
-    { key: 'weight', label: 'вес' },
-    { key: 'perMetVklCert', label: 'металл включений' },
-    { key: 'perTioCert', label: 'TIO2' },
-    { key: 'perH2oCert', label: 'H2O' },
-    { key: 'H2OWeight', label: 'ВЕС H2O' },
-    { key: 'DryWeight', label: 'СУХОЙ ВЕС' },
-    { key: 'MetalTon', label: 'МЕТАЛЛ ТОНН' },
-    { key: 'MinusMetal', label: 'МИНУС МЕТАЛЛ' },
-    { key: 'standart80Tio2', label: 'СТАНДАРТ 80 TIO2' },
-    { key: 'MiroDocument', label: 'МИРО документ' },
-    { key: 'InvoiceDate', label: 'Инвойс дата' },
-    { key: 'InvoiceNumber', label: 'Инвойс номер' },
-    { key: 'GtdDate', label: 'ГТД дата' },
-    { key: 'GtdNumber', label: 'ГТД номер' }
+    {
+      key: 'numberVagonOrTank',
+      label: 'номер вагона/танка',
+      isCalculated: false
+    },
+    { key: 'weight', label: 'Вес', isCalculated: false },
+    {
+      key: 'perMetVklCert',
+      label: 'металл включений',
+      isCalculated: false
+    },
+    { key: 'perTioCert', label: 'TIO2', isCalculated: false },
+    { key: 'perH2oCert', label: 'H2O', isCalculated: false },
+    { key: 'H2OWeight', label: 'ВЕС H2O', isCalculated: true },
+    { key: 'DryWeight', label: 'СУХОЙ ВЕС', isCalculated: true },
+    { key: 'MetalTon', label: 'МЕТАЛЛ ТОНН', isCalculated: true },
+    { key: 'MinusMetal', label: 'МИНУС МЕТАЛЛ', isCalculated: true },
+    {
+      key: 'standart80Tio2',
+      label: 'СТАНДАРТ 80 TIO2',
+      isCalculated: true
+    },
+    { key: 'MiroDocument', label: 'МИРО документ', isCalculated: false },
+    { key: 'InvoiceDate', label: 'Дата', isCalculated: false },
+    { key: 'InvoiceNumber', label: 'Номер инвойса', isCalculated: false },
+    { key: 'GtdDate', label: 'ГТД дата', isCalculated: false },
+    { key: 'GtdNumber', label: 'ГТД номер', isCalculated: false },
+    { key: 'tio2Analysis', label: 'TiO2', isCalculated: false },
+    { key: 'h2oAnalysis', label: 'H2O', isCalculated: false },
+    {
+      key: 'recalculatedWeight',
+      label: 'Пересчитанный вес',
+      isCalculated: true
+    }
   ] as Column[],
 
   calc: {

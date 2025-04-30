@@ -124,6 +124,17 @@
                   class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />
                 <input
+                  v-else-if="
+                    column.key === 'weight' ||
+                    column.key === 'tio2Analysis' ||
+                    column.key === 'h2oAnalysis'
+                  "
+                  type="number"
+                  step="0.01"
+                  v-model.number="item[column.key]"
+                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+                <input
                   v-else
                   type="text"
                   v-model="item[column.key]"
@@ -200,6 +211,7 @@ import { shop12Config } from '~/composable/shop12'
 interface Column {
   key: string
   label: string
+  isCalculated?: boolean
 }
 
 const shopStore = useShopStore()
@@ -220,7 +232,17 @@ const config = computed(() => {
   }
 })
 
-const columns = computed(() => config.value?.columns || [])
+const columns = computed(() => {
+  if (!config.value) return []
+
+  // В режиме редактирования скрываем вычисляемые поля
+  if (isEditing.value) {
+    return config.value.columns.filter(column => !column.isCalculated)
+  }
+
+  return config.value.columns
+})
+
 const filteredItems = computed(() => shopStore.filteredItems)
 
 // Пагинация
@@ -285,7 +307,18 @@ const saveChanges = () => {
 const addRow = () => {
   const newItem: any = {}
   columns.value.forEach(column => {
-    newItem[column.key] = ''
+    // Устанавливаем начальные значения в зависимости от типа поля
+    if (column.key.includes('Date')) {
+      newItem[column.key] = new Date().toISOString().split('T')[0] // Текущая дата
+    } else if (
+      column.key === 'weight' ||
+      column.key === 'tio2Analysis' ||
+      column.key === 'h2oAnalysis'
+    ) {
+      newItem[column.key] = '0' // Числовые поля начинаем с 0
+    } else {
+      newItem[column.key] = '' // Текстовые поля пустые
+    }
   })
   shopStore.items.push(newItem)
 }

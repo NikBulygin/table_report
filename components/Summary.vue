@@ -1,15 +1,23 @@
 <template>
-  <div>
-    <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">
-      Сводка
-    </h3>
-    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      <SummaryCard
-        v-for="field in summaryFields"
-        :key="field.key"
-        :label="field.label"
-        :value="getSummaryValue(field.key)"
-      />
+  <div class="bg-white shadow rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900">Сводка</h3>
+      <div
+        class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+      >
+        <div
+          v-for="field in summaryFields"
+          :key="field"
+          class="bg-gray-50 rounded-lg p-4"
+        >
+          <h4 class="text-sm font-medium text-gray-500">
+            {{ getFieldLabel(field) }}
+          </h4>
+          <p class="mt-2 text-2xl font-semibold text-gray-900">
+            {{ getSummaryValue(field) }}
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -20,13 +28,9 @@ import { useShopStore } from '~/stores/shop'
 import { shop2Config } from '~/composable/shop2'
 import { shop12Config } from '~/composable/shop12'
 
-interface Column {
-  key: string
-  label: string
-}
-
 const shopStore = useShopStore()
 
+// Получаем конфигурацию в зависимости от магазина
 const config = computed(() => {
   switch (shopStore.shopName) {
     case 'shop2':
@@ -38,28 +42,24 @@ const config = computed(() => {
   }
 })
 
-const summaryFields = computed(() => {
-  if (!config.value) return []
-  return config.value.columns.filter((col: Column) =>
-    config.value?.summary.fields.includes(col.key)
-  )
-})
+const summaryFields = computed(() => config.value?.summary.fields || [])
 
-const getSummaryValue = (key: string) => {
-  if (!shopStore.items.length) return 0
+const getFieldLabel = (field: string) => {
+  const column = config.value?.columns.find(col => col.key === field)
+  return column?.label || field
+}
 
-  const values = shopStore.items.map(item => {
-    // Если значение уже рассчитано, используем его
-    if (item[key] !== undefined) return item[key]
+const getSummaryValue = (field: string) => {
+  const values = shopStore.filteredItems
+    .map(item => {
+      const value = item[field]
+      return typeof value === 'number' ? value : 0
+    })
+    .filter(value => !isNaN(value))
 
-    // Иначе пытаемся рассчитать
-    const calc = config.value?.calc[key]
-    if (calc) return calc(item)
+  if (values.length === 0) return '0.00'
 
-    return 0
-  })
-
-  // Суммируем все значения
-  return values.reduce((sum, val) => sum + val, 0).toFixed(2)
+  const sum = values.reduce((acc, val) => acc + val, 0)
+  return sum.toFixed(2)
 }
 </script>
