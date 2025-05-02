@@ -442,3 +442,17 @@ watch(
   { deep: true }
 )
 </script>
+
+<style>
+/* Скрываем спиннеры для числовых полей в Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+/* Скрываем спиннеры для числовых полей в других браузерах */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+</style>
