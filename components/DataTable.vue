@@ -132,6 +132,7 @@
                   type="number"
                   step="0.01"
                   v-model.number="item[column.key]"
+                  @keypress="preventComma"
                   class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />
                 <input
@@ -431,6 +432,12 @@ const deleteSelected = () => {
     }
   })
   selectedItems.value = []
+}
+
+const preventComma = (event: KeyboardEvent) => {
+  if (event.key === ',') {
+    event.preventDefault()
+  }
 }
 
 // Сброс страницы при изменении фильтров
