@@ -11,8 +11,13 @@ interface ShopState {
   filters: {
     date: string
     invoice: string
+    gtd: string
   }
   summary: Shop12Summary | Shop2Summary
+  groupedSummary: {
+    groupedData: Record<string, Record<string, any>>
+    totals: any
+  } | null
 }
 
 interface DataChanges {
@@ -42,14 +47,16 @@ export const useShopStore = defineStore('shop', {
       shopName: '',
       filters: {
         date: defaultDate,
-        invoice: ''
+        invoice: '',
+        gtd: ''
       },
       summary: {
         weight: 0,
         tio2Analysis: 0,
         h2oAnalysis: 0,
         recalculatedWeight: 0
-      }
+      },
+      groupedSummary: null
     }
   },
 
@@ -80,6 +87,16 @@ export const useShopStore = defineStore('shop', {
           return false
         }
 
+        // Фильтр по номеру ГТД
+        if (
+          state.filters.gtd &&
+          !item.GtdNumber.toLowerCase().includes(
+            state.filters.gtd.toLowerCase()
+          )
+        ) {
+          return false
+        }
+
         return true
       })
     }
@@ -98,7 +115,9 @@ export const useShopStore = defineStore('shop', {
       this.summary = summary
     },
 
-    setFilters(filters: Partial<{ date: string; invoice: string }>) {
+    setFilters(
+      filters: Partial<{ date: string; invoice: string; gtd: string }>
+    ) {
       this.filters = { ...this.filters, ...filters }
     },
 
@@ -136,10 +155,13 @@ export const useShopStore = defineStore('shop', {
     async saveChanges(changes: DataChanges) {
       try {
         // Отправляем изменения на сервер
-        const response = await $fetch(`/api/${this.shopName}`, {
-          method: 'POST',
-          body: changes
-        })
+        const response = await $fetch<{ success: boolean }>(
+          `/api/${this.shopName}`,
+          {
+            method: 'post',
+            body: changes
+          }
+        )
 
         // Обновляем локальные данные
         if (response.success) {
@@ -160,6 +182,9 @@ export const useShopStore = defineStore('shop', {
 
           // Добавляем новые элементы
           this.items.push(...changes.added)
+
+          // Обновляем сводку после успешного сохранения
+          await this.fetchSummary()
         }
 
         return response
@@ -176,7 +201,8 @@ export const useShopStore = defineStore('shop', {
           {
             query: {
               date: this.filters.date,
-              invoice: this.filters.invoice
+              invoice: this.filters.invoice,
+              gtd: this.filters.gtd
             }
           }
         )
@@ -184,6 +210,22 @@ export const useShopStore = defineStore('shop', {
         this.summary = response.summary
       } catch (error) {
         console.error('Error fetching items:', error)
+      }
+    },
+
+    async fetchSummary() {
+      try {
+        const response = await $fetch(`/api/${this.shopName}/summary`, {
+          query: {
+            date: this.filters.date,
+            invoice: this.filters.invoice,
+            gtd: this.filters.gtd
+          }
+        })
+        this.groupedSummary = response
+      } catch (error) {
+        console.error('Error fetching summary:', error)
+        throw error
       }
     }
   }

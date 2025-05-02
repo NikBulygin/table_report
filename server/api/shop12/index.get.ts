@@ -26,6 +26,7 @@ export default defineEventHandler(async event => {
     const query = getQuery(event)
     const dateFilter = query.date as string
     const invoiceFilter = query.invoice as string
+    const gtdFilter = query.gtd as string
 
     // Строим условия фильтрации
     const where: any = {}
@@ -54,6 +55,12 @@ export default defineEventHandler(async event => {
     if (invoiceFilter) {
       where.InvoiceNumber = {
         contains: invoiceFilter
+      }
+    }
+
+    if (gtdFilter) {
+      where.GtdNumber = {
+        contains: gtdFilter
       }
     }
 

@@ -3,7 +3,7 @@
     <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">
       Фильтры
     </h3>
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
       <div>
         <label for="date" class="block text-sm font-medium text-gray-700">
           Месяц-Год
@@ -30,6 +30,18 @@
           placeholder="Введите номер инвойса"
         />
       </div>
+      <div>
+        <label for="gtd" class="block text-sm font-medium text-gray-700">
+          Номер ГТД
+        </label>
+        <input
+          type="text"
+          id="gtd"
+          v-model="gtdFilter"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          placeholder="Введите номер ГТД"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -41,6 +53,7 @@ import { useShopStore } from '~/stores/shop'
 const shopStore = useShopStore()
 const dateFilter = ref('')
 const invoiceFilter = ref('')
+const gtdFilter = ref('')
 
 // Функция для форматирования даты в формат YYYY-MM
 const formatDateForInput = (date: string) => {
@@ -60,14 +73,19 @@ const formatDateForStore = (date: string) => {
 onMounted(() => {
   dateFilter.value = formatDateForInput(shopStore.filters.date)
   invoiceFilter.value = shopStore.filters.invoice
+  gtdFilter.value = shopStore.filters.gtd
 })
 
 // Отслеживаем изменения фильтров
-watch([dateFilter, invoiceFilter], ([newDate, newInvoice]) => {
-  // Обновляем фильтры в хранилище
-  shopStore.setFilters({
-    date: formatDateForStore(newDate),
-    invoice: newInvoice
-  })
-})
+watch(
+  [dateFilter, invoiceFilter, gtdFilter],
+  ([newDate, newInvoice, newGtd]) => {
+    // Обновляем фильтры в хранилище
+    shopStore.setFilters({
+      date: formatDateForStore(newDate),
+      invoice: newInvoice,
+      gtd: newGtd
+    })
+  }
+)
 </script>
