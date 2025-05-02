@@ -1,10 +1,32 @@
 <template>
   <div class="bg-white shadow rounded-lg">
     <div class="px-4 py-5 sm:p-6">
-      <h3 class="text-lg font-medium leading-6 text-gray-900">Сводка</h3>
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Сводка</h3>
+        <button
+          @click="printSummary"
+          class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 mr-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
+            />
+          </svg>
+          Печать
+        </button>
+      </div>
 
       <!-- Сводная таблица -->
-      <div class="mt-4 overflow-x-auto">
+      <div class="mt-4 overflow-x-auto" ref="summaryTable">
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
@@ -99,12 +121,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, watch } from 'vue'
+import { computed, onMounted, watch, ref } from 'vue'
 import { useShopStore } from '~/stores/shop'
 import { shop2Config } from '~/composable/shop2'
 import { shop12Config } from '~/composable/shop12'
 
 const shopStore = useShopStore()
+const summaryTable = ref<HTMLElement | null>(null)
 
 // Получаем конфигурацию в зависимости от магазина
 const config = computed(() => {
@@ -162,4 +185,68 @@ watch(
   },
   { deep: true }
 )
+
+const printSummary = () => {
+  const printWindow = window.open('', '_blank')
+  if (!printWindow) return
+
+  // Определяем ориентацию на основе ширины таблицы
+  const tableWidth = summaryTable.value?.offsetWidth || 0
+  const orientation = tableWidth > 800 ? 'landscape' : 'portrait'
+
+  const style = `
+    <style>
+      @page { size: A4 ${orientation}; margin: 1cm; }
+      body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+      table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+      th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+      th { background-color: #f3f4f6; }
+      tr:nth-child(even) { background-color: #f9fafb; }
+      .total-row { font-weight: bold; background-color: #f3f4f6; }
+      @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+    </style>
+  `
+
+  const title =
+    shopStore.shopName === 'shop2'
+      ? 'Сводка по шлаку'
+      : 'Сводка по ильмениту'
+  const date = new Date().toLocaleDateString('ru-RU')
+
+  const content = [
+    '<!DOCTYPE html>',
+    '<html>',
+    '<head>',
+    `<title>${title}</title>`,
+    style,
+    '</head>',
+    '<body>',
+    `<h2>${title}</h2>`,
+    `<p>Дата формирования: ${date}</p>`,
+    summaryTable.value?.innerHTML || '',
+    '<script>',
+    'window.onload = () => { window.print(); window.close(); }',
+    '<\/script>',
+    '</body>',
+    '</html>'
+  ].join('\n')
+
+  printWindow.document.write(content)
+  printWindow.document.close()
+}
 </script>
+
+<style>
+/* Скрываем все элементы при печати, кроме таблицы */
+@media print {
+  body > *:not(.summary-table) {
+    display: none !important;
+  }
+  .summary-table {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+</style>
