@@ -154,16 +154,31 @@ export const useShopStore = defineStore('shop', {
 
     async saveChanges(changes: DataChanges) {
       try {
-        // Отправляем изменения на сервер
-        const response = await $fetch<{ success: boolean }>(
-          `/api/${this.shopName}`,
-          {
-            method: 'post',
-            body: changes
-          }
-        )
+        // Validate changes before sending
+        if (!changes.deleted) changes.deleted = []
+        if (!changes.edited) changes.edited = []
+        if (!changes.added) changes.added = []
 
-        // Обновляем локальные данные
+        // Ensure edited items have IDs and added items don't
+        const invalidEdited = changes.edited.some(item => !item.id)
+        const invalidAdded = changes.added.some(item => item.id)
+
+        if (invalidEdited || invalidAdded) {
+          throw new Error(
+            'Invalid data: edited items must have IDs, added items must not have IDs'
+          )
+        }
+
+        // Отправляем изменения на сервер
+        const response = await $fetch<{
+          success: boolean
+          newIds?: number[]
+        }>(`/api/${this.shopName}`, {
+          method: 'post',
+          body: changes
+        })
+
+        // Обновляем локальные данные только после успешного ответа
         if (response.success) {
           // Удаляем удаленные элементы
           this.items = this.items.filter(
@@ -180,8 +195,14 @@ export const useShopStore = defineStore('shop', {
             }
           })
 
-          // Добавляем новые элементы
-          this.items.push(...changes.added)
+          // Добавляем новые элементы с серверными ID
+          if (response.newIds && Array.isArray(response.newIds)) {
+            changes.added.forEach((item, index) => {
+              if (response.newIds && response.newIds[index]) {
+                this.items.push({ ...item, id: response.newIds[index] })
+              }
+            })
+          }
 
           // Обновляем сводку после успешного сохранения
           await this.fetchSummary()

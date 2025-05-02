@@ -2,7 +2,7 @@
   <div class="bg-white shadow rounded-lg">
     <div class="px-4 py-5 sm:p-6">
       <div class="flex justify-between items-center mb-4">
-        <h3 class="text-lg font-medium leading-6 text-gray-900">Сводка</h3>
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Отчёт</h3>
         <button
           @click="printSummary"
           class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -216,8 +216,8 @@ watch(
 const printSummary = () => {
   const title =
     shopStore.shopName === 'shop2'
-      ? 'Сводка по шлаку'
-      : 'Сводка по ильмениту'
+      ? 'Отчёт по шлаку'
+      : 'Отчёт по ильмениту'
   const windowTitle = `УКТМК: ${title}`
 
   const printWindow = window.open('', windowTitle)

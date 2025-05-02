@@ -71,6 +71,7 @@ export default defineEventHandler(async event => {
   try {
     const body = await readBody(event)
     const { deleted, edited, added } = body
+    const newIds: number[] = []
 
     // Handle deletions
     if (deleted && deleted.length > 0) {
@@ -83,65 +84,69 @@ export default defineEventHandler(async event => {
       })
     }
 
-    // Handle edits
+    // Handle edits of existing records
     if (edited && edited.length > 0) {
-      for (const item of edited) {
-        await prisma.shop2.update({
-          where: { id: item.id },
-          data: prepareItem(item)
+      await Promise.all(
+        edited.map((item: Shop2Item) => {
+          const preparedItem = prepareItem(item)
+          return prisma.shop2.update({
+            where: { id: item.id },
+            data: {
+              numberVagonOrTank: preparedItem.numberVagonOrTank,
+              weight: preparedItem.weight,
+              perMetVklCert: preparedItem.perMetVklCert,
+              perTioCert: preparedItem.perTioCert,
+              perH2oCert: preparedItem.perH2oCert,
+              H2OWeight: preparedItem.H2OWeight,
+              DryWeight: preparedItem.DryWeight,
+              MetalTon: preparedItem.MetalTon,
+              MinusMetal: preparedItem.MinusMetal,
+              standart80Tio2: preparedItem.standart80Tio2,
+              InvoiceDate: preparedItem.InvoiceDate,
+              InvoiceNumber: preparedItem.InvoiceNumber,
+              GtdDate: preparedItem.GtdDate,
+              GtdNumber: preparedItem.GtdNumber,
+              MiroDocument: preparedItem.MiroDocument
+            }
+          })
         })
-      }
+      )
     }
 
-    // Handle additions
+    // Handle addition of new records
     if (added && added.length > 0) {
-      for (const item of added) {
-        const preparedItem = prepareItem(item)
-        await prisma.shop2.upsert({
-          where: {
-            id: preparedItem.id || -1 // Use -1 for new items
-          },
-          create: {
-            numberVagonOrTank: preparedItem.numberVagonOrTank,
-            weight: preparedItem.weight,
-            perMetVklCert: preparedItem.perMetVklCert,
-            perTioCert: preparedItem.perTioCert,
-            perH2oCert: preparedItem.perH2oCert,
-            H2OWeight: preparedItem.H2OWeight,
-            DryWeight: preparedItem.DryWeight,
-            MetalTon: preparedItem.MetalTon,
-            MinusMetal: preparedItem.MinusMetal,
-            standart80Tio2: preparedItem.standart80Tio2,
-            InvoiceDate: preparedItem.InvoiceDate,
-            InvoiceNumber: preparedItem.InvoiceNumber,
-            GtdDate: preparedItem.GtdDate,
-            GtdNumber: preparedItem.GtdNumber,
-            MiroDocument: preparedItem.MiroDocument
-          },
-          update: {
-            numberVagonOrTank: preparedItem.numberVagonOrTank,
-            weight: preparedItem.weight,
-            perMetVklCert: preparedItem.perMetVklCert,
-            perTioCert: preparedItem.perTioCert,
-            perH2oCert: preparedItem.perH2oCert,
-            H2OWeight: preparedItem.H2OWeight,
-            DryWeight: preparedItem.DryWeight,
-            MetalTon: preparedItem.MetalTon,
-            MinusMetal: preparedItem.MinusMetal,
-            standart80Tio2: preparedItem.standart80Tio2,
-            InvoiceDate: preparedItem.InvoiceDate,
-            InvoiceNumber: preparedItem.InvoiceNumber,
-            GtdDate: preparedItem.GtdDate,
-            GtdNumber: preparedItem.GtdNumber,
-            MiroDocument: preparedItem.MiroDocument
-          }
+      const createdItems = await Promise.all(
+        added.map((item: Shop2Item) => {
+          const preparedItem = prepareItem(item)
+          return prisma.shop2.create({
+            data: {
+              numberVagonOrTank: preparedItem.numberVagonOrTank,
+              weight: preparedItem.weight,
+              perMetVklCert: preparedItem.perMetVklCert,
+              perTioCert: preparedItem.perTioCert,
+              perH2oCert: preparedItem.perH2oCert,
+              H2OWeight: preparedItem.H2OWeight,
+              DryWeight: preparedItem.DryWeight,
+              MetalTon: preparedItem.MetalTon,
+              MinusMetal: preparedItem.MinusMetal,
+              standart80Tio2: preparedItem.standart80Tio2,
+              InvoiceDate: preparedItem.InvoiceDate,
+              InvoiceNumber: preparedItem.InvoiceNumber,
+              GtdDate: preparedItem.GtdDate,
+              GtdNumber: preparedItem.GtdNumber,
+              MiroDocument: preparedItem.MiroDocument
+            }
+          })
         })
-      }
+      )
+
+      newIds.push(...createdItems.map(item => item.id))
     }
 
     return {
       success: true,
-      message: 'Changes saved successfully'
+      message: 'Changes saved successfully',
+      newIds
     }
   } catch (error) {
     console.error('Error saving changes:', error)

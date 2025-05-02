@@ -47,6 +47,7 @@ export default defineEventHandler(async event => {
   try {
     const body = await readBody(event)
     const { deleted, edited, added } = body
+    const newIds: number[] = []
 
     // Обрабатываем удаление
     if (deleted && deleted.length > 0) {
@@ -59,52 +60,57 @@ export default defineEventHandler(async event => {
       })
     }
 
-    // Обрабатываем редактирование
+    // Обрабатываем редактирование существующих записей
     if (edited && edited.length > 0) {
-      for (const item of edited) {
-        await prisma.shop12.update({
-          where: { id: item.id },
-          data: prepareItem(item)
+      await Promise.all(
+        edited.map((item: Shop12Item) => {
+          const preparedItem = prepareItem(item)
+          return prisma.shop12.update({
+            where: { id: item.id },
+            data: {
+              weight: preparedItem.weight,
+              tio2Analysis: preparedItem.tio2Analysis,
+              h2oAnalysis: preparedItem.h2oAnalysis,
+              vagonNumber: preparedItem.vagonNumber,
+              InvoiceDate: preparedItem.InvoiceDate,
+              InvoiceNumber: preparedItem.InvoiceNumber,
+              GtdDate: preparedItem.GtdDate,
+              GtdNumber: preparedItem.GtdNumber,
+              recalculatedWeight: preparedItem.recalculatedWeight
+            }
+          })
         })
-      }
+      )
     }
 
-    // Обрабатываем добавление
+    // Обрабатываем добавление новых записей
     if (added && added.length > 0) {
-      for (const item of added) {
-        const preparedItem = prepareItem(item)
-        await prisma.shop12.upsert({
-          where: {
-            id: preparedItem.id || -1 // Use -1 for new items
-          },
-          create: {
-            weight: preparedItem.weight,
-            tio2Analysis: preparedItem.tio2Analysis,
-            h2oAnalysis: preparedItem.h2oAnalysis,
-            vagonNumber: preparedItem.vagonNumber,
-            InvoiceDate: preparedItem.InvoiceDate,
-            InvoiceNumber: preparedItem.InvoiceNumber,
-            GtdDate: preparedItem.GtdDate,
-            GtdNumber: preparedItem.GtdNumber,
-            recalculatedWeight: preparedItem.recalculatedWeight
-          },
-          update: {
-            weight: preparedItem.weight,
-            tio2Analysis: preparedItem.tio2Analysis,
-            h2oAnalysis: preparedItem.h2oAnalysis,
-            vagonNumber: preparedItem.vagonNumber,
-            InvoiceDate: preparedItem.InvoiceDate,
-            InvoiceNumber: preparedItem.InvoiceNumber,
-            GtdDate: preparedItem.GtdDate,
-            GtdNumber: preparedItem.GtdNumber,
-            recalculatedWeight: preparedItem.recalculatedWeight
-          }
+      const createdItems = await Promise.all(
+        added.map((item: Shop12Item) => {
+          const preparedItem = prepareItem(item)
+          return prisma.shop12.create({
+            data: {
+              weight: preparedItem.weight,
+              tio2Analysis: preparedItem.tio2Analysis,
+              h2oAnalysis: preparedItem.h2oAnalysis,
+              vagonNumber: preparedItem.vagonNumber,
+              InvoiceDate: preparedItem.InvoiceDate,
+              InvoiceNumber: preparedItem.InvoiceNumber,
+              GtdDate: preparedItem.GtdDate,
+              GtdNumber: preparedItem.GtdNumber,
+              recalculatedWeight: preparedItem.recalculatedWeight
+            }
+          })
         })
-      }
+      )
+
+      newIds.push(...createdItems.map(item => item.id))
     }
+
     return {
       success: true,
-      message: 'Changes saved successfully'
+      message: 'Changes saved successfully',
+      newIds
     }
   } catch (error) {
     console.error('Error saving changes:', error)
