@@ -84,9 +84,27 @@
                   </td>
                 </tr>
               </template>
+              <!-- Итог по ГТД -->
+              <tr class="bg-gray-100">
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900"
+                >
+                  Итого по ГТД: {{ gtd }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                ></td>
+                <td
+                  v-for="field in numericFields"
+                  :key="field"
+                  class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900"
+                >
+                  {{ formatNumber(calculateGtdTotal(gtdGroup, field)) }}
+                </td>
+              </tr>
             </template>
             <!-- Общий итог -->
-            <tr class="bg-gray-100 font-bold">
+            <tr class="bg-gray-200 font-bold">
               <td
                 class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
               >
@@ -173,6 +191,15 @@ const formatNumber = (value: number) => {
   return value?.toFixed(2) || '0.00'
 }
 
+const calculateGtdTotal = (
+  gtdGroup: Record<string, any>,
+  field: string
+): number => {
+  return Object.values(gtdGroup).reduce((sum, invoice) => {
+    return sum + (invoice[field] || 0)
+  }, 0)
+}
+
 // Загружаем сводные данные при монтировании компонента и при изменении фильтров
 onMounted(() => {
   shopStore.fetchSummary()
@@ -187,7 +214,13 @@ watch(
 )
 
 const printSummary = () => {
-  const printWindow = window.open('', '_blank')
+  const title =
+    shopStore.shopName === 'shop2'
+      ? 'Сводка по шлаку'
+      : 'Сводка по ильмениту'
+  const windowTitle = `УКТМК: ${title}`
+
+  const printWindow = window.open('', windowTitle)
   if (!printWindow) return
 
   // Определяем ориентацию на основе ширины таблицы
@@ -196,28 +229,61 @@ const printSummary = () => {
 
   const style = `
     <style>
-      @page { size: A4 ${orientation}; margin: 1cm; }
-      body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
-      table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-      th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-      th { background-color: #f3f4f6; }
-      tr:nth-child(even) { background-color: #f9fafb; }
-      .total-row { font-weight: bold; background-color: #f3f4f6; }
-      @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+      @page { 
+        size: A4 ${orientation}; 
+        margin: 1cm; 
+      }
+      @page :first {
+        margin-bottom: 0;
+      }
+      body { 
+        font-family: Arial, sans-serif; 
+        margin: 0; 
+        padding: 20px; 
+      }
+      table { 
+        width: 100%; 
+        border-collapse: collapse; 
+        margin-bottom: 20px; 
+      }
+      th, td { 
+        border: 1px solid #ddd; 
+        padding: 8px; 
+        text-align: left; 
+      }
+      th { 
+        background-color: #f3f4f6; 
+      }
+      tr:nth-child(even) { 
+        background-color: #f9fafb; 
+      }
+      .total-row { 
+        font-weight: bold; 
+        background-color: #f3f4f6; 
+      }
+      @media print { 
+        body { 
+          -webkit-print-color-adjust: exact; 
+          print-color-adjust: exact; 
+        }
+        /* Убираем URL из нижнего колонтитула */
+        @page { 
+          margin-bottom: 0;
+        }
+        @page :first { 
+          margin-bottom: 0;
+        }
+      }
     </style>
   `
 
-  const title =
-    shopStore.shopName === 'shop2'
-      ? 'Сводка по шлаку'
-      : 'Сводка по ильмениту'
   const date = new Date().toLocaleDateString('ru-RU')
 
   const content = [
     '<!DOCTYPE html>',
     '<html>',
     '<head>',
-    `<title>${title}</title>`,
+    `<title>${windowTitle}</title>`,
     style,
     '</head>',
     '<body>',
