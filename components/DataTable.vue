@@ -53,102 +53,94 @@
 
     <!-- Таблица -->
     <div class="overflow-x-auto">
-      <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
-          <tr>
-            <th
-              v-if="isEditing"
-              scope="col"
-              class="relative w-12 px-6 sm:w-16 sm:px-8"
-            >
-              <input
-                v-if="filteredItems.length > 0"
-                type="checkbox"
-                class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                :checked="isAllSelected"
-                @change="toggleSelectAll"
-              />
-            </th>
-            <th
-              v-for="column in columns"
-              :key="column.key"
-              scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              {{ column.label }}
-            </th>
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-          <tr v-if="filteredItems.length === 0">
-            <td
-              :colspan="isEditing ? columns.length + 1 : columns.length"
-              class="px-6 py-4 text-center text-sm text-gray-500"
-            >
-              {{
-                isEditing
-                  ? 'Нажмите "Добавить" для создания новой записи'
-                  : 'Нет данных для отображения'
-              }}
-            </td>
-          </tr>
-          <tr
-            v-for="(item, index) in paginatedItems"
-            v-else
-            :key="item.id || index"
-            :class="{
-              'bg-gray-50': isEditing && selectedItems.includes(item)
-            }"
+      <div class="grid grid-cols-1 gap-4">
+        <!-- Заголовки -->
+        <div class="grid grid-cols-12 gap-4 bg-gray-50 p-4 rounded-t-lg">
+          <div v-if="isEditing" class="col-span-1">
+            <input
+              v-if="filteredItems.length > 0"
+              type="checkbox"
+              class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              :checked="isAllSelected"
+              @change="toggleSelectAll"
+            />
+          </div>
+          <div
+            v-for="column in columns"
+            :key="column.key"
+            class="text-xs font-medium text-gray-500 uppercase tracking-wider"
           >
-            <td
-              v-if="isEditing"
-              class="relative w-12 px-6 sm:w-16 sm:px-8"
-            >
+            {{ column.label }}
+          </div>
+        </div>
+
+        <!-- Пустое состояние -->
+        <div
+          v-if="filteredItems.length === 0"
+          class="col-span-full p-4 text-center text-sm text-gray-500 bg-white rounded-lg"
+        >
+          {{
+            isEditing
+              ? 'Нажмите "Добавить" для создания новой записи'
+              : 'Нет данных для отображения'
+          }}
+        </div>
+
+        <!-- Строки данных -->
+        <div
+          v-for="(item, index) in paginatedItems"
+          v-else
+          :key="item.id || index"
+          class="grid grid-cols-12 gap-4 p-4 bg-white rounded-lg border border-gray-200"
+          :class="{
+            'bg-gray-50': isEditing && selectedItems.includes(item)
+          }"
+        >
+          <div v-if="isEditing" class="col-span-1">
+            <input
+              type="checkbox"
+              class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              :checked="selectedItems.includes(item)"
+              @change="toggleSelectItem(item)"
+            />
+          </div>
+          <div
+            v-for="column in columns"
+            :key="column.key"
+            class="text-sm text-gray-500"
+          >
+            <template v-if="isEditing">
               <input
-                type="checkbox"
-                class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                :checked="selectedItems.includes(item)"
-                @change="toggleSelectItem(item)"
+                v-if="column.key.includes('Date')"
+                type="date"
+                v-model="item[column.key]"
+                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
-            </td>
-            <td
-              v-for="column in columns"
-              :key="column.key"
-              class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-            >
-              <template v-if="isEditing">
-                <input
-                  v-if="column.key.includes('Date')"
-                  type="date"
-                  v-model="item[column.key]"
-                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                />
-                <input
-                  v-else-if="
-                    column.key === 'weight' ||
-                    column.key === 'tio2Analysis' ||
-                    column.key === 'h2oAnalysis'
-                  "
-                  type="number"
-                  step="0.01"
-                  v-model.number="item[column.key]"
-                  @keypress="preventComma"
-                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                />
-                <input
-                  v-else
-                  type="text"
-                  v-model="item[column.key]"
-                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                />
-              </template>
-              <template v-else>
-                {{ item[column.key] }}
-              </template>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              <input
+                v-else-if="
+                  column.key === 'weight' ||
+                  column.key === 'tio2Analysis' ||
+                  column.key === 'h2oAnalysis'
+                "
+                type="number"
+                step="0.01"
+                v-model.number="item[column.key]"
+                @keypress="preventComma"
+                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              />
+              <input
+                v-else
+                type="text"
+                v-model="item[column.key]"
+                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              />
+            </template>
+            <template v-else>
+              {{ item[column.key] }}
+            </template>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Нижняя панель управления -->
@@ -461,5 +453,70 @@ input[type='number']::-webkit-outer-spin-button,
 input[type='number']::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+/* Grid layout styles */
+.grid {
+  display: grid;
+}
+
+.grid-cols-12 {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .grid-cols-12 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .col-span-1 {
+    grid-column: span 1;
+  }
+
+  .col-span-full {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Card styles */
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.rounded-t-lg {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.border {
+  border-width: 1px;
+}
+
+.border-gray-200 {
+  border-color: #e5e7eb;
+}
+
+/* Input styles */
+input[type='text'],
+input[type='number'],
+input[type='date'] {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid #d1d5db;
+  background-color: white;
+}
+
+input[type='text']:focus,
+input[type='number']:focus,
+input[type='date']:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
 }
 </style>
