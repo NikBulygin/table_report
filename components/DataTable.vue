@@ -53,10 +53,12 @@
 
     <!-- Таблица -->
     <div class="overflow-x-auto">
-      <div class="grid grid-cols-1 gap-4">
+      <div class="grid grid-cols-1 gap-4 min-w-max">
         <!-- Заголовки -->
-        <div class="grid grid-cols-12 gap-4 bg-gray-50 p-4 rounded-t-lg">
-          <div v-if="isEditing" class="col-span-1">
+        <div
+          class="grid grid-cols-12 gap-4 bg-gray-50 p-4 rounded-t-lg min-w-max"
+        >
+          <div v-if="isEditing" class="col-span-1 min-w-[40px]">
             <input
               v-if="filteredItems.length > 0"
               type="checkbox"
@@ -68,7 +70,7 @@
           <div
             v-for="column in columns"
             :key="column.key"
-            class="text-xs font-medium text-gray-500 uppercase tracking-wider"
+            class="text-xs font-medium text-gray-500 uppercase tracking-wider min-w-[120px]"
           >
             {{ column.label }}
           </div>
@@ -77,7 +79,7 @@
         <!-- Пустое состояние -->
         <div
           v-if="filteredItems.length === 0"
-          class="col-span-full p-4 text-center text-sm text-gray-500 bg-white rounded-lg"
+          class="col-span-full p-4 text-center text-sm text-gray-500 bg-white rounded-lg min-w-max"
         >
           {{
             isEditing
@@ -91,12 +93,12 @@
           v-for="(item, index) in paginatedItems"
           v-else
           :key="item.id || index"
-          class="grid grid-cols-12 gap-4 p-4 bg-white rounded-lg border border-gray-200"
+          class="grid grid-cols-12 gap-4 p-4 bg-white rounded-lg border border-gray-200 min-w-max"
           :class="{
             'bg-gray-50': isEditing && selectedItems.includes(item)
           }"
         >
-          <div v-if="isEditing" class="col-span-1">
+          <div v-if="isEditing" class="col-span-1 min-w-[40px]">
             <input
               type="checkbox"
               class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
@@ -107,7 +109,7 @@
           <div
             v-for="column in columns"
             :key="column.key"
-            class="text-sm text-gray-500"
+            class="text-sm text-gray-500 min-w-[120px]"
           >
             <template v-if="isEditing">
               <input
